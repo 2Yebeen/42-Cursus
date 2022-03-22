@@ -1,4 +1,4 @@
-[Go to English Subtitle](#https://github.com/33bini/42-SEOUL/blob/master/Libft/libft.en.md)
+[English](#https://github.com/33bini/42-Seoul/blob/master/Libft/libft.en.md)
 
 # **Libft**
 
