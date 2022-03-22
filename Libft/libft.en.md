@@ -62,7 +62,7 @@
 | ---------------------------- | ---------------------------------------------------------------------------------------------- |
 | **Turn in files**            | `*.c, libft.h, Makefile`                                                                       |
 | **Makefile**                 | Yes                                                                                            |
-| **External functs. **        | `Detailed below`                                                                               |
+| **External functs**        | `Detailed below`                                                                               |
 | **Description**                 | `Write your own library, containing an extract of important functions for your cursus.`        |
 
 <br>
