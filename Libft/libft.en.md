@@ -63,7 +63,7 @@
 | **Turn in files**            | `*.c, libft.h, Makefile`                                                                       |
 | **Makefile**                 | Yes                                                                                            |
 | **External functs. **        | `Detailed below`                                                                               |
-| **설명**                     | `Write your own library, containing an extract of important functions for your cursus.`        |
+| **Description**                 | `Write your own library, containing an extract of important functions for your cursus.`        |
 
 <br>
 
