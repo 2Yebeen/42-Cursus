@@ -1,5 +1,3 @@
-[English](#https://github.com/33bini/42-Seoul/blob/master/Libft/libft.en.md)
-
 # **Libft**
 
 ##### 나만의 첫 번째 라이브러리
