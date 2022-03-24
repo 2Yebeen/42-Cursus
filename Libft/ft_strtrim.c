@@ -26,7 +26,7 @@ char	*ft_strtrim(char const *s1, char const *set)
         start++;
     while ((end > 0) && s1[end] && ft_strchr(set, s1[end]))
         end--;
-    if (start > end)
+    if (start >= end)
         return (ft_strdup(""));
     str = (char *)malloc(sizeof(char) * (end - start + 1));
     if (!str)
