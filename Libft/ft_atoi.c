@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 15:58:02 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/22 15:22:29 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/26 15:15:52 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/26 15:19:17 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	ft_atoi(const char *str)
 {
-	size_t		i;
-	int			sign;
-    unsigned long long	max;
-    unsigned long long	num;
-	
+	size_t				i;
+	int					sign;
+	unsigned long long	max;
+	unsigned long long	num;
+
 	i = 0;
 	num = 0;
 	sign = 1;
-    max = 9223372036854775807
+	max = 9223372036854775807;
 	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
 	if (str[i] == '-')

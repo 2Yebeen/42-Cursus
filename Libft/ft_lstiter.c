@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 02:08:29 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/26 16:26:28 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/23 19:59:05 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/23 20:00:48 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *b1, const void *b2, size_t n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	size_t			i;
-	unsigned char	*s1;
-	unsigned char	*s2;
+	t_list	*curr;
 
-	i = 0;
-	s1 = (unsigned char *)b1;
-	s2 = (unsigned char *)b2;
-	while (i < n)
+	if (!lst || !f)
+		return ;
+	curr = lst;
+	while (curr)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		f(curr->content);
+		curr = curr->next;
 	}
-	return (0);
 }

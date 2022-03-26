@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 02:08:29 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/26 16:26:28 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/23 19:17:06 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/23 19:19:54 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *b1, const void *b2, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t			i;
-	unsigned char	*s1;
-	unsigned char	*s2;
+	int	div;
+	int	mod;
+	int	ans;
 
-	i = 0;
-	s1 = (unsigned char *)b1;
-	s2 = (unsigned char *)b2;
-	while (i < n)
+	if (n == -2147483648)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	return (0);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= -1;
+	}
+	div = n / 10;
+	mod = n % 10;
+	if (div != 0)
+		ft_putnbr_fd(div, fd);
+	ans = mod + '0';
+	write(fd, &ans, 1);
 }
