@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:00:56 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/31 18:50:05 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:18:07 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	ft_formats(va_list args, const char format)
 	else if (format == 'd' || format == 'i')
 		print_length += ft_printnbr(va_arg(args, int));
 	else if (format == 'u')
-		print_length += ft_print_unsigned(va_arg(args, unsigned int));
-	else if (format == 'x' || format == 'X')
-		print_length += ft_print_hex(va_arg(args, unsigned int), format);
+		print_length += ft_putnbr(va_arg(args, unsigned int));
+	else if ((format == 'x') || (format == 'X'))
+		print_length += ft_putnbr_base(va_arg(args, unsigned int), format);
 	else if (format == '%')
-		print_length += ft_printpercent();
+		print_length += ft_printchar(69);
 	return (print_length);
 }
 

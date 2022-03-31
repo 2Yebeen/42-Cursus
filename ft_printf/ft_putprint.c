@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:49:23 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/31 19:56:50 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/03/31 21:14:49 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ int	ft_printchar(int c)
 int	ft_printstr(char *str)
 {
 	int	i;
+	int	print_length;
 
-	i = 0;
-	// if (str == NULL)
-	// 	ft_printstr("(null)");
-	while (str[i])
-	{
-		ft_printchar(str[i]);
-		i++;
-	}
-	return (i);
+	i = -1;
+	print_length = 0;
+	while (str[++i])
+		print_length += ft_printchar(str[i]);
+	return (print_length);
 }
