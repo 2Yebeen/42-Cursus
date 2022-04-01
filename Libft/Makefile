@@ -3,16 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
+#    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 18:16:59 by yeblee            #+#    #+#              #
-#    Updated: 2022/03/21 17:03:26 by yeblee           ###   ########.fr        #
+#    Updated: 2022/03/27 20:59:47 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+ifdef WITH_BONUS
+	OBJ = $(OBJS) $(B_OBJS)
+else
+	OBJ = $(OBJS)
+endif
+
 CC = gcc
+AR = ar rcs
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror -I.
+CFLAGS = -Wall -Wextra -Werror
+
+INCLUDES = ./libft.h
 
 SRCS = ./ft_isalpha.c ./ft_isdigit.c ./ft_isalnum.c ./ft_isascii.c ./ft_isprint.c\
 	  ./ft_strlen.c ./ft_memset.c ./ft_bzero.c ./ft_memcpy.c ./ft_memmove.c\
@@ -22,21 +31,22 @@ SRCS = ./ft_isalpha.c ./ft_isdigit.c ./ft_isalnum.c ./ft_isascii.c ./ft_isprint.
 	  ./ft_substr.c ./ft_strjoin.c ./ft_strtrim.c ./ft_split.c ./ft_itoa.c\
 	  ./ft_strmapi.c ./ft_striteri.c ./ft_putchar_fd.c ./ft_putstr_fd.c ./ft_putendl_fd.c\
 	  ./ft_putnbr_fd.c
-OBJS= $(SRCS:.c=.o)
 
 BONUS = ./ft_lstnew.c ./ft_lstadd_front.c ./ft_lstsize.c ./ft_lstlast.c ./ft_lstadd_back.c\
 		./ft_lstdelone.c ./ft_lstclear.c ./ft_lstiter.c ./ft_lstmap.c
+		
+OBJS= $(SRCS:.c=.o)
 B_OBJS = $(BONUS:.c=.o)
 
 NAME = libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	$(AR) $@ $?
 
-bonus: $(OBJS) $(B_OBJS)
-		ar rcs $(NAME) $(OBJS) $(B_OBJS)
+bonus:
+	@make WITH_BONUS=1 $(NAME)
 
 clean:
 		$(RM) $(OBJS) $(B_OBJS)
@@ -46,4 +56,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all bonus clean fclean re

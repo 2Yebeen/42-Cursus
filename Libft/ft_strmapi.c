@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:33:02 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/23 19:37:40 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/01 14:34:37 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	i;
 	char	*str;
 
+	if (!s || !f)
+		return (NULL);
 	str = ft_strdup(s);
 	if (!str)
 		return (NULL);

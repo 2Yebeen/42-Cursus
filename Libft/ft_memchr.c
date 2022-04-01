@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:29:54 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/26 15:47:52 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/01 13:40:21 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	find;
 	unsigned char	*new_s;
 
-	if (!s)
-		return (NULL);
 	find = (unsigned char)c;
 	new_s = (unsigned char *)s;
 	i = 0;
