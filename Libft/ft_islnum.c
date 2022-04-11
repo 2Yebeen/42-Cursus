@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_islnum.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 01:42:12 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/25 01:42:12 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/11 14:43:43 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
 	if (c >= '0' && c <= '9')
-    	return (4);
+		return (4);
 	else if (c >= 'a' && c <= 'z')
-    	return (2);
-   	else if (c >= 'A' && c <= 'Z')
-    	return (1);
-    else
+		return (2);
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else
 		return (0);
 }

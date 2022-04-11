@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:26:02 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/23 16:43:03 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/11 14:43:08 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	len;
 
 	len = count * size;
+	if (count > 0 && size > 0 && size != (len / count))
+		return (0);
 	ptr = malloc(len);
 	if (!ptr)
 		return (0);
