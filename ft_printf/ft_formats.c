@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_formats.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
+/*   Updated: 2022/04/12 19:41:24 by yeblee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+// else if (format == 'd' || format == 'i' || format == 'u'
+//		|| format == 'p' || format == 'x' || format == 'X')
+//			print_length += ft_printbase(args, format);
+
+#include "ft_printf.h"
+
+int	ft_formats(va_list args, const char format)
+{
+	int	print_length;
+
+	print_length = 0;
+	if (format == '%')
+		print_length += write(1, "%", 1);
+	else if (format == 'c')
+		print_length += ft_printchar(va_arg(args, int));
+	else if (format == 's')
+		print_length += ft_printstr(va_arg(args, char *));
+	else if (format == 'p')
+			print_length += ft_print_ptr(va_arg(args, unsigned long long));
+	else if (format == 'd' || format == 'i')
+		print_length += ft_printbase(va_arg(args, int));
+	else if (format == 'u')
+		print_length += ft_putnbr(va_arg(args, unsigned int));
+	else if ((format == 'x') || (format == 'X'))
+		print_length += ft_putnbr_base(va_arg(args, unsigned int), format);
+	return (print_length);
+}

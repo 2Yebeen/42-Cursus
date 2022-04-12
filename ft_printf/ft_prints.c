@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_prints.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 15:47:34 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/12 15:59:41 by yeblee           ###   ########.fr       */
+/*   Created: 2022/04/12 16:03:21 by yeblee            #+#    #+#             */
+/*   Updated: 2022/04/12 19:25:31 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str, ...)
+int	ft_strlen(char *str)
 {
-	int		i;
-	va_list	args;
-	int		print_length;
+	int	i;
 
 	i = 0;
-	print_length = 0;
-	va_start(args, str);
 	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			print_length += ft_formats(args, str[i + 1]);
-			i++;
-		}
-		else
-			print_length += write(1, str[i], 1);
 		i++;
+	return (i);
+}
+
+int	ft_printchar(int chr)
+{
+	unsigned char	c;
+
+	c = (unsigned char)chr;
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_printstr(char *str)
+{
+	int	print_length;
+
+	if (!str)
+	{
+		print_length = write(1, "(null)", 6);
+		return (print_length);
 	}
-	va_end(args);
+	print_length = write(1, str, ft_strlen(str));
 	return (print_length);
 }
