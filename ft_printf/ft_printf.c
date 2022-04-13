@@ -6,13 +6,15 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:47:34 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/12 15:59:41 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/13 19:39:01 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// int 아닐 경우 -1, NULL일 경우 (null) 출력
+
 #include "ft_printf.h"
 
-int	ft_printf(const char *str, ...)
+int	ft_printf(const char *format, ...)
 {
 	int		i;
 	va_list	args;
@@ -20,16 +22,16 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	print_length = 0;
-	va_start(args, str);
-	while (str[i])
+	va_start(args, format);
+	while (format[i])
 	{
-		if (str[i] == '%')
+		if (format[i] == '%')
 		{
-			print_length += ft_formats(args, str[i + 1]);
+			print_length += ft_formats(args, format[i + 1]);
 			i++;
 		}
 		else
-			print_length += write(1, str[i], 1);
+			print_length += write(1, format[i], 1);
 		i++;
 	}
 	va_end(args);

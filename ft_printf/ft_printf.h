@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:51:42 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/12 19:46:22 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/13 12:05:14 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 # include <stdio.h>
 # include <stdarg.h>
 
-int	ft_printf(const char *str, ...);
-int	ft_formats(va_list args, const char format);
-int	ft_strlen(char *str);
-int	ft_printchar(int chr);
-int	ft_printstr(char *str);
-int	ft_printbase(va_list args, const char format);
-int	ft_putnbr(void n, int base);
-int	ft_baselen(char *base);
+/*ft_printf.c*/
+int		ft_printf(const char *str, ...);
+
+/*ft_formats.c*/
+int		ft_formats(va_list args, const char format);
+
+/*ft_printstr.c*/
+int		ft_strlen(char *str);
+int		ft_printchar(int chr);
+int		ft_printstr(char *str);
 
 #endif

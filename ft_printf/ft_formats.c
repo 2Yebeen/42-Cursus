@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/12 19:41:24 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/13 14:48:13 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	ft_formats(va_list args, const char format)
 
 	print_length = 0;
 	if (format == '%')
-		print_length += write(1, "%", 1);
+		print_length += write(1, '%', 1);
 	else if (format == 'c')
 		print_length += ft_printchar(va_arg(args, int));
 	else if (format == 's')
 		print_length += ft_printstr(va_arg(args, char *));
 	else if (format == 'd' || format == 'i' || format == 'u'
 		|| format == 'p' || format == 'x' || format == 'X')
-			print_length += ft_printbase(args, *format);
+			print_length += ft_printbase(args, format);
 	return (print_length);
 }
