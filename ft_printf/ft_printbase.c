@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*base_type(const char *type)
+char	*base_type(const char type)
 {
 	if (type == 'u' || type == 'd')
 		return ("0123456789");
@@ -20,26 +20,24 @@ char	*base_type(const char *type)
 		return ("0123456789abcdef");
 	else if (type == 'X')
 		return ("0123456789ABCDEF");
-	return (0);
 }
 
 int	ft_printbase(va_list ap, const char format)
 {
 	int		tmp;
 	int		print_length;
+	char	*str;
 	char	*base;
 
 	base = base_type(format);
 	print_length = 0;
 	if (format == 'd' || format == 'i')
-		print_length += ft_itoa(va_arg(ap, int));
+		str = ft_itoa(va_arg(ap, int), base);
 	else if (format == 'u' || format == 'x' || format == 'X')
-		print_length += ft_printnbr(va_arg(ap, unsigned int), format, base);
+		str = ft_uitoa(va_arg(ap, unsigned int), base);
 	else if (format == 'p')
-	{
-		tmp = va_arg(ap, unsigned long long);
-		print_length += write(1, "0x", 2);
-		print_length += ft_printnbr((unsigned long long)tmp, format, base);
-	}
+		str = ft_pitoa(va_arg(ap, unsigned long long), base);
+	print_length += ft_printstr(str);
+	free(str);
 	return (print_length);
 }

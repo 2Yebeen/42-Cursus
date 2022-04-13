@@ -18,7 +18,7 @@ int	ft_formats(va_list args, const char format)
 
 	print_length = 0;
 	if (format == '%')
-		print_length += write(1, '%', 1);
+		print_length += write(1, "%", 1);
 	else if (format == 'c')
 		print_length += ft_printchar(va_arg(args, int));
 	else if (format == 's')

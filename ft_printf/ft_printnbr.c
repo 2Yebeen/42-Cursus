@@ -1,54 +1,106 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_formats.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 00:58:18 by marvin            #+#    #+#             */
-/*   Updated: 2022/04/13 19:40:06 by yeblee           ###   ########.fr       */
+/*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
+/*   Updated: 2022/04/13 14:48:13 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	prec_nbr(unsigned long long nbr, t_flag *info, char **temp, int i)
-{
-	int		nbr_len;
-	int		res;
+#include "ft_printf.h"
 
-	nbr_len = ft_nbrlen(nbr, info);
-	if (info->prec > nbr_len)
-		res = info->prec;
-	else
-		res = nbr_len;
-	*temp = (char *)malloc(sizeof(char) * res + 1);
-	if (!(*temp))
-		return (0);
-	(*temp)[res] = '\0';
-	while (nbr_len + i < res)
+size_t	ft_numlen(unsigned	int num, int base)
+{
+	int	len;
+
+	len = 0;
+	while (num)
 	{
-		(*temp)[i] = '0';
-		i++;
+		len++;
+		num = num / base;
 	}
-	i = 1;
-	if (nbr == 0 && info->prec != 0)
-		(*temp)[res - i] = '0';
-	while (nbr)
-	{
-		(*temp)[res - i] = nbr_baseset(info->type)[nbr % info->nbr_base];
-		nbr /= info->nbr_base;
-		i++;
-	}
-	return (nbr_len);
+	return (len);
 }
 
-int	ft_printnbr(unsigned long long nbr, char type, char *base)
+char	*ft_uitoa(unsigned int n, char *base)
 {
-	int		i;
-	int		nbr_len;
-	char	*result;
+	char	*ptr;
+	int		base_len;
+	size_t	len;
 
-	nbr_len = 0;
-	nbr_len += prec_nbr(nbr, base, result, i);
-	nbr_len += nbr_put_minus(type, result);
-	return (nbr_len);
+	if (n == 0)
+		return ("0");
+	base_len = ft_strlen(base);
+	len = ft_numlen(n, base_len);
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	if (!ptr)
+		ptr[0] = '0';
+	ptr[len--] = '\0';
+	while (n)
+	{
+		ptr[len] = base[n % base_len];
+		n /= base_len;
+		len--;
+	}
+	return (ptr);
+}
+
+char	*ft_itoa(int n, char *base)
+{
+	char	*ptr;
+	int		base_len;
+	long	nb;
+	size_t	len;
+
+	base_len = ft_strlen(base);
+	len = ft_numlen(n, base_len);
+	nb = (long)n;
+	ptr = (char *)malloc(sizeof(char) * len + 1);
+	if (!ptr)
+		return (NULL);
+	if (nb < 0)
+	{
+		ptr[0] = '-';
+		nb = -nb;
+	}
+	if (nb == 0)
+		ptr[0] = '0';
+	ptr[len--] = '\0';
+	while (nb)
+	{
+		ptr[len] = base[nb % 10];
+		nb /= base_len;
+		len--;
+	}
+	return (ptr);
+}
+
+char	*ft_pitoa(unsigned long long n, char *base)
+{
+	char	*ptr;
+	int		base_len;
+	size_t	len;
+
+	base_len = ft_strlen(base);
+	len = ft_numlen(n, base_len) + 2;
+	ptr = (char *)malloc(sizeof(char) * len + 1);
+	if (!ptr)
+		return (NULL);
+	ptr[0] = '0';
+	ptr[1] = 'x';
+	if (n == 0)
+		ptr[2] = '0';
+	ptr[len--] = '\0';
+	while (n)
+	{
+		ptr[len] = base[n % 10];
+		n /= base_len;
+		len--;
+	}
+	return (ptr);
 }

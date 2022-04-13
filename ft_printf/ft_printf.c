@@ -13,6 +13,7 @@
 // int 아닐 경우 -1, NULL일 경우 (null) 출력
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int	ft_printf(const char *format, ...)
 {
@@ -31,9 +32,10 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 		else
-			print_length += write(1, format[i], 1);
+			print_length += write(1, (format + i), 1);
 		i++;
 	}
 	va_end(args);
+	// printf("\nstring length : %d\n",print_length);
 	return (print_length);
 }
