@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_formats.c                                       :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/13 14:48:13 by yeblee           ###   ########.fr       */
+/*   Created: 2022/04/12 15:47:34 by yeblee            #+#    #+#             */
+/*   Updated: 2022/04/14 12:57:08 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// int 아닐 경우 -1, NULL일 경우 (null) 출력
+
 #include "ft_printf.h"
 
-int	ft_formats(va_list args, const char format)
+int	ft_printf(const char *format, ...)
 {
-	int	print_length;
+	int		i;
+	va_list	args;
+	int		print_length;
 
+	i = 0;
 	print_length = 0;
-	if (format == '%')
-		print_length += write(1, "%", 1);
-	else if (format == 'c')
-		print_length += ft_printchar(va_arg(args, int));
-	else if (format == 's')
-		print_length += ft_printstr(va_arg(args, char *));
-	else if (format == 'd' || format == 'i' || format == 'u'
-		|| format == 'p' || format == 'x' || format == 'X')
-			print_length += ft_printbase(args, format);
+	va_start(args, format);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			print_length += ft_formats(args, format[i + 1]);
+			i++;
+		}
+		else
+			print_length += write(1, (format + i), 1);
+		i++;
+	}
+	va_end(args);
 	return (print_length);
 }

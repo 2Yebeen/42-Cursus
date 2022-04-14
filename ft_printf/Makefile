@@ -3,32 +3,45 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 01:28:11 by marvin            #+#    #+#              #
-#    Updated: 2022/04/13 01:28:11 by marvin           ###   ########.fr        #
+#    Updated: 2022/04/14 17:31:51 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libftprintf.a
+
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+
+AR			= ar 
+ARFLAGS		= rcs
+
+RM			= rm -rf
+
+INCLUDE		= include
 LIBFT		= libft
 LIBFT_LIB	= libft.a
-RM			= rm -f
-SRCS		= ./ft_printf.c ./print_char.c ./print_string.c ./print_nbr.c ./utils.c 
+
+RM			= rm -rf
+
+SRCS		= ft_printf.c	\
+			  ft_formats.c	\
+			  ft_printbase.c\
+			  ft_printnbr.c	\
+			  ft_printstr.c	\
+
 OBJS 		= $(SRCS:.c=.o)
-INCS		= .
-CC			= gcc
-CFALGS		= -Wall -Wextra -Werror -Iinclude
 
 %.o : %.c
 	$(CC) $(CFALGS) -c $< -o $(<:.c=.o) -I$(INCS)
 
-$(NAME) : $(OBJS)
-	make all -C $(LIBFT)/
-	cp $(LIBFT)/$(LIBFT_LIB) $(NAME)
-	ar rc $(NAME) $(OBJS)
-
-.PHONEY: clean
+$(NAME): $(OBJ)
+			make -C $(LIBFT)
+			cp libft/libft.a .
+			mv libft.a $(NAME)
+			$(AR) $(NAME) $(OBJ)
 
 all : $(NAME)
 
@@ -41,3 +54,5 @@ fclean :
 	make fclean -C $(LIBFT)
 
 re:	fclean all
+
+.PHONY: all clean fclean re norm

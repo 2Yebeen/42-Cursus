@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:06:20 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/13 19:23:23 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/14 13:18:39 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 char	*base_type(const char type)
 {
-	if (type == 'u' || type == 'd')
+	if (type == 'u' || type == 'd' || type == 'i')
 		return ("0123456789");
 	else if (type == 'x' || type == 'p')
 		return ("0123456789abcdef");
 	else if (type == 'X')
 		return ("0123456789ABCDEF");
+	return (0);
 }
 
 int	ft_printbase(va_list ap, const char format)

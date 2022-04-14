@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:51:42 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/13 12:05:14 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/14 18:00:19 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdlib.h>
 
 /*ft_formats.c*/
 int		ft_formats(va_list args, const char format);
 
 /*ft_printbase.c*/
-int	    ft_printbase(va_list ap, const char format);
+int		ft_printbase(va_list ap, const char format);
 char	*base_type(const char type);
 
 /*ft_printf.c*/
