@@ -6,21 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:03:21 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/13 12:03:39 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/15 19:54:15 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "../includes/ft_printf.h"
 
 int	ft_printchar(int chr)
 {

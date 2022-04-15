@@ -10,7 +10,7 @@ gcc -L./ -lftprintf main.c 2> /dev/null
 ./a.out
 cd ..
 make fclean
-​
+#
 echo -e "\033[32;1m"ft_printf_tester"\033[m"
 git clone https://github.com/paulo-santana/ft_printf_tester
 make
@@ -21,7 +21,6 @@ sh test m
 # sh test b2
 cd ..
 make fclean
-​
 echo -e "\033[32;1m"printfTester"\033[m"
 git clone https://github.com/Tripouille/printfTester
 cd printfTester
@@ -30,13 +29,9 @@ make m
 # make a
 cd ..
 make fclean
-​
-​
 #
 # --------------- OLD VERSION ---------------
 #
-​
-​
 # echo -e "\033[32;1m"pft"\033[m"
 # git clone https://github.com/gavinfielder/pft.git
 # cd pft
@@ -45,7 +40,6 @@ make fclean
 # ./test
 # cd ..
 # make fclean
-​
 # # this test have dependancy on pft
 # echo -e "\033[32;1m"PFT_2019"\033[m"
 # cd pft
@@ -58,7 +52,6 @@ make fclean
 # ./test
 # cd ..
 # make fclean
-​
 # # this test have dependancy on pft
 # echo -e "\033[32;1m"PFT_EXAM"\033[m"
 # cd pft
@@ -71,26 +64,22 @@ make fclean
 # ./test
 # cd ..
 # make fclean
-​
 # echo -e "\033[32;1m"42TESTERS-PRINTF"\033[m"
 # git clone https://github.com/Mazoise/42TESTERS-PRINTF.git
 # cd 42TESTERS-PRINTF
 # bash runtest.sh
 # cd ..
-​
 # echo -e "\033[32;1m"PRINTF_TESTER"\033[m"
 # git clone https://github.com/Kwevan/PRINTF_TESTER.git
 # cd PRINTF_TESTER
 # bash run.sh
 # cd ..
-​
 # echo -e "\033[32;1m"printf_lover_v2"\033[m"
 # git clone https://github.com/charMstr/printf_lover_v2.git
 # cd printf_lover_v2
 # ./printf_lover.sh
 # cd ..
 # make fclean
-​
 # echo -e "\033[32;1m"printf-tester"\033[m"
 # git clone https://github.com/AntoineBourin/printf-tester.git
 # make
@@ -111,7 +100,6 @@ make fclean
 # zsh test.sh
 # cd ..
 # make fclean
-​
 echo -e "\033[32;1m"FINISHED enter will remove testers and diff results, ctrl + c to check remain"\033[m"
 read $a
 # new version

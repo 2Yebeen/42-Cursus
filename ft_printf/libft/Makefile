@@ -6,15 +6,9 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 18:16:59 by yeblee            #+#    #+#              #
-#    Updated: 2022/04/11 14:35:43 by yeblee           ###   ########.fr        #
+#    Updated: 2022/04/15 19:50:06 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-ifdef WITH_BONUS
-	OBJ = $(OBJS) $(OBJS_B)
-else
-	OBJ = $(OBJS)
-endif
 
 NAME = libft.a
 
@@ -28,62 +22,15 @@ RM = rm -rf
 
 INCLUDES = ./libft.h
 
-SRCS =  ft_atoi.c			\
-		ft_bzero.c			\
-		ft_calloc.c			\
-		ft_isalnum.c		\
-		ft_isalpha.c		\
-		ft_isascii.c		\
-		ft_isdigit.c		\
-		ft_isprint.c		\
-		ft_itoa.c			\
-		ft_memchr.c			\
-		ft_memcmp.c			\
-		ft_memcpy.c			\
-		ft_memmove.c		\
-		ft_memset.c			\
-		ft_putchar_fd.c		\
-		ft_putendl_fd.c		\
-		ft_putnbr_fd.c		\
-		ft_putstr_fd.c		\
-		ft_split.c			\
-		ft_strchr.c			\
-		ft_strdup.c			\
-		ft_striteri.c		\
-		ft_strjoin.c		\
-		ft_strlcat.c		\
-		ft_strlcpy.c		\
-		ft_strlen.c			\
-		ft_strmapi.c		\
-		ft_strncmp.c		\
-		ft_strnstr.c		\
-		ft_strrchr.c		\
-		ft_strtrim.c		\
-		ft_substr.c			\
-		ft_tolower.c		\
-		ft_toupper.c
-
-BONUS = ft_lstnew.c			\
-		ft_lstadd_front.c	\
-		ft_lstsize.c		\
-		ft_lstlast.c		\
-		ft_lstadd_back.c	\
-		ft_lstdelone.c		\
-		ft_lstclear.c		\
-		ft_lstiter.c		\
-		ft_lstmap.c
+SRCS =  ft_strlen.c
 
 OBJS = $(SRCS:.c=.o)
-OBJS_B = $(BONUS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
-
-bonus:
-	@make WITH_BONUS=42 $(NAME)
 
 all: $(NAME)
 
@@ -95,4 +42,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

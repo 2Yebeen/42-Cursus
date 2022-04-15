@@ -6,13 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:47:34 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/14 12:57:08 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/15 19:54:10 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// int 아닐 경우 -1, NULL일 경우 (null) 출력
-
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {

@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 01:28:11 by marvin            #+#    #+#              #
-#    Updated: 2022/04/14 17:31:51 by yeblee           ###   ########.fr        #
+#    Updated: 2022/04/15 19:52:12 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,44 +15,40 @@ NAME		= libftprintf.a
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-AR			= ar 
+AR			= ar
 ARFLAGS		= rcs
 
 RM			= rm -rf
 
-INCLUDE		= include
-LIBFT		= libft
-LIBFT_LIB	= libft.a
+INCDIR		= ./includes
+LIBFT		= ./libft
 
-RM			= rm -rf
-
-SRCS		= ft_printf.c	\
-			  ft_formats.c	\
-			  ft_printbase.c\
-			  ft_printnbr.c	\
-			  ft_printstr.c	\
+SRCS		= ./srcs/ft_printf.c	\
+			  ./srcs/ft_formats.c	\
+			  ./srcs/ft_checkbase.c	\
+			  ./srcs/ft_printbase.c	\
+			  ./srcs/ft_printstr.c	\
 
 OBJS 		= $(SRCS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFALGS) -c $< -o $(<:.c=.o) -I$(INCS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-			make -C $(LIBFT)
-			cp libft/libft.a .
-			mv libft.a $(NAME)
-			$(AR) $(NAME) $(OBJ)
+$(NAME) : $(OBJS)
+	@make -C $(LIBFT)
+	@cp $(LIBFT)/libft.a $(NAME)
+	@ar rcs $@ $?
 
 all : $(NAME)
 
 clean : 
 	$(RM) $(OBJS)
-	make clean -C $(LIBFT)
+	@make clean -C $(LIBFT)
 
-fclean :
+fclean : clean
 	$(RM) $(NAME)
-	make fclean -C $(LIBFT)
+	@make fclean -C $(LIBFT)
 
-re:	fclean all
+re:	clean all
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re

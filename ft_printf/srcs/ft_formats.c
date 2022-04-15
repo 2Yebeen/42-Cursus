@@ -6,11 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/14 12:56:29 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/15 20:12:45 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_formats(va_list args, const char format)
 {
@@ -25,6 +25,6 @@ int	ft_formats(va_list args, const char format)
 		print_length += ft_printstr(va_arg(args, char *));
 	else if (format == 'd' || format == 'i' || format == 'u'
 		|| format == 'p' || format == 'x' || format == 'X')
-			print_length += ft_printbase(args, format);
+			print_length += ft_checkbase(args, format);
 	return (print_length);
 }
