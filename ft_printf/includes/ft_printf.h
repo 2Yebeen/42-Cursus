@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 15:51:42 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/15 20:08:52 by yeblee           ###   ########.fr       */
+/*   Created: 2022/04/18 19:47:53 by yeblee            #+#    #+#             */
+/*   Updated: 2022/04/18 19:47:56 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 int		ft_printf(const char *str, ...);
 
-int	    ft_parsing(va_list args, const char format);
-int     ft_formats(va_list ap, const char *format);
+int		ft_parsing(va_list args, const char format);
+int		ft_formats(va_list ap, const char *format);
 
 char	*base_type(const char type);
 int		ft_checkbase(va_list ap, const char format);

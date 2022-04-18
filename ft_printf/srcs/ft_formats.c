@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:00:04 by yeblee            #+#    #+#             */
-/*   Updated: 2022/04/15 20:12:45 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/04/18 19:48:09 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_parsing(va_list args, const char format)
 	return (print_length);
 }
 
-int ft_formats(va_list ap, const char *format)
+int	ft_formats(va_list ap, const char *format)
 {
 	int	i;
 	int	print_length;
