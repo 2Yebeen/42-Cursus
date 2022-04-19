@@ -1,3 +1,9 @@
+# **RESULT**
+
+<img width="716" src="https://user-images.githubusercontent.com/68188768/163919970-7ff9845c-eb27-4701-b826-a95d14616ca9.png">
+
+<br>
+
 # **printf**
 
 ##### Because putnbr and putstr aren’t enough
