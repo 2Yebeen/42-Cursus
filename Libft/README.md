@@ -1,3 +1,11 @@
+# **RESULT**
+
+<img width="688" src="https://user-images.githubusercontent.com/68188768/163920599-e9e81f8b-eca9-4a67-a830-a4560e87398a.png">
+
+<img width="611" src="https://user-images.githubusercontent.com/68188768/163920606-f2359262-909d-4164-a7bf-2d7522906a86.png">
+
+<br>
+
 # **Libft**
 
 ##### 나만의 첫 번째 라이브러리
