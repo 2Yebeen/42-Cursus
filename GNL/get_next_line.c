@@ -11,42 +11,102 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-void	free_ptr(char **ptr)
+void	*get_clean(t_gnl_list *lst)
 {
-	free(*ptr);
-	*ptr = NULL;
+    t_gnl_data	*del;
+	t_gnl_data	*tmp;
+
+	if (!lst)
+		return (NULL);
+    del = lst->pHead;
+	while (del)
+	{
+		tmp = del->pNext;
+		free(del->pContent);
+        del->pContent = NULL;
+		free(del);
+        del = NULL;
+		del = tmp;
+	}
+    free(tmp);
+    tmp = NULL;
+    return (NULL);
 }
 
-char *get_next_line(int fd)
+void    get_line(t_gnl_list *lst)
 {
-    static char *backup;
-    char        *buf;
-    char        *ret;
+}
+t_gnl_data *get_buff(char *content)
+{
+    t_gnl_data *ret;
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
-        return (NULL);
-    buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buf)
-        return (NULL);
-    ret = read_line(fd, buf, backup);
-    if (!ret)
-        return (NULL);
-    free_ptr(&buf);
-    backup = extract(ret);
+    ret = malloc(sizeof(t_gnl_data));
+    ret->pContent = content;
+    ret->pNext = NULL;
+
     return (ret);
 }
+void    get_read_file(int fd, t_gnl_list *lst)
+{
+    t_gnl_data  *buff;
+    t_gnl_data  *last;
+    int         nr;
+    char        *content;
 
-#include<stdio.h>
+    last = lst->pHead;
+    content = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    nr = 1;
+    while (nr > 0)
+    {
+        nr = read(fd, content, BUFFER_SIZE);
+        if (nr == -1)
+            get_clean(lst);
+        buff = get_buff(content);
+        printf("%s\n", buff->pContent);
+        buff->pContent[nr] = 0;
+        buff->pNext = NULL;
+        last->pNext = buff;
+        lst->pTail->pNext = last->pNext;
+
+    }
+}
+
+char	*get_next_line(int fd)
+{
+    static t_gnl_list    *lst;
+    // char                 *ret;
+    size_t               nr;
+
+    t_gnl_data          *tester;
+
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return (NULL);
+    lst = malloc(sizeof(t_gnl_list));
+    lst->pHead = malloc(sizeof(t_gnl_data));
+    lst->pTail = malloc(sizeof(t_gnl_data));
+    lst->pHead->pContent = NULL;
+    lst->pHead->pNext = NULL;
+    lst->pTail->pContent = NULL;
+    lst->pTail->pNext = NULL;
+    get_read_file(fd, lst);
+    tester = lst->pHead;
+    printf("^^%s\n", tester->pNext->pContent);
+    // get_line(lst); 
+    get_clean(lst);
+    return (NULL);
+}
+
 #include <fcntl.h>
-#include <unistd.h>
 
-int mian(void) {
+int main(void)
+{
     int fd;
 
-    fd = open("test.txt", O_RDONLY);
-    if (fd == -1) return (1);
-    printf("fd : %d\n", fd);
-    close(fd);
-    return (0);
+    fd = open("text.txt", O_RDONLY);
+    get_next_line(fd);
+    // system("leaks a.out");
+
+    return 0;
 }

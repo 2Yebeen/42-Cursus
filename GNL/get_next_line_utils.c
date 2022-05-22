@@ -27,6 +27,8 @@ char	*ft_strchr(const char *s, int c)
 	int		i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] == (unsigned char)c)
@@ -80,30 +82,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++j])
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
-	return (str);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*str;
-
-	if (!s)
-		return (NULL);
-	i = ft_strlen(s);
-	if (start > (unsigned int)ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = '\0';
 	return (str);
 }
