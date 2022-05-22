@@ -25,6 +25,19 @@
 #  define BUFFER_SIZE 10
 # endif // BUFFER_SIZE
 
+typedef struct s_gnl_data
+{
+    int                 data;
+    struct s_gnl_data   *pLlink;
+    struct s_gnl_data   *pRlink;
+} t_gnl_data;
+
+typedef struct  s_gnl_list
+{
+    char                *buff;
+    struct s_gnl_list   header;
+} t_gnl_list;
+
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *str);
@@ -32,4 +45,4 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 
-#endif
+#endif //GET_NEXT_LINE_H
