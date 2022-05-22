@@ -17,6 +17,14 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif // OPEN_MAX
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif // BUFFER_SIZE
+
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *str);
