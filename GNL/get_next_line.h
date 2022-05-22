@@ -22,28 +22,20 @@
 # endif
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 2
 # endif
 
-typedef struct s_gnl_data
+typedef struct s_gnl_list
 {
     char                *pContent;
-    struct s_gnl_data   *pNext;
-} t_gnl_data;
-
-typedef struct  s_gnl_list
-{
-    struct s_gnl_data   *pHead;
-    struct s_gnl_data   *pTail;
-    
+    struct s_gnl_list   *pNext;
 } t_gnl_list;
 
-// char	*get_next_line(int fd);
+char	*get_next_line(int fd);
 
-// size_t	ft_strlen(const char *s);
-// char	*ft_strdup(const char *str);
-// char	*ft_strchr(const char *s, int c);
-// char	*ft_strjoin(char const *s1, char const *s2);
-// void    *ft_memset(void *ptr, int value, size_t len);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *str);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

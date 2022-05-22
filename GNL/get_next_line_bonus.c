@@ -11,3 +11,24 @@
 /* ************************************************************************** */
 
 
+// void	*get_clean(t_gnl_list *lst)
+// {
+//     t_gnl_data	*del;
+// 	t_gnl_data	*tmp;
+
+// 	if (!lst)
+// 		return (NULL);
+//     del = lst->pHead;
+// 	while (del)
+// 	{
+// 		tmp = del->pNext;
+// 		free(del->pContent);
+//         del->pContent = NULL;
+// 		free(del);
+//         del = NULL;
+// 		del = tmp;
+// 	}
+//     free(tmp);
+//     tmp = NULL;
+//     return (NULL);
+// }
