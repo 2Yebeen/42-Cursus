@@ -12,16 +12,16 @@
 
 #include "get_next_line.h"
 
-char	*ft_free(char *buffer, char *buf)
+char	*gnl_set_remains(char *buffer, char *buf)
 {
 	char	*temp;
 
-	temp = ft_strjoin(buffer, buf);
+	temp = gnl_strjoin(buffer, buf);
 	free(buffer);
 	return (temp);
 }
 
-char	*ft_next(char *buffer)
+char	*gnl_get_next(char *buffer)
 {
 	int		i;
 	int		j;
@@ -35,7 +35,7 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = gnl_calloc((gnl_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
 	while (buffer[i])
@@ -44,7 +44,7 @@ char	*ft_next(char *buffer)
 	return (line);
 }
 
-char	*ft_line(char *buffer)
+char	*gnl_get_line(char *buffer)
 {
 	char	*line;
 	int		i;
@@ -54,7 +54,7 @@ char	*ft_line(char *buffer)
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = gnl_calloc(i + 2, sizeof(char));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -66,14 +66,14 @@ char	*ft_line(char *buffer)
 	return (line);
 }
 
-char	*read_file(int fd, char *res)
+char	*gnl_read_file(int fd, char *res)
 {
 	char	*buffer;
 	int		byte_read;
 
 	if (!res)
-		res = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		res = gnl_calloc(1, 1);
+	buffer = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
 	{
@@ -84,8 +84,8 @@ char	*read_file(int fd, char *res)
 			return (NULL);
 		}
 		buffer[byte_read] = 0;
-		res = ft_free(res, buffer);
-		if (ft_strchr(buffer, '\n'))
+		res = gnl_set_remains(res, buffer);
+		if (gnl_strchr(buffer, '\n'))
 			break ;
 	}
 	free(buffer);
@@ -99,32 +99,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buffer = read_file(fd, buffer);
+	buffer = gnl_read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
+	line = gnl_get_line(buffer);
+	buffer = gnl_get_next(buffer);
 	return (line);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main(void)
-// {
-//     int fd;
-// 	char	*get;
-//     fd = open("test2.txt", O_RDONLY);
-//     get = get_next_line(fd);
-// 	printf("%s\n", get);
-
-// 	// fd = open("text.txt", O_RDONLY);
-//     get = get_next_line(fd);
-// 	printf("%s\n", get);
-
-// 	// fd = open("text.txt", O_RDONLY);
-//     get = get_next_line(fd);
-// 	printf("%s\n", get);
-//     // system("leaks a.out");
-
-//     return 0;
-// }

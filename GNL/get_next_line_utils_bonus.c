@@ -12,26 +12,12 @@
 
 #include "get_next_line_bonus.h"
 
-// char	*gnl_clear_node(t_list **node)
-// {
-// 	free((*node)->contents);
-// 	(*node)->prev->next = (*node)->next;
-// 	if ((*node)->next)
-// 	{
-// 		(*node)->next->prev = (*node)->prev;
-// 	}
-// 	free(*node);
-// 	*node = NULL;
-// 	return (NULL);
-// }
 char	*gnl_clear_node(t_list *node)
 {
 	free(node->contents);
 	node->prev->next = node->next;
 	if (node->next)
-	{
 		node->next->prev = node->prev;
-	}
 	free(node);
 	node = NULL;
 	return (NULL);

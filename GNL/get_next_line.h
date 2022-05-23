@@ -15,20 +15,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
-# endif
-
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
+size_t	gnl_strlen(const char *s);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_strdup(const char *str);
+char	*gnl_strjoin(char const *s1, char const *s2);
+void	*gnl_calloc(size_t elementCount, size_t elementSize);
+char	*get_next_line(int fd);
 
 #endif

@@ -44,34 +44,32 @@ char	*gnl_set_remains(char *contents, size_t offset)
 	return (ret);
 }
 
-char	*gnl_read_file(char *contents, int fd)
+char	*gnl_read_file(int fd, char *res)
 {
-	ssize_t	len;
-	char	*buff;
+	int		len;
 	char	*temp;
-	char	*ret;
+	char	*buff;
 
 	buff = malloc(BUFFER_SIZE + 1);
-	if (buff == NULL)
+	if (!buff)
 		return (NULL);
-	ret = contents;
-	while (ret == NULL || !gnl_strchr(ret, '\n'))
+	while (res == NULL || !gnl_strchr(res, '\n'))
 	{
 		len = read(fd, buff, BUFFER_SIZE);
 		if (len <= 0)
 			break ;
 		buff[len] = '\0';
-		temp = ret;
-		ret = gnl_append_buff(ret, buff);
+		temp = res;
+		res = gnl_append_buff(res, buff);
 		free(temp);
 	}
 	free(buff);
-	if (len < 0 || ret == NULL || *ret == '\0')
+	if (len < 0 || res == NULL || *res == '\0')
 	{
-		free(ret);
+		free(res);
 		return (NULL);
 	}
-	return (ret);
+	return (res);
 }
 
 t_list	*gnl_get_node(t_list *head, int fd)
@@ -110,7 +108,7 @@ char	*get_next_line(int fd)
 	node = gnl_get_node(&head, fd);
 	if (!node)
 		return (gnl_clear_node(node));
-	node->contents = gnl_read_file(node->contents, fd);
+	node->contents = gnl_read_file(fd, node->contents);
 	if (!node->contents)
 		return (gnl_clear_node(node));
 	line = gnl_get_line(node->contents);
@@ -121,20 +119,3 @@ char	*get_next_line(int fd)
 		return (gnl_clear_node(node));
 	return (line);
 }
-
-// #include <fcntl.h>
-// int main(void)
-// {
-// 	int		fd;
-// 	char	*prt;
-// 	// fd = open("text.txt", O_RDONLY);
-// 	fd = open("test2.txt", O_RDONLY);
-// 	prt = get_next_line(fd);
-// 	printf("%s\n",prt);
-// 	prt = get_next_line(fd);
-// 	printf("%s\n",prt);
-// 	prt = get_next_line(fd);
-// 	printf("%s\n",prt);
-// 	system("leaks a.out");
-// 	return (0);
-// }

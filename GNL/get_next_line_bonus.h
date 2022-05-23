@@ -15,15 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
-# endif
 
 typedef struct s_gnl_list
 {
@@ -38,5 +29,6 @@ char	*gnl_clear_node(t_list *node);
 char	*gnl_strchr(char const *s, int c);
 char	*gnl_append_buff(char const *save, char const *buf);
 size_t	gnl_strlcpy(char *dst, char const *src, size_t dstsize);
+char	*get_next_line(int fd);
 
 #endif
