@@ -6,101 +6,124 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:39 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/23 12:17:23 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:41:32 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <stdio.h>
 
-void	*get_clean(t_gnl_list *lst)
+char	*ft_free(char *buffer, char *buf)
 {
-    t_gnl_list	*del;
-	t_gnl_list	*tmp;
+	char	*temp;
 
-	if (!lst)
-		return (NULL);
-    del = lst;
-	while (del)
+	temp = ft_strjoin(buffer, buf);
+	free(buffer);
+	return (temp);
+}
+
+char	*ft_next(char *buffer)
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
 	{
-		tmp = del->pNext;
-		free(del->pContent);
-        del->pContent = NULL;
-		free(del);
-        del = NULL;
-		del = tmp;
+		free(buffer);
+		return (NULL);
 	}
-    free(tmp);
-    tmp = NULL;
-    return (NULL);
+	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	i++;
+	j = 0;
+	while (buffer[i])
+		line[j++] = buffer[i++];
+	free(buffer);
+	return (line);
 }
 
-char    *get_line(t_gnl_list *lst)
+char	*ft_line(char *buffer)
 {
-    t_gnl_list   *ret;
+	char	*line;
+	int		i;
 
-    ret = lst;
-    while (ret->pNext)
-        ret = ret->pNext;
-    return (ret->pContent);
+	i = 0;
+	if (!buffer[i])
+		return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	line = ft_calloc(i + 2, sizeof(char));
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] && buffer[i] == '\n')
+		line[i++] = '\n';
+	return (line);
 }
 
-void    get_read_file(int fd, t_gnl_list *lst)
+char	*read_file(int fd, char *res)
 {
-    int     nr;
-    char    *content;
+	char	*buffer;
+	int		byte_read;
 
-    content = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    nr = 1;
-    while (nr > 0)
-    {
-        nr = read(fd, content, BUFFER_SIZE);
-        // printf("content : %s\n", content);
-        if (nr == -1)
-        {
-            get_clean(lst);
-            break;
-        }
-        content[nr] = 0;
-        lst->pContent = ft_strjoin(lst->pContent, content);
-        if (ft_strchr(content, '\n'))
-            break;
-    }
-    free(content);
+	if (!res)
+		res = ft_calloc(1, 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	byte_read = 1;
+	while (byte_read > 0)
+	{
+		byte_read = read(fd, buffer, BUFFER_SIZE);
+		if (byte_read == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[byte_read] = 0;
+		res = ft_free(res, buffer);
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	free(buffer);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-    static t_gnl_list    *lst;
-    char                 *ret;
-    // size_t               nr;
+	static char	*buffer;
+	char		*line;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-    lst = malloc(sizeof(t_gnl_list));
-    lst->pContent = NULL;
-    lst->pNext = NULL;
-    get_read_file(fd, lst);
-    ret = get_line(lst);
-    return (ret);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	buffer = read_file(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = ft_line(buffer);
+	buffer = ft_next(buffer);
+	return (line);
 }
 
 // #include <fcntl.h>
-
+// #include <stdio.h>
 // int main(void)
 // {
 //     int fd;
 // 	char	*get;
-//     fd = open("text.txt", O_RDONLY);
-//     get = get_next_line(fd);
-// 	printf("%s", get);
-
-//     get = get_next_line(fd);
-// 	printf("%s", get);
-
+//     fd = open("test2.txt", O_RDONLY);
 //     get = get_next_line(fd);
 // 	printf("%s\n", get);
 
+// 	// fd = open("text.txt", O_RDONLY);
+//     get = get_next_line(fd);
+// 	printf("%s\n", get);
+
+// 	// fd = open("text.txt", O_RDONLY);
+//     get = get_next_line(fd);
+// 	printf("%s\n", get);
 //     // system("leaks a.out");
 
 //     return 0;

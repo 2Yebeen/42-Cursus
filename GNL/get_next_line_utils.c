@@ -6,12 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:09:08 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/23 12:16:32 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/19 15:55:17 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -28,11 +27,8 @@ char	*ft_strchr(const char *s, int c)
 	int		i;
 
 	i = 0;
-	if (!s)
-		return (NULL);
 	while (s[i])
 	{
-		// printf("ft_strchr : %c, %s\n", s[i],s);
 		if (s[i] == (unsigned char)c)
 			return ((char *)s + i);
 		i++;
@@ -62,13 +58,12 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	i;
 	size_t	j;
-	// printf("%s\t%s\n",s1, s2);
+
 	if (!s1 && !s2)
 		return (NULL);
 	else if (!s1 && s2)
@@ -86,4 +81,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	return (str);
+}
+
+void	*ft_calloc(size_t elementCount, size_t elementSize)
+{
+	size_t	i;
+	char	*ret;
+
+	ret = malloc(elementSize * elementCount);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (i < elementSize * elementCount)
+	{
+		ret[i] = '\0';
+		i++;
+	}
+	return (ret);
 }
