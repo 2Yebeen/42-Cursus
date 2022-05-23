@@ -6,12 +6,12 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:39 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/19 12:08:43 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:17:23 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+// #include <stdio.h>
 
 void	*get_clean(t_gnl_list *lst)
 {
@@ -46,7 +46,7 @@ char    *get_line(t_gnl_list *lst)
 }
 
 void    get_read_file(int fd, t_gnl_list *lst)
-{\
+{
     int     nr;
     char    *content;
 
@@ -55,6 +55,7 @@ void    get_read_file(int fd, t_gnl_list *lst)
     while (nr > 0)
     {
         nr = read(fd, content, BUFFER_SIZE);
+        // printf("content : %s\n", content);
         if (nr == -1)
         {
             get_clean(lst);
@@ -72,7 +73,7 @@ char	*get_next_line(int fd)
 {
     static t_gnl_list    *lst;
     char                 *ret;
-    size_t               nr;
+    // size_t               nr;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
@@ -84,23 +85,23 @@ char	*get_next_line(int fd)
     return (ret);
 }
 
-#include <fcntl.h>
+// #include <fcntl.h>
 
-int main(void)
-{
-    int fd;
-	char	*get;
-    fd = open("text.txt", O_RDONLY);
-    get = get_next_line(fd);
-	printf("%s\n", get);
+// int main(void)
+// {
+//     int fd;
+// 	char	*get;
+//     fd = open("text.txt", O_RDONLY);
+//     get = get_next_line(fd);
+// 	printf("%s", get);
 
-    get = get_next_line(fd);
-	printf("%s\n", get);
+//     get = get_next_line(fd);
+// 	printf("%s", get);
 
-    get = get_next_line(fd);
-	printf("%s\n", get);
+//     get = get_next_line(fd);
+// 	printf("%s\n", get);
 
-    system("leaks a.out");
+//     // system("leaks a.out");
 
-    return 0;
-}
+//     return 0;
+// }

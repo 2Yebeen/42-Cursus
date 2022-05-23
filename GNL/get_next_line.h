@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:49 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/19 15:02:27 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:16:38 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <stdlib.h>
 # include <limits.h>
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
+// # ifndef OPEN_MAX
+// #  define OPEN_MAX 256
+// # endif
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
-# endif
+// # ifndef BUFFER_SIZE
+// #  define BUFFER_SIZE 4
+// # endif
 
 typedef struct s_gnl_list
 {
