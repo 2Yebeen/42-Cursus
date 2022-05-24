@@ -1,16 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 12:09:08 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/19 15:55:17 by yeblee           ###   ########.fr       */
+/*   Created: 2022/05/19 12:09:13 by yeblee            #+#    #+#             */
+/*   Updated: 2022/05/23 17:10:21 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*gnl_clear_node(t_list *node)
+{
+	free(node->contents);
+	node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	free(node);
+	node = NULL;
+	return (NULL);
+}
+
+char	*gnl_append_buff(char const *contents, char const *buff)
+{
+	char	*ret;
+
+	if (!buff)
+		return (NULL);
+	ret = malloc(gnl_strlen(contents) + gnl_strlen(buff) + 1);
+	if (!ret)
+		return (NULL);
+	if (!contents)
+	{
+		gnl_strlcpy(ret, buff, gnl_strlen(buff) + 1);
+		return (ret);
+	}
+	gnl_strlcpy(ret, contents, gnl_strlen(contents) + 1);
+	gnl_strlcpy(ret + gnl_strlen(contents), buff, gnl_strlen(buff) + 1);
+	return (ret);
+}
 
 size_t	gnl_strlen(char const *s)
 {
@@ -35,64 +65,20 @@ char	*gnl_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*gnl_strdup(const char *s)
+size_t	gnl_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
-	size_t	len;
-	char	*str;
+	size_t	len_src;
 
-	len = gnl_strlen(s);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
+	len_src = gnl_strlen(src);
+	if (dstsize == 0)
+		return (len_src);
 	i = 0;
-	while (s[i])
+	while (i + 1 < dstsize && src[i])
 	{
-		str[i] = s[i];
+		dst[i] = src[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*gnl_strjoin(char const *s1, char const *s2)
-{
-	char	*s;
-	size_t	i;
-	size_t	j;
-
-	if (!s1 && !s2)
-		return (NULL);
-	else if (!s1 && s2)
-		return (gnl_strdup(s2));
-	else if (s1 && !s2)
-		return (gnl_strdup(s1));
-	s = (char *)malloc(sizeof(char) * ((gnl_strlen(s1) + gnl_strlen(s2)) + 1));
-	if (!s)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		s[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		s[i + j] = s2[j];
-	s[i + j] = '\0';
-	return (s);
-}
-
-void	*gnl_calloc(size_t elementCount, size_t elementSize)
-{
-	size_t	i;
-	char	*ret;
-
-	ret = malloc(elementSize * elementCount);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (i < elementSize * elementCount)
-	{
-		ret[i] = '\0';
-		i++;
-	}
-	return (ret);
+	dst[i] = 0;
+	return (len_src);
 }

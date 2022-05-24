@@ -6,12 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:56 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/23 17:10:32 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/24 12:29:19 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 char	*gnl_get_line(char const *contents)
 {
@@ -25,7 +24,7 @@ char	*gnl_get_line(char const *contents)
 	else
 		len = gnl_strchr(contents, '\0') - contents;
 	line = malloc(len + 1);
-	if (line == NULL)
+	if (!line)
 		return (NULL);
 	gnl_strlcpy(line, contents, len + 1);
 	return (line);
@@ -36,7 +35,7 @@ char	*gnl_set_remains(char *contents, size_t offset)
 	char	*ret;
 
 	ret = malloc(gnl_strlen(contents + offset) + 1);
-	if (ret == NULL)
+	if (!ret)
 		return (NULL);
 	gnl_strlcpy(ret, contents + offset, gnl_strlen(contents + offset) + 1);
 	free(contents);
@@ -53,7 +52,7 @@ char	*gnl_read_file(int fd, char *res)
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	while (res == NULL || !gnl_strchr(res, '\n'))
+	while (!res || !gnl_strchr(res, '\n'))
 	{
 		len = read(fd, buff, BUFFER_SIZE);
 		if (len <= 0)
@@ -64,9 +63,10 @@ char	*gnl_read_file(int fd, char *res)
 		free(temp);
 	}
 	free(buff);
-	if (len < 0 || res == NULL || *res == '\0')
+	if (len < 0 || !res || *res == '\0')
 	{
 		free(res);
+		res = NULL;
 		return (NULL);
 	}
 	return (res);
@@ -85,7 +85,7 @@ t_list	*gnl_get_node(t_list *head, int fd)
 			node = node->next;
 	}
 	node = malloc(sizeof(t_list));
-	if (node == NULL)
+	if (!node)
 		return (NULL);
 	node->fd = fd;
 	node->contents = NULL;

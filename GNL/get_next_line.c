@@ -5,104 +5,117 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 12:08:39 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/23 15:41:32 by yeblee           ###   ########.fr       */
+/*   Created: 2022/05/19 12:08:56 by yeblee            #+#    #+#             */
+/*   Updated: 2022/05/24 12:29:41 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*gnl_set_remains(char *buffer, char *buf)
+char	*gnl_get_line(char const *contents)
 {
-	char	*temp;
-
-	temp = gnl_strjoin(buffer, buf);
-	free(buffer);
-	return (temp);
-}
-
-char	*gnl_get_next(char *buffer)
-{
-	int		i;
-	int		j;
+	size_t	len;
 	char	*line;
 
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!buffer[i])
-	{
-		free(buffer);
+	if (!contents)
 		return (NULL);
-	}
-	line = gnl_calloc((gnl_strlen(buffer) - i + 1), sizeof(char));
-	i++;
-	j = 0;
-	while (buffer[i])
-		line[j++] = buffer[i++];
-	free(buffer);
+	if (gnl_strchr(contents, '\n'))
+		len = gnl_strchr(contents, '\n') - contents + 1;
+	else
+		len = gnl_strchr(contents, '\0') - contents;
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	gnl_strlcpy(line, contents, len + 1);
 	return (line);
 }
 
-char	*gnl_get_line(char *buffer)
+char	*gnl_set_remains(char *contents, size_t offset)
 {
-	char	*line;
-	int		i;
+	char	*ret;
 
-	i = 0;
-	if (!buffer[i])
+	ret = malloc(gnl_strlen(contents + offset) + 1);
+	if (!ret)
 		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	line = gnl_calloc(i + 2, sizeof(char));
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
-	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
-	return (line);
+	gnl_strlcpy(ret, contents + offset, gnl_strlen(contents + offset) + 1);
+	free(contents);
+	contents = NULL;
+	return (ret);
 }
 
 char	*gnl_read_file(int fd, char *res)
 {
-	char	*buffer;
-	int		byte_read;
+	int		len;
+	char	*temp;
+	char	*buff;
 
-	if (!res)
-		res = gnl_calloc(1, 1);
-	buffer = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
-	byte_read = 1;
-	while (byte_read > 0)
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (NULL);
+	while (!res || !gnl_strchr(res, '\n'))
 	{
-		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[byte_read] = 0;
-		res = gnl_set_remains(res, buffer);
-		if (gnl_strchr(buffer, '\n'))
+		len = read(fd, buff, BUFFER_SIZE);
+		if (len <= 0)
 			break ;
+		buff[len] = '\0';
+		temp = res;
+		res = gnl_append_buff(res, buff);
+		free(temp);
 	}
-	free(buffer);
+	free(buff);
+	if (len < 0 || !res || *res == '\0')
+	{
+		free(res);
+		res = NULL;
+		return (NULL);
+	}
 	return (res);
+}
+
+t_list	*gnl_get_node(t_list *head, int fd)
+{
+	t_list	*node;
+
+	node = head->next;
+	while (node)
+	{
+		if (node->fd == fd)
+			return (node);
+		else
+			node = node->next;
+	}
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->fd = fd;
+	node->contents = NULL;
+	node->prev = head;
+	node->next = head->next;
+	if (head->next)
+		head->next->prev = node;
+	head->next = node;
+	return (node);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	static t_list	head;
+	t_list			*node;
+	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = gnl_read_file(fd, buffer);
-	if (!buffer)
+	node = gnl_get_node(&head, fd);
+	if (!node)
+		return (gnl_clear_node(node));
+	node->contents = gnl_read_file(fd, node->contents);
+	if (!node->contents)
+		return (gnl_clear_node(node));
+	line = gnl_get_line(node->contents);
+	if (!line)
 		return (NULL);
-	line = gnl_get_line(buffer);
-	buffer = gnl_get_next(buffer);
+	node->contents = gnl_set_remains(node->contents, gnl_strlen(line));
+	if (!node->contents)
+		return (gnl_clear_node(node));
 	return (line);
 }
