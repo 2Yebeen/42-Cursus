@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:56 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/24 12:29:19 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/24 20:45:30 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	node = gnl_get_node(&head, fd);
 	if (!node)
-		return (gnl_clear_node(node));
+		return (NULL);
 	node->contents = gnl_read_file(fd, node->contents);
 	if (!node->contents)
 		return (gnl_clear_node(node));
