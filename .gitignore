@@ -1,5 +1,4 @@
 .DS_Store
 GNL/venv
 .vscode
-*.txt
 *.out
