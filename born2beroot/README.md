@@ -165,9 +165,8 @@ $ sudo mysql -u root -p
 ```bash
 write_enable=YES // 업로드 가능하게
 user_sub_token=$USER
-local_root=/home/$USER/ftp // ftp root directory
+local_root=/srv/ftp // ftp root directory
 ```
-
 <br />
 
 `vim /etc/vsftpd.userlist` vsftpd user list <br />
