@@ -1,177 +1,167 @@
-## system
-`sudo systemctl status ufw` ufw <br />
-`sudo systemctl status ssh` ssh <br />
-`hostnamectl` debian <br />
+# **RESULT**
 
-## group
-`cat /etc/group | grep tkang`
+<img width="716" src="">
 
-<br />
+<img width="631" src="">
 
-## User
-`sudo useradd 'user'` <br />
-`usermod -aG 'group' 'user'` <br />
-`cut -f1 -d: /etc/passwd` <br />
+<br>
 
-<br />
+# **Born2beroot**
 
-## password policy
-`vi /etc/login.defs` password expire days
-<br />
+# Contents
 
-`libpam-pwquality` 패스워드 설정 강화를 위한 모듈 <br />
-`vi /etc/pam.d/common-password` password regex
+| Chapter | Contents                                        | page |
+| :-----: | :-----------------------------------------------| :--: |
+|I        | [**Preamble**](#Chapter-1)                      |   2  |
+|II       | [**Introduction**](#Chapter-2)                  |   3  |
+|III      | [**General guidelines**](#Chapter-3)            |   4  |
+|IV       | [**Mandatory part**](#Chapter-4)                |   5  |
+|V        | [**Bonus part**](#Chapter-5)                    |   10 |
+|VI       | [**Submission and peer-evaluation**](#Chapter-6)|   12 |
 
-<br />
+<br>
 
-## hostname
-`hostnamectl` check host name <br />
-`hostnamectl set-hostname 'change-name'`
+# **Chapter 1**
 
-<br />
+## Preamble
 
-## LVM
-`lsblk` check partitioning scheme
+YOU CAN DO ANYTHING YOU WANT TO DO <br>
+VIRTUAL MACHINE <br>
+THIS IS YOUR WORLD
 
-<br />
+<br><br>
 
-## sudoers
-`visudo /etc/sudoers` sudoers path <br />
-`requiretty` tty환경에서만 sudo를 실행하겠다. <br />
-`log_input` , `log_output` pseudo tty (pts, 의사 tty)에서 sudo 명령을 실행하고 모든 사용자 입력과 출력을 화면에 수신 가능하게 기록 <br />
+# **Chapter 2**
 
-<br />
+## Introduction
 
-sudoers는 일반 계정에 sudo 명령어를 이용하여 임시로 root 권한을 주는 것을 의미한다.
+<br>
 
-## check log
-`/var/log/sudo`
+이 프로젝트는 여러분에게 가상화의 멋진 세계를 소개하는 것을 목표로 합니다. 특정 지침에 따라 VirtualBox(VirtualBox를 사용할 수 없는 경우 UTM)에서 첫 번째 시스템을 생성합니다. 그러면 이 프로젝트가 끝나면 엄격한 규칙을 구현하면서 자신만의 운영 체제를 설정할 수 있습니다.
 
-<br />
+<br>
 
-## ufw
-`sudo systemctl status ufw` ufw <br />
-`sudo ufw allow 'port-number'` allow <br />
-`sudo ufw delete allow 'port-number'` delete <br />
+# **Chapter 3**
 
-## SSH
-`ssh id@ip -p 4242` <br />
-`vim /etc/ssh/sshd_config ` config file <br />
-`ss -tupln` ss로 리눅스 시스템 소켓 상태를 조회 <br />
-`/etc/network/interfaces` interface settings
+## General guidelines
 
-<br />
+<br>
 
-## AppArmor
-`sudo aa-status` Apparmor status
+VirtualBox(또는 VirtualBox를 사용할 수 없는 경우 UTM)의 사용은 필수입니다. 
+저장소의 루트에 있는 signature.txt 파일만 제출하면 됩니다. 컴퓨터의 가상 디스크 서명을 붙여 넣어야 합니다. 제출로 이동하고 자세한 내용은 동료 평가를 참조하십시오.
 
-<br />
+<br>
 
-## ufw
-`sudo ufw status` ufw status
+# Chapter 4
 
-<br />
+## Mandatory part
 
-## monitors
-`sysstat` 리눅스 성능 측정 도구, cpu memory network 등 지표를 수치화한다. <br />
-`uname -a` os and kernel version
+<br>
 
-<br />
+이 프로젝트는 특정 규칙에 따라 첫 번째 서버를 설정하는 작업으로 구성됩니다. 
 
-`nproc --all` processor
+최소한의 서비스로 서버를 설정해야 하기 때문에 그래픽 인터페이스를 설치하는 것은 금지되어 있습니다. 그렇지 않으면 0점 처리됩니다.
+운영 체제로 Debian의 최신 안정 버전(테스트/불안정 버전 없음) 또는 CentOS의 최신 안정 버전을 선택해야 합니다. 시스템 관리를 처음 하는 경우 Debian을 사용하는 것이 좋습니다.
 
-<br />
 
-`grep 'processor' /proc/cpuinfo | uniq | wc -l` vprocessor
 
-<br />
+##### 1. LVM을 사용하여 암호화된 파티션을 2개 이상 생성해야 합니다.
 
-`free -m | grep Mem: | awk '{printf"%.2f%%\n", $3 / $2 * 100'}` usage RAM rate
+- 방어하는 동안, 당신은 다음과 같은 몇 가지 질문을 받게 될 것입니다. 예를 들어 다음을 알아야 합니다. aptitude와 apt의 차이점 또는 SELinux 또는 AppArmor이 무엇인지 알아야 합니다.
 
-<br />
+##### 2. SSH 서비스는 포트 4242에서만 실행됩니다. 보안상의 이유로 SSH를 루트로 사용하여 연결할 수 없어야 합니다. 
 
-`df -Bm | grep /dev/ | grep -v /boot | awk '{used += $3} {full += $2} END {printf("%d%%\n"), used / full * 100}'` usage Memory
+- SSH의 사용은 방어 중에 새로운 설정을 통해 테스트됩니다. 계정. 따라서 작동 방식을 이해해야 합니다.
 
-<br />
+##### 3. UFW 방화벽으로 운영 체제를 구성해야 하므로 포트 4242만 열려 있습니다.
 
-`mpstat | grep all | awk '{printf "%.2f%%\n", 100-$13}'` cpu usage
+- 가상 시스템을 시작할 때 방화벽이 활성화되어 있어야 합니다. CentOS의 경우 기본 방화벽 대신 UFW를 사용해야 합니다. 그것을 설치하려면 아마도 DNF가 필요할 것입니다.
+- 가상 시스템의 호스트 이름은 42로 끝나는 로그인(예: wil42)이어야 합니다. 평가 중에 이 호스트 이름을 수정해야 합니다.
+- 강력한 암호 정책을 구현해야 합니다.
+- 엄격한 규칙에 따라 sudo를 설치하고 구성해야 합니다.
+- 루트 사용자 외에도 사용자 이름으로 로그인한 사용자가 있어야 합니다.
+- 이 사용자는 user42 및 sudo 그룹에 속해 있어야 합니다.
+- 방어하는 동안 새 사용자를 만들고 그룹에 할당해야 합니다.
+- 강력한 암호 정책을 설정하려면 다음 요구 사항을 준수해야 합니다.
+    - 암호는 30일마다 만료되어야 합니다.
+    - 암호를 수정하기 전에 허용되는 최소 일 수는 2일로 설정됩니다.
+    - 사용자는 암호가 만료되기 7일 전에 경고 메시지를 받아야 합니다.
+    - 암호는 10자 이상이어야 합니다. 대문자 및 숫자를 포함해야 합니다. 또한 연속적으로 동일한 문자를 3자 이상 사용할 수 없습니다.
+    - 암호에는 사용자 이름을 포함할 수 없습니다.
+    - 다음 규칙은 루트 암호에는 적용되지 않습니다. 암호는 이전 암호의 일부가 아닌 7자 이상이어야 합니다.
+    - 물론 루트 암호는 이 정책을 준수해야 합니다.
+    - 구성 파일을 설정한 후에는 루트 계정을 포함하여 가상 시스템에 있는 계정의 모든 암호를 변경해야 합니다.
 
-<br />
 
-`who -b | awk '{print $3" "$4}'` last boot
+##### 4. sudo 그룹에 대한 강력한 구성을 설정하려면 다음 요구 사항을 준수해야 합니다.
+- sudo를 이용한 인증은 비밀번호가 잘못되었을 경우 3회까지로 제한되어야 합니다.
+- sudo 사용 시 잘못된 비밀번호로 인한 오류가 발생할 경우 원하는 사용자 지정 메시지가 표시되어야 합니다.
+- sudo를 사용하는 각 작업은 입력과 출력 모두 보관해야 합니다. 로그 파일은 /var/log/sudo/ 폴더에 저장해야 합니다.
+- 보안상의 이유로 TTY 모드를 활성화해야 합니다.
+- 보안상의 이유로 sudo에서 사용할 수 있는 경로도 제한해야 합니다. 
+    - 예: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/snap/bin
 
-<br />
+##### 5. 마지막으로, 당신은 monitoring.sh이라는 간단한 스크립트를 만들어야 합니다. 그것은 bash로 개발되어야 합니다.
 
-`if [lsblk | grep lvm | wc -l -eq 0]; then echo no; else echo yes; fi` lvm or not
+- 서버 시작 시 스크립트는 10분마다 모든 터미널에 일부 정보(아래 목록)를 표시합니다. 배너는 선택 사항입니다. 오류가 표시되지 않아야 합니다. 
+- 스크립트는 항상 다음 정보를 표시할 수 있어야 합니다.
+- 운영 체제 및 커널 버전의 아키텍처입니다.
+- 물리적 프로세서 수입니다.
+- 가상 프로세서 수입니다.
+- 서버에서 현재 사용 가능한 RAM 및 사용률(백분율)입니다.
+- 서버에서 현재 사용 가능한 메모리와 사용률(백분율)입니다.
+- 프로세서의 현재 사용률(백분율)입니다.
+- 마지막으로 재부팅한 날짜 및 시간입니다.
+- LVM이 활성 상태인지 여부입니다.
+- 활성 연결 수입니다.
+- 서버를 사용하는 사용자 수입니다.
+- 서버의 IPv4 주소와 MAC(미디어 액세스 제어) 주소입니다.
+- sudo 프로그램으로 실행된 명령 수입니다.
+- 변호하는 동안 이 스크립트가 어떻게 작동하는지 설명하라는 메시지가 표시됩니다. 당신은 또한 그것을 수정하지 않고 그것을 중단해야 합니다. - cron을 보세요.
 
-<br />
+<br>
 
-`cat /proc/net/sockstat{,6} | awk '$1 == "TCP:"{print $3 - 1 " ESTABLISHED"}'` connections
+# Chapter 5
 
-<br />
+## Bonus part
 
-`who | wc -l` users
+<br>
 
-<br />
+- 아래 구조와 유사한 구조를 얻을 수 있도록 파티션을 올바르게 설정하십시오.(LVM 설명)
+- lighttpd, MariaDB 및 PHP 서비스를 사용하여 WordPress 웹 사이트를 설정합니다.
+- 유용하다고 생각되는 서비스를 설정합니다(NGINX/Apache2 제외!). 변호하는 동안, 당신은 당신의 선택을 정당화해야 할 것입니다.
+- 보너스 부분을 완료하기 위해 추가 서비스를 설정할 수 있습니다. 이 경우 필요에 따라 포트를 더 열 수 있습니다. 물론 UFW 규칙은 그에 따라 조정되어야 합니다.
+- 보너스 부분은 필수 부분이 PERFECT 인 경우에만 평가됩니다. 완벽 함은 필수 부품이 통합되어 오작동 없이 작동 함을 의미합니다. 
+- 모든 필수 요건을 통과하지 못한 경우 보너스 부분은 전혀 평가되지 않습니다.
 
-`hostname -I` IP
+<br>
 
-<br />
+# Chapter 6
 
-`ip addr | grep "ether " | awk '{print $2}' | sed -n '1p'` MAC
+## Submission and peer-evaluation
 
-<br />
+<br>
 
-`journalctl _COMM=sudo | wc -l` sudo
+Git 리포지토리의 루트에 있는 txt 파일 서명만 제출하면 됩니다. 시스템 가상 디스크의 서명을 여기에 붙여 넣어야 합니다. 이 서명을 받으려면 먼저 기본 설치 폴더(VM이 저장되는 폴더)를 열어야 합니다.
 
-## cron
-`crontab -e` settings <br />
-`wall` 사용자의 터미널로 메세지를 보낸다.
+- Windows: %HOMEDRIVE%%HOMEPATH%\VirtualBox VMs\
+- Linux: ~/VirtualBox VMs/
+- MacM1: ~/Library/Containers/com.utmapp.UTM/Data/Documents/
+- MacOS: ~/VirtualBox VMs/
 
-## WordPress
-- php로 작성된 온라인 오픈소스 웹사이트 제작 도구
-`ufw allow 80` well-known port
-`/var/www/html/wordpress`
-`/var/www/html/wordpress/wp-config.php`
+그런 다음 가상 시스템의 ".vdi" 파일(또는 UTM' 사용자의 경우 ".qcow2")에서 sha1 형식으로 서명을 검색합니다. 
 
-## Lighttpd
-- 오픈소스 경량 웹 서버
+다음은 centos_serv.vdi 파일에 대한 4가지 명령 예제입니다.
 
-```bash
-$ sudo systemctl stop lighttpd.service	// 서버 중지
-$ sudo systemctl start lighttpd.service	// 서버 시작
-$ sudo systemctl enable lighttpd.service	// 서버 부팅 (enable with start up)
-```
-` vi /etc/lighttpd/lighttpd.conf` lighttpd 설정
+- Windows: certUtil -hashfile centos_serv.vdi sha1
+- Linux: sha1sum centos_serv.vdi
+- For Mac M1: shasum Centos.utm/Images/disk-0.qcow2
+- MacOS: shasum centos_serv.vdi
 
-## MariaDB
-- RDBMS
-```bash
-$ sudo systemctl stop mysql.service	// DB 중지
-$ sudo systemctl start mysql.service	// DB 시작
-$ sudo systemctl enable mysql.service	// DB 부팅 (enable with start up)
-$ sudo mysql_secure_installation // 보안 설정
-$ sudo mysql -u root -p
-```
+다음은 어떤 종류의 출력을 얻을 것인지를 보여 주는 예입니다.
 
-## PHP
-`vim /etc/lighttpd/conf-available/15-fastcgi-php.conf` fastcgi 적용
-
-## ftp, vsftpd
-`dpkg -l | grep vsftpd` vsftpd <br />
-`dpkg -l | grep ftp` ftp <br />
-`ufw status` check 21 prot (well known port) <br />
-`vim /etc/vsftpd.conf` vsftpd setting <br />
-```bash
-write_enable=YES // 업로드 가능하게
-user_sub_token=$USER
-local_root=/srv/ftp // ftp root directory
-```
-<br />
-
-`vim /etc/vsftpd.userlist` vsftpd user list <br />
-```bash
-userlist_enable=YES
-userlist_file=/etc/vsftpd.userlist
-userlist_deny=NO // userlist 등록된 계정만 접속 가능
-```
+- 6e657c4619944be17df3c31faa030c25e43e40af
+- 첫 번째 평가 후, 가상 머신의 서명이 변경될 수 있습니다. 이 문제를 해결하려면 가상 머신을 복제하거나 상태 저장을 사용하십시오.
+- 물론 Git 저장소에서 가상 머신을 설정하는 것은 금지되어 있습니다. 
+- 방어 중에 signature.txt 파일의 서명이 가상 머신의 서명과 비교됩니다. 
+- 두 개가 동일하지 않으면 점수가 0이 됩니다.
