@@ -21,3 +21,4 @@ https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3k
 강의에서는 값이 핑퐁으로 된다고 했는데, 나는 값이 핑퐁으로 되는 것이 아니라 부모 먼저 되고 자식이 실행 되었다. 프로세스마다 차이가 있다고 하는 것 같다. 
 그리고 코드에서 wait();으로만 표기를 했느데 그러면 에러가 나기 때문에 wait(NULL);로 변경해 줘야 한다.
 
+# 03 Calling fork muliple times
