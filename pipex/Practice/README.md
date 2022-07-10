@@ -23,3 +23,7 @@ https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3k
 
 # 03 Calling fork muliple times
 <img width="432" alt="스크린샷 2022-07-07 오후 8 14 03" src="https://user-images.githubusercontent.com/68188768/177760730-7a317ae7-1aa8-4b68-a3b6-db0ab43333de.png">
+
+# use pipe
+
+# FIFO
