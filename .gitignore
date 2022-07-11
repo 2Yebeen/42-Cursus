@@ -2,3 +2,6 @@
 GNL/venv
 .vscode
 *.out
+*.zip
+*.o
+tester

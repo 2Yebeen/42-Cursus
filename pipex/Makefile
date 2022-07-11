@@ -1,10 +1,7 @@
 NAME		= pipex
 
-CC			= gcc
+CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
-
-AR			= ar
-ARFLAGS		= rcs
 
 RM			= rm -rf
 
@@ -15,27 +12,28 @@ SRCS		= pipex.c	\
 			  utils.c	\
 
 OBJS 		= $(SRCS:.c=.o)
+# SRCS = $(addprefix ./, $(addsuffix .c, $(FILE)))
+# OBJS = $(addprefix ./, $(addsuffix .o, $(FILE)))
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCDIR)
 
-$(NAME) : $(OBJS)
-	# @make -C $(LIBFT)
-	# $(CC) -o 4(NAME) -L./$(LIBFT) -lft $(OBJS)
-	@make -C $(LIBFT)
-	@cp $(LIBFT)/libft.a $(NAME)
-	@ar rcs $@ $?
+$(NAME): $(OBJS)
+	make -C $(LIBFT)
+	$(CC) -o $(NAME) -L $(LIBFT) -lft $(OBJS)
 
-all : $(NAME)
+all: $(NAME)
 
-clean :
+clean:
 	$(RM) $(OBJS)
-	@make clean -C $(LIBFT)
+	make clean -C $(LIBFT)
 
-fclean : clean
+fclean: clean
 	$(RM) $(NAME)
-	@make fclean -C $(LIBFT)
+	make fclean -C $(LIBFT)
 
-re:	clean all
+re:	
+	make fclean 
+	make all
 
 .PHONY: all clean fclean re
