@@ -1,6 +1,10 @@
-|Circle|Project                                                                     |Languate|Topic            |Data of completion|
-|:----:|:---------------------------------------------------------------------------|:------:|:----------------|:-----------------:|
-|   0  |[Libft](https://github.com/33bini/42-Seoul/tree/master/Libft)               |    C   | Makefile,<br>struct,<br>restrict,<br>static|22.04.11|
-|   1  |[ft_printf](https://github.com/33bini/42-Seoul/tree/master/ft_printf)       |    C   | va_arg           |22.04.18|
-|   1  |[get_next_line](https://github.com/33bini/42-Seoul/tree/master/GNL)         |    C   | File Descriptor,<br> static|22.05.26|
-|   1  |[Born2beroot](https://github.com/33bini/42-Seoul/tree/master/Born2beroot)   | Network| Virtual machine,<br> Linux,<br> Debian,<br> etc ...|22.07.04|
+|Circle|Project                                                                     |Languate|Topic            |Data of completion|score|
+|:----:|:---------------------------------------------------------------------------|:------:|:----------------|:-----------------:|:---:|
+|   0  |[Libft](https://github.com/33bini/42-Seoul/tree/master/Libft)               |    C   | Makefile,<br>struct,<br>restrict,<br>static|22.04.11|[![yeblee's 42 Libft Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2523060)](https://github.com/JaeSeoKim/badge42)|
+|   1  |[ft_printf](https://github.com/33bini/42-Seoul/tree/master/ft_printf)       |    C   | va_arg           |22.04.18|[![yeblee's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2557803)](https://github.com/JaeSeoKim/badge42)|
+|   1  |[get_next_line](https://github.com/33bini/42-Seoul/tree/master/GNL)         |    C   | File Descriptor,<br> static|22.05.26|[![yeblee's 42 get_next_line Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2557804)](https://github.com/JaeSeoKim/badge42)|
+|   1  |[Born2beroot](https://github.com/33bini/42-Seoul/tree/master/Born2beroot)   | Network| Virtual machine,<br> Linux,<br> Debian,<br> etc ...|22.07.04|[![yeblee's 42 Born2beroot Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2557805)](https://github.com/JaeSeoKim/badge42)|
+|   1  |[Exam](https://github.com/yeblee/42-Seoul/tree/master/Exam/Rank-02)   | C| union,<br> ft_printf|22.07.04|[![yeblee's 42 Exam Rank 02 Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2645147)](https://github.com/JaeSeoKim/badge42)|
+|   2  |[pipex](https://github.com/33bini/42-Seoul/tree/master/pipex)   | C| - | - |[![yeblee's 42 pipex Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2645151)](https://github.com/JaeSeoKim/badge42)|
+
+
