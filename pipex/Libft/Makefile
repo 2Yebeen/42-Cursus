@@ -26,10 +26,6 @@ OBJS = $(SRCS:.c=.o)
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
-# $(NAME): $(SRCS) $(INCLUDES)
-# 		 $(CC) $(CFLAGS) -c $(SRCS)
-# 		 $(AR) $(ARFLAGS) $@ $(OBJS)
-
 all: $(NAME)
 
 clean:
