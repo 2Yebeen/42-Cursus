@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/11 12:06:44 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/12 13:24:25 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	child_process(char *argv[], char *envp[], int *fd)
 
 	infile = open(argv[1], O_RDONLY | O_CLOEXEC, 0777);
 	if (infile == -1)
-		exit_trap("file error\n", 1);
+		exit_msg("file error\n", 1);
 	else
 	{
 		if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
-			exit_trap("duplicate error\n", 1);
+			exit_msg("duplicate error\n", 1);
 		else 
 			close(fd[WRITE_END]);
 		if (dup2(infile, STDIN_FILENO) == -1)
-			exit_trap("duplicate error\n", 1);
+			exit_msg("duplicate error\n", 1);
 		else
 			close(fd[READ_END]);
 		close(infile);
@@ -40,15 +40,15 @@ void	parent_process(char *argv[], char *envp[], int *fd)
 
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0777);
 	if (outfile == -1)
-		exit_trap("file error\n", 1);
+		exit_msg("file error\n", 1);
 	else
 	{
 		if (dup2(fd[READ_END], STDIN_FILENO) == -1)
-			exit_trap("duplicate error\n", 1);
+			exit_msg("duplicate error\n", 1);
 		else
 			close(fd[READ_END]);
 		if (dup2(outfile, STDOUT_FILENO) == -1)
-			exit_trap("duplicate error\n", 1);
+			exit_msg("duplicate error\n", 1);
 		else
 			close(fd[WRITE_END]);
 		close(outfile);
@@ -64,16 +64,16 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
-			exit_trap("pipe error\n", 1);
+			exit_msg("pipe error\n", 1);
 		pid = fork();
 		if (pid == -1)
-			exit_trap("fork error\n", 1);
+			exit_msg("fork error\n", 1);
 		if (pid == 0)
 			child_process(argv, envp, fd);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, WNOHANG);
 		parent_process(argv, envp, fd);
 	}
 	else
-		exit_trap("arguments error\n", 1);
+		exit_msg("arguments error\n", 1);
 	return (0);
 }

@@ -6,16 +6,18 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:51 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/11 11:58:06 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/12 13:39:30 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	exit_trap(char *str, int sig)
+void	exit_msg(char *str, int sig)
 {
-	write(2, str, ft_strlen(str));
-	// exit(EXIT_FAILURE);
+	char *ret;
+
+	ret = ft_strjoin("Error : ", str);
+	write(2, ret, ft_strlen(ret));
 	exit(sig);
 
 }
@@ -53,5 +55,5 @@ void	find_path(char *argv, char *envp[])
 	path = set_path(cmd, envp);
 	free(cmd);
 	if (execve(path, tmp, envp) == -1)
-		exit_trap("excute error\n", 127);
+		exit_msg("command not found\n", 127);
 }
