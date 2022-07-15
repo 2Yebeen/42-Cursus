@@ -6,14 +6,14 @@ CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 
 INCDIR		= ./pipex.h
+INCDIR_BONUS= ./pipex_bonus.h
+
 LIBFT		= ./libft
 
-SRCS		= pipex.c	\
-			  utils.c	\
+SRCS		= pipex.c		\
+			  utils.c		
 
 OBJS 		= $(SRCS:.c=.o)
-# SRCS = $(addprefix ./, $(addsuffix .c, $(FILE)))
-# OBJS = $(addprefix ./, $(addsuffix .o, $(FILE)))
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCDIR)
