@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../Libft/libft.h" 
+# include "./Libft/libft.h" 
 
 void	child_process(char *argv[], char *envp[], int *fd);
 void	parent_process(char *argv[], char *envp[], int *fd);
