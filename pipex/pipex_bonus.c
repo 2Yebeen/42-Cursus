@@ -15,87 +15,89 @@
 void	child_process(char *argv, char **envp)
 {
 	pid_t	pid;
-	int		p[2];
+	int		fd[2];
 
-	if (pipe(p) == -1)
-		error();
+	if (pipe(fd) == -1)
+		exit_msg("pipe error\n", 1);
 	pid = fork();
 	if (pid == -1)
-		error();
+		exit_msg("fork error\n", 1);
 	if (pid == 0)
 	{
-		close(p[READ_END]);
-		dup2(p[1], STDOUT_FILENO);
-		execute(argv, envp);
+		close(fd[READ_END]);
+		dup2(fd[WRITE_END], STDOUT_FILENO);
+		find_path(argv, envp);
 	}
 	else
 	{
-		close(p[WRITE_END]);
-		dup2(p[READ_END], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
+		close(fd[WRITE_END]);
+		dup2(fd[READ_END], STDIN_FILENO);
+		waitpid(pid, NULL, WNOHANG);
 	}
 }
 
-void	here_doc(char *limiter, int argc)
+void	here_doc(char *limiter)
 {
-	pid_t	reader;
-	int		p[2];
+	pid_t	pid;
+	int		fd[2];
 	char	*line;
 
-	if (argc < 6)
-		arg_error(1);
-	if (pipe(p) == -1)
-		error();
-	reader = fork();
-	if (reader == 0)
+	if (pipe(fd) == -1)
+		exit_msg("pipe error\n", 1);
+	pid = fork();
+	if (pid == -1)
+		exit_msg("fork error\n", 1);
+	if (pid == 0)
 	{
-		close(p[READ_END]);
+		close(fd[READ_END]);
 		while (get_next_line(&line))
 		{
 			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 				exit(EXIT_SUCCESS);
-			write(p[1], line, ft_strlen(line));
+			// write(fd[WRITE_END], line, ft_strlen(line));
 		}
 	}
 	else
 	{
-		close(p[WRITE_END]);
-		dup2(p[READ_END], STDIN_FILENO);
-		wait(NULL);
+		close(fd[WRITE_END]);
+		dup2(fd[READ_END], STDIN_FILENO);
+		waitpid(pid, NULL, WNOHANG);
 	}
 }
 
-// void	dup_close(src, dst)
-// {
-// 	dup2(src, dst);
-// 	close(src);
-// }
-
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char *argv[], char *envp[])
 {
 	int	i;
-	int	filein;
-	int	fileout;
+	int	infile;
+	int	outfile;
 
 	if (argc >= 5)
 	{
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		{
 			i = 3;
-			fileout = open_file(argv[argc - 1], 0);
-			here_doc(argv[2], argc);
+			outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0777);
+			if (outfile == -1)
+				exit_msg("file error\n", 1);
+			here_doc(argv[2]);
 		}
 		else
 		{
 			i = 2;
-			fileout = open_file(argv[argc - 1], 1);
-			filein = open_file(argv[1], 2);
-			dup2(filein, STDIN_FILENO);
-			close(filein);
+			outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0777);
+			if (outfile == -1)
+				exit_msg("file error\n", 1);
+			infile = open(argv[1], O_RDONLY | O_CLOEXEC, 0777);
+			if (infile == -1)
+				exit_msg("file error\n", 1);
+			if (dup2(infile, STDIN_FILENO) == -1)
+				exit_msg("duplicate error\n", 1);
+			else
+				close(infile);
 		}
 		while (i < argc - 2)
 			child_process(argv[i++], envp);
-		execute(argv[argc - 2], envp);
+		find_path(argv[argc - 2], envp);
 	}
-	arg_error(1);
+	exit_msg("arguments error\n", 1);
 }

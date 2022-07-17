@@ -19,16 +19,16 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 
 # define READ_END	0
 # define WRITE_END	1
 
-int	open_file(char *argv, int i);
-int	get_next_line(char **line);
-void	arg_error(int bonus);
-// void	dup_close(src, dst);
-void	here_doc(char *limiter, int argc);
 void	child_process(char *argv, char **envp);
+void	here_doc(char *limiter);
+void	exit_msg(char *str, int sig);
+int	    get_next_line(char **line);
+char	*set_path(char *cmd, char *envp[]);
+void	find_path(char *argv, char *envp[]);
 
 #endif
