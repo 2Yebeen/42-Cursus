@@ -6,16 +6,15 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:51 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 13:06:14 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:56:31 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 
 void	exit_msg(char *str, int sig)
 {
-	char	*ret;
+	char *ret;
 
 	ret = ft_strjoin("Error : ", str);
 	write(2, ret, ft_strlen(ret));
@@ -42,14 +41,6 @@ char	*set_path(char *cmd, char *envp[])
 		i++;
 	}
 	return (NULL);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s || fd < 0)
-		return ;
-	if (*s && fd >= 0)
-		write(fd, s, ft_strlen(s));
 }
 
 void	find_path(char *argv, char *envp[])

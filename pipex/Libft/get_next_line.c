@@ -6,11 +6,11 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:56 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 15:43:55 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:04:27 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*gnl_get_line(char const *contents)
 {

@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 15:45:16 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:39:45 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,30 @@ void	create_pipex(char *argv, char *envp[])
 	if (pid == 0)
 	{
 		close(fd[READ_END]);
-		dup2(fd[WRITE_END], STDOUT_FILENO);
+		if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
+			exit_msg("duplicate error\n", 1);
 		find_path(argv, envp);
 	}
 	else
 	{
 		close(fd[WRITE_END]);
-		dup2(fd[READ_END], STDIN_FILENO);
+		if (dup2(fd[READ_END], STDIN_FILENO) == -1)
+			exit_msg("duplicate error\n", 1);
 		waitpid(pid, NULL, WNOHANG);
+	}
+}
+
+void	line_write(int fd, char *limiter)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+			exit(EXIT_SUCCESS);
+		write(fd, line, ft_strlen(line));
+		free(line);
 	}
 }
 
@@ -40,7 +56,6 @@ void	here_doc(char *limiter)
 {
 	pid_t	pid;
 	int		fd[2];
-	char	*line;
 
 	if (pipe(fd) == -1)
 		exit_msg("pipe error\n", 1);
@@ -48,15 +63,7 @@ void	here_doc(char *limiter)
 	if (pid == -1)
 		exit_msg("fork error\n", 1);
 	if (pid == 0)
-	{
-		close(fd[READ_END]);
-		while (get_next_line(&line))
-		{
-			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-				exit(EXIT_SUCCESS);
-			write(fd[WRITE_END], line, ft_strlen(line));
-		}
-	}
+		line_write(fd[WRITE_END], limiter);
 	else
 	{
 		close(fd[WRITE_END]);
@@ -71,29 +78,21 @@ int	main(int argc, char *argv[], char *envp[])
 	int	infile;
 	int	outfile;
 
+	i = 2;
 	if (argc >= 5)
 	{
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		{
 			i = 3;
-			outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0777);
-			if (outfile == -1)
-				exit_msg("file error\n", 1);
+			outfile = ft_openfile(argv[argc - 1], 0);
 			here_doc(argv[2]);
 		}
 		else
 		{
-			i = 2;
-			outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0777);
-			if (outfile == -1)
-				exit_msg("file error\n", 1);
-			infile = open(argv[1], O_RDONLY | O_CLOEXEC, 0777);
-			if (infile == -1)
-				exit_msg("file error\n", 1);
-			if (dup2(infile, STDIN_FILENO) == -1)
-				exit_msg("duplicate error\n", 1);
-			else
-				close(infile);
+			outfile = ft_openfile(argv[argc - 1], 1);
+			infile = ft_openfile(argv[1], 2);
+			dup2(infile, STDIN_FILENO);
+			close(infile);
 		}
 		dup2(outfile, STDOUT_FILENO);
 		while (i < argc - 2)
