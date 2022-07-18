@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 10:43:26 by yebeen            #+#    #+#              #
-#    Updated: 2022/07/18 15:50:32 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/18 17:58:22 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS		= pipex.c				\
 
 SRCB		= pipex_bonus.c			\
 			  pipex_utils_bonus.c	\
-			  pipex_gnl.c	
+			#   pipex_gnl.c	
 
 OBJS 		= $(SRCS:.c=.o)
 OBJB 		= $(SRCB:.c=.o)
@@ -44,6 +44,7 @@ $(NAME): 	$(OBJS)
 $(NAMEB): 	$(OBJB)
 			@make -C $(LIBFT)
 			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
+			# mv pipex_bonus pipex
 clean:
 			@$(RM) $(OBJS) $(OBJB)
 			@make clean -C $(LIBFT)

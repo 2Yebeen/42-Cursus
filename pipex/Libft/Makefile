@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 13:08:09 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/18 13:08:10 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/18 17:04:06 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,17 @@ ARFLAGS = rcs
 
 RM = rm -rf
 
-INCLUDES = libft.h		\
-		#    ../get_next_line/get_next_line.h
+INCLUDES = libft.h
 
-SRCS =  ft_strlen.c		\
-		ft_strncmp.c	\
-		ft_split.c		\
-		ft_strjoin.c	\
-		ft_strlcpy.c	\
-		ft_strdup.c		\
-		ft_strlcat.c	\
-		# ../get_next_line/get_next_line.c	\
-		# ../get_next_line/get_next_line_utils.c	
+SRCS =  ft_strlen.c					\
+		ft_strncmp.c				\
+		ft_split.c					\
+		ft_strjoin.c				\
+		ft_strlcpy.c				\
+		ft_strdup.c					\
+		ft_strlcat.c				\
+		get_next_line.c			\
+		get_next_line_utils.c	
 
 OBJS = $(SRCS:.c=.o)
 

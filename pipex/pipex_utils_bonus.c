@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 15:23:22 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:43:14 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,27 @@
 
 void	exit_msg(char *str, int sig)
 {
-	char *ret;
+	char	*ret;
 
 	ret = ft_strjoin("Error : ", str);
 	write(2, ret, ft_strlen(ret));
 	exit(sig);
+}
+
+int	ft_openfile(char *argv, int type)
+{
+	int	file;
+
+	file = -1;
+	if (type == 0)
+		file = open(argv, O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0777);
+	else if (type == 1)
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0777);
+	else if (type == 2)
+		file = open(argv, O_RDONLY | O_CLOEXEC, 0777);
+	else if (file == -1)
+		exit(1);
+	return (file);
 }
 
 char	*set_path(char *cmd, char *envp[])
