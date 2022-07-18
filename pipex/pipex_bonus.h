@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 14:09:20 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 15:50:28 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 void	create_pipex(char *argv, char *envp[]);
 void	here_doc(char *limiter);
 void	exit_msg(char *str, int sig);
-int	    get_next_line(char *line[]);
 char	*set_path(char *cmd, char *envp[]);
 void	find_path(char *argv, char *envp[]);
+int	get_next_line(char *line[]);
 
 #endif

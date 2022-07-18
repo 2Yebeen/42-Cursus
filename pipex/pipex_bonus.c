@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 15:06:44 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 15:45:16 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,9 @@ int	main(int argc, char *argv[], char *envp[])
 			else
 				close(infile);
 		}
-		// dup2(outfile, STDOUT_FILENO);
+		dup2(outfile, STDOUT_FILENO);
 		while (i < argc - 2)
 			create_pipex(argv[i++], envp);
 		find_path(argv[argc - 2], envp);
 	}
-	else
-		exit_msg("arguments error\n", 1);
 }
