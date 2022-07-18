@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/15 16:54:27 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:44:09 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # define READ_END	0
 # define WRITE_END	1
 
-void	child_process(char *argv, char **envp);
+void	create_pipe(char *argv, char *envp[]);
 void	here_doc(char *limiter);
 void	exit_msg(char *str, int sig);
-int	    get_next_line(char **line);
+int	    get_next_line(char *line[]);
 char	*set_path(char *cmd, char *envp[]);
 void	find_path(char *argv, char *envp[]);
 

@@ -1,6 +1,17 @@
-aa
-bb
-cc
-dd
-ee
-ff
+-rw-r--r--⠀staff⠀0    ⠀Jul 18 12:12:52⠀⠀a                  
+drwxr-xr-x⠀staff⠀256  ⠀Jul 17 22:22:05⠀⠀GNL/               
+-rw-r--r--⠀staff⠀43   ⠀Jul 18 11:27:32⠀⠀infile             
+drwxr-xr-x⠀staff⠀640  ⠀Jul 18 12:18:15⠀⠀libft/             
+-rw-r--r--⠀staff⠀1607 ⠀Jul 18 10:49:57⠀⠀Makefile           
+-rwxr-xr-x⠀staff⠀20   ⠀Jul 18 12:18:17⠀⠀outfile*           
+-rwxr-xr-x⠀staff⠀34754⠀Jul 18 12:18:15⠀⠀pipex*             
+drwxr-xr-x⠀staff⠀448  ⠀Jul 18 11:02:45⠀⠀pipex-tester/      
+-rw-r--r--⠀staff⠀2244 ⠀Jul 18 10:44:20⠀ﭰ⠀pipex.c            
+-rw-r--r--⠀staff⠀1346 ⠀Jul 18 10:44:22⠀h⠀pipex.h            
+-rw-r--r--⠀staff⠀2408 ⠀Jul 18 12:18:15⠀⠀pipex.o            
+-rw-r--r--⠀staff⠀2662 ⠀Jul 18 10:44:06⠀ﭰ⠀pipex_bonus.c      
+-rw-r--r--⠀staff⠀1371 ⠀Jul 18 10:44:09⠀h⠀pipex_bonus.h      
+-rw-r--r--⠀staff⠀1797 ⠀Jul 18 12:18:12⠀ﭰ⠀pipex_utils.c      
+-rw-r--r--⠀staff⠀1992 ⠀Jul 18 12:18:15⠀⠀pipex_utils.o      
+-rw-r--r--⠀staff⠀2056 ⠀Jul 18 10:44:12⠀ﭰ⠀pipex_utils_bonus.c
+drwxr-xr-x⠀staff⠀352  ⠀Jul 11 22:44:52⠀⠀Practice/   

@@ -6,13 +6,13 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/15 16:53:10 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:44:06 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	child_process(char *argv, char **envp)
+void	create_pipe(char *argv, char *envp[])
 {
 	pid_t	pid;
 	int		fd[2];
@@ -96,7 +96,7 @@ int	main(int argc, char *argv[], char *envp[])
 				close(infile);
 		}
 		while (i < argc - 2)
-			child_process(argv[i++], envp);
+			create_pipe(argv[i++], envp);
 		find_path(argv[argc - 2], envp);
 	}
 	exit_msg("arguments error\n", 1);

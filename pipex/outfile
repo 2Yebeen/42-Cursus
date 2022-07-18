@@ -1,0 +1,18 @@
+total 152
+drwxr-xr-x   8 yebeen  staff    256  7 17 22:22 GNL
+-rw-r--r--   1 yebeen  staff   1607  7 18 10:49 Makefile
+drwxr-xr-x  11 yebeen  staff    352  7 11 22:44 Practice
+-rw-r--r--   1 yebeen  staff      0  7 18 12:12 a
+-rw-r--r--   1 yebeen  staff   1229  7 18 12:19 infile
+drwxr-xr-x  20 yebeen  staff    640  7 18 12:20 libft
+-rwxr-xr-x   1 yebeen  staff      0  7 18 12:23 outfile
+-rwxr-xr-x   1 yebeen  staff  34754  7 18 12:20 pipex
+drwxr-xr-x  14 yebeen  staff    448  7 18 11:02 pipex-tester
+-rw-r--r--   1 yebeen  staff   2244  7 18 10:44 pipex.c
+-rw-r--r--   1 yebeen  staff   1346  7 18 10:44 pipex.h
+-rw-r--r--   1 yebeen  staff   2408  7 18 12:20 pipex.o
+-rw-r--r--   1 yebeen  staff   2662  7 18 10:44 pipex_bonus.c
+-rw-r--r--   1 yebeen  staff   1371  7 18 10:44 pipex_bonus.h
+-rw-r--r--   1 yebeen  staff   1800  7 18 12:20 pipex_utils.c
+-rw-r--r--   1 yebeen  staff   1976  7 18 12:20 pipex_utils.o
+-rw-r--r--   1 yebeen  staff   2056  7 18 10:44 pipex_utils_bonus.c

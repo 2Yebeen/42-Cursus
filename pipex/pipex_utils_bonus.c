@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/15 16:50:18 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:44:11 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
-#include <stdio.h>
 
-int	get_next_line(char **line)
+int	get_next_line(char *line[])
 {
 	char	*buffer;
 	int		readed;
@@ -64,7 +63,7 @@ char	*set_path(char *cmd, char *envp[])
 	while (paths[i])
 	{
 		path = ft_strjoin(paths[i], cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, W_OK) == 0)
 			return (path);
 		free(path);
 		i++;

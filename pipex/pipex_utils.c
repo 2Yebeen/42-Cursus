@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:51 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/12 13:39:30 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 12:20:41 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
 
 void	exit_msg(char *str, int sig)
 {
@@ -43,6 +44,13 @@ char	*set_path(char *cmd, char *envp[])
 	}
 	return (NULL);
 }
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s || fd < 0)
+		return ;
+	if (*s && fd >= 0)
+		write(fd, s, ft_strlen(s));
+}
 
 void	find_path(char *argv, char *envp[])
 {
@@ -54,6 +62,7 @@ void	find_path(char *argv, char *envp[])
 	cmd = ft_strjoin("/", tmp[0]);
 	path = set_path(cmd, envp);
 	free(cmd);
+	// ft_putstr_fd(path, 1);
 	if (execve(path, tmp, envp) == -1)
 		exit_msg("command not found\n", 127);
 }
