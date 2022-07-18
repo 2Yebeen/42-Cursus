@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:09:02 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/24 20:45:20 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:06:42 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# define BUFFER_SIZE 255
 
 typedef struct s_gnl_list
 {
 	int					fd;
 	char				*contents;
+	struct s_gnl_list	*prev;
 	struct s_gnl_list	*next;
 }	t_list;
 

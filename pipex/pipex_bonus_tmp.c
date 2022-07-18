@@ -6,13 +6,13 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 15:06:44 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 13:48:57 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	create_pipex(char *argv, char *envp[])
+void	create_pipe(char *argv, char *envp[])
 {
 	pid_t	pid;
 	int		fd[2];
@@ -25,13 +25,19 @@ void	create_pipex(char *argv, char *envp[])
 	if (pid == 0)
 	{
 		close(fd[READ_END]);
-		dup2(fd[WRITE_END], STDOUT_FILENO);
+		if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
+			exit_msg("duplicate error\n", 1);
+		else
+			close(fd[WRITE_END]);
 		find_path(argv, envp);
 	}
 	else
 	{
 		close(fd[WRITE_END]);
-		dup2(fd[READ_END], STDIN_FILENO);
+		if (dup2(fd[READ_END], STDIN_FILENO) == -1)
+			exit_msg("duplicate error\n", 1);
+		else
+			close(fd[READ_END]);
 		waitpid(pid, NULL, WNOHANG);
 	}
 }
@@ -95,11 +101,9 @@ int	main(int argc, char *argv[], char *envp[])
 			else
 				close(infile);
 		}
-		// dup2(outfile, STDOUT_FILENO);
 		while (i < argc - 2)
-			create_pipex(argv[i++], envp);
+			create_pipe(argv[i++], envp);
 		find_path(argv[argc - 2], envp);
 	}
-	else
-		exit_msg("arguments error\n", 1);
+	exit_msg("arguments error\n", 1);
 }
