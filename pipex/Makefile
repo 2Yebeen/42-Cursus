@@ -1,39 +1,59 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/07/18 10:43:26 by yebeen            #+#    #+#              #
+#    Updated: 2022/07/18 15:50:32 by yeblee           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= pipex
+NAMEB		= pipex_bonus
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 
 RM			= rm -rf
 
-INCDIR		= ./pipex.h
-INCDIR_BONUS= ./pipex_bonus.h
-
 LIBFT		= ./libft
 
-SRCS		= pipex.c		\
-			  utils.c		
+SRCS		= pipex.c				\
+			  pipex_utils.c	
+
+SRCB		= pipex_bonus.c			\
+			  pipex_utils_bonus.c	\
+			  pipex_gnl.c	
 
 OBJS 		= $(SRCS:.c=.o)
+OBJB 		= $(SRCB:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCDIR)
+			$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT)
 
-$(NAME): $(OBJS)
-	make -C $(LIBFT)
-	$(CC) -o $(NAME) -L $(LIBFT) -lft $(OBJS)
+all: 		$(NAME)
 
-all: $(NAME)
+bonus:		$(NAMEB)
 
+$(NAME): 	$(OBJS)
+			@make -C $(LIBFT)
+			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
+
+$(NAMEB): 	$(OBJB)
+			@make -C $(LIBFT)
+			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
 clean:
-	$(RM) $(OBJS)
-	make clean -C $(LIBFT)
+			@$(RM) $(OBJS) $(OBJB)
+			@make clean -C $(LIBFT)
 
-fclean: clean
-	$(RM) $(NAME)
-	make fclean -C $(LIBFT)
+fclean: 	clean
+			@$(RM) $(NAME) $(NAMEB)
+			@make fclean -C $(LIBFT)
 
 re:	
-	make fclean 
-	make all
+			@make fclean 
+			@make all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

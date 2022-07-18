@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/15 16:50:18 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 15:23:22 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
-#include <stdio.h>
-
-int	get_next_line(char **line)
-{
-	char	*buffer;
-	int		readed;
-	int		i;
-	char	c;
-
-	i = 0;
-	readed = 0;
-	buffer = (char *)malloc(10000);
-	if (!buffer)
-		return (-1);
-	readed = read(0, &c, 1);
-	while (readed && c != '\n' && c != '\0')
-	{
-		if (c != '\n' && c != '\0')
-			buffer[i] = c;
-		i++;
-		readed = read(0, &c, 1);
-	}
-	buffer[i] = '\n';
-	buffer[++i] = '\0';
-	*line = buffer;
-	free(buffer);
-	return (readed);
-}
 
 void	exit_msg(char *str, int sig)
 {
@@ -47,7 +19,6 @@ void	exit_msg(char *str, int sig)
 	ret = ft_strjoin("Error : ", str);
 	write(2, ret, ft_strlen(ret));
 	exit(sig);
-
 }
 
 char	*set_path(char *cmd, char *envp[])
@@ -64,7 +35,7 @@ char	*set_path(char *cmd, char *envp[])
 	while (paths[i])
 	{
 		path = ft_strjoin(paths[i], cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);
 		i++;

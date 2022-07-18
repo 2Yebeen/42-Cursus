@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/12 13:00:38 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:44:22 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "./Libft/libft.h" 
+# include "./libft/libft.h" 
 
 void	child_process(char *argv[], char *envp[], int *fd);
 void	parent_process(char *argv[], char *envp[], int *fd);
