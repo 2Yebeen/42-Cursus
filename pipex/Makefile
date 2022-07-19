@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 10:43:26 by yebeen            #+#    #+#              #
-#    Updated: 2022/07/18 17:58:22 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/18 22:45:22 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(NAME): 	$(OBJS)
 $(NAMEB): 	$(OBJB)
 			@make -C $(LIBFT)
 			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
-			# mv pipex_bonus pipex
+			cp pipex_bonus pipex
 clean:
 			@$(RM) $(OBJS) $(OBJB)
 			@make clean -C $(LIBFT)
