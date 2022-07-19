@@ -1,210 +1,155 @@
-# Keyword
+# page 0
 
-- linux pipe와 redirection을 구현하자!
-- 멀티 프로세싱 맛보기!
-- <a href="./subject.md">과제 전문</a>
+Pipex
+Pipex
 
-# Blocking vs Nonblocking vs Async
-- waitpid는 특정 자식 프로세스가 종료될 때 까지 대기하지만 WNOHANG 옵션을 통해서 함수를 바로 return 하고 자기 task를 수행한다.
-- 그러다 자식 프로세스가 종료되면 status에 자식 프로세스 반환값 * 256을 입력한다.
-- 즉, non blocking fork
-- Synchronous
-	- 작업 요청을 했을 때 요청의 결과값을 직접 받는 것이다.
-	- 호출한 함수가 작업 완료를 신경 쓴다.
-- Asynchronous
-	- 작업 요청을 했을 때 요청의 결과값을 간접적으로 받는 것이다.
-	- 요청의 결과값과 return 값이 다를 수 있다.
-	- 호출된 함수(callback 함수)가 작업 완료를 신경쓴다.
-	- e.g. 이메일로 물어보고 메일 송신을 완료(return)했지만 답은 언제 올지 모른다.
-- blocking
-	- 요청한 작업을 마칠 때까지 계속 대기한다.
-	- return 값을 받아야 끝난다.
-	- 호출된 함수가 자신의 작업을 모두 마칠 때까지 호출한 함수에게 제어권을 넘겨주지 않고 대기하게 만드는 것.
-	- e.g. 전화를 받을 때까지 계속 대기 후 답을 얻는다.
-- non-blocking
-	- 요청한 작업을 즉시 마칠 수 없다면 바로 return한다.
-	- 결과가 완료 되었는지 지속적으로 확인한다.
-	- 호출된 함수가 바로 return해서 호출한 함수에게 제어권을 넘겨주고 호출한 함수가 다른 일을 할 수 있게 기회를 주는 것.
-	- e.g. 전화를 했는데 받지 않아서 계속 반복 전화하다가 어느 순간 받아서 답을 얻는다.
+Summary: This project is the discovery in detail and by programming of a UNIX mechanism that you already know.
+요약 : 이 프로젝트는 여러분이 이미 알고 계시는 UNIX 매커니즘을 더 자세히 알아가는 프로젝트입니다.
 
-## pipe <unistd.h>
+# page 1
 
-- `int pipe(int filedes[2]);`
-- 프로세스 간 통신 (IPC) 에서 사용하는 파이프 생성 (message passing...?)
-- pipe() 에서 생성하는 파이프는 프로세스에서 생성되는 것이 아니라 커널에서 생성되고, 이용할 수 있는 파일 디스크럽터만 제공된다.
-- 그러므로 하나의 프로세스에서 파이프를 생성했다면, 다른 프로세스에서 그 FD를 사용하여 통신한다.
-- 반환된 FD는 파일에 대한 FD가 아닌 운영체제로부터 할당 받은 특정 버퍼에 대한 FD이다.
-- 또한 이 FD는 입출력 방향이 결정되어 있다.
-- 입력과 출력을 위한 입출구가 따로 존재하고, FIFO 구조로 데이터를 주고 받는다.
+| 챕터  | 내용                     | 페이지 |
+| :---: | :----------------------- | :----: |
+|   I   | [**서문**]()             |   2    |
+|  II   | [**기본 지시사항**]()    |   3    |
+|  III  | [**목표**]()             |   5    |
+| III.I | [**예시**]()             |   5    |
+|  IV   | [**보너스 파트**]()      |   6    |
+|   V   | [**제출 및 동료평가**]() |   7    |
 
-```C
-int pipe(int filedes[2]);
+# page 2
 
-filedes[0] // 읽기 전용
-filedes[1] // 쓰기 전용
+Cristina: "Go dance salsa somewhere :)"
+크리스티나 : "어디 살사춤이나 추러 가자 :)"
+
+# page 3
+
+Chapter II
+챕터 2
+Common Instructions
+기본 지시사항
+
+• Your project must be written in accordance with the Norm. If you have bonus files/functions, they are included in the norm check and you will receive a 0 if there is a norm error inside.
+• 여러분의 프로젝트는 Norminette 기준에 따라 작성되어야 합니다. 보너스 파일이나 함수가 있는 경우, 해당 파일/함수도 Norminette 기준을 체크하는 데에 포함해야 하며, Norminette 에러가 발생할 시에는 여러분의 프로젝트는 0점을 받게 됩니다.
+
+• Your functions should not quit unexpectedly (segmentation fault, bus error, double free, etc) apart from undefined behaviors. If this happens, your project will be considered non functional and will receive a 0 during the evaluation.
+• 정의되지 않는 동작인 경우 이외에는 여러분이 작성하신 프로그램이 예기치 않게 종료되면 안됩니다 (segmentation fault, bus error, double free 등). 만약 여러분의 프로그램이 예기치 않게 종료된다면, 작동하지 않은 것으로 간주되어 평가에서 0점을 받게 됩니다.
+
+• All heap allocated memory space must be properly freed when necessary. No leaks will be tolerated.
+• 힙에 선언한 모든 메모리 영역은 free로 처리되어야 합니다. 메모리 누수는 용납되어서는 안됩니다.
+
+• If the subject requires it, you must submit a Makefile which will compile your source files to the required output with the flags -Wall, -Wextra and -Werror, and your Makefile must not relink.
+• 서브젝트가 요구할 시 Makefile을 제출하여야 합니다. 여러분이 작성하신 Makefile은 `-Wall -Wextra -Werror` 플래그에 따라 컴파일을 해야하며, 컴파일 이후에 다시 리링크되지 않아야 합니다.
+
+• Your Makefile must at least contain the rules $(NAME), all, clean, fclean and re.
+• 여러분이 작성하신 Makefile 에서는 다음의 룰을 정의하고 있어야 합니다. - `$(NAME), all, clean, fclean, re`
+
+• To turn in bonuses to your project, you must include a rule bonus to your Makefile, which will add all the various headers, librairies or functions that are forbidden on the main part of the project. Bonuses must be in a different file \_bonus.{c/h}. Mandatory and bonus part evaluation is done separately.
+• 프로젝트에 보너스를 제출하려면, Makefile에 `bonus` 규칙을 포함해야하며, 해당 규칙은 프로젝트의 메인 파트에서 금지되었던 모든 다양한 헤더, 라이브러리,또는 함수들을 Makefile에 추가할 수 있습니다. 보너스는 반드시 \_bonus.{c/h} 라는 다른 파일에 있어야 합니다. 필수 파트와 보너스 파트는 개별적으로 평가될 것입니다.
+
+• If your project allows you to use your libft, you must copy its sources and its associated Makefile in a libft folder with its associated Makefile. Your project’s Makefile must compile the library by using its Makefile, then compile the project.
+• 해당 프로젝트에서 `libft`를 사용하는 경우, 해당 라이브러리의 소스와 Makefile을 `libft` 폴더에 복사해야 합니다. 프로젝트의 Makefile은 Makefile을 사용하여 라이브러리를 컴파일한 다음에 여러분이 작성하신 프로젝트를 컴파일 해야합니다.
+
+• We encourage you to create test programs for your project even though this work won’t have to be submitted and won’t be graded. It will give you a chance to easily test your work and your peers’ work. You will find those tests especially useful during your defence. Indeed, during defence, you are free to use your tests and/or the tests of the peer you are evaluating.
+• `제출할 필요가 없고 채점되지 않더라도` 우리는 여러분이 프로젝트를 위한 테스트 프로그램을 만들 것을 권장합니다. 이 프로그램은 여러분의 과제물과 동료들의 과제물을 쉽게 검증할 기회를 제공할 것입니다. 평가하는 동안 이 테스트 프로그램들이 특히 유용하다는 것을 알게 될 것입니다. 평가 중에는 여러분의 테스트 프로그램과 평가 받는 동료의 테스트 프로그램들을 자유롭게 사용할 수 있습니다.
+
+• Submit your work to your assigned git repository. Only the work in the git repository will be graded. If Deepthought is assigned to grade your work, it will be done after your peer-evaluations. If an error happens in any section of your work during Deepthought’s grading, the evaluation will stop.
+• 할당된 git 저장소에 과제물을 제출하세요. 오직 git 저장소에 있는 과제물만 채점 할 것입니다. Deepthought가 평가를 하게 된다면, 동료평가 이후에 수행됩니다. 만약 Deepthought가 평가 중 오류가 발생한다면, 그 즉시 평가는 중지될 것입니다.
+
+• The executable files must be named client and server.
+실행파일은 각각 `pipex`로 이름을 지어야 합니다.
+
+# page 4
+
+• You have to handle errors sensitively. In no way can your program quit unexpectedly (Segmentation fault, bus error, double free, etc). If you are unsure, handle the errors like the shell command < file1 cmd1 | cmd2 > file2.
+• 여러분은 세심하게 에러를 처리하셔야 하며, 여러분이 작성하신 프로그램이 예기치 않게 종료되면 안됩니다 (Segmentation fault, bus error, double free, 등). 확실하게 잘 모르겠다면, 쉘에서 다음과 같은 명령어에서 나오는 오류들을 처리해보세요 : `< file1 cmd1 | cmd2 > file2`
+
+• Your program cannot have memory leaks.
+• 여러분이 작성하신 프로그램에서 메모리 누수가 발생하면 안됩니다.
+
+• You are allowed to use the following functions:
+• 다음의 함수만을 사용하실 수 있습니다. :
+
+    ◦ open
+    ◦ close
+    ◦ read
+    ◦ write
+    ◦ malloc
+    ◦ free
+    ◦ dup2
+    ◦ execve
+    ◦ fork
+    ◦ perror
+    ◦ strerror
+    ◦ exit
+
+# page 5
+
+Chapter III
+챕터 3
+Objectives
+목표
+
+Your objective is to code the Pipex program.
+여러분의 목표는 Pipex 프로그램을 작성하는 것입니다.
+It should be executed in this way:
+여러분이 작성하신 프로그램은 다음과 같이 실행될 것입니다. :
+
+    $> ./pipex file1 cmd1 cmd2 file2
+
+Just in case: file1 and file2 are file names, cmd1 and cmd2 are shell commands with their parameters.
+예를 들어, `file1`및 `file2`는 파일 이름이고 `cmd1` 및 `cmd2`는 매개변수에 대응하는 Shell 명령어 입니다.
+
+The execution of the pipex program should do the same as the next shell command:
+여러분의 Pipex 프로그램은 아래의 명령을 Shell에서 실행되는 것과 동일하게 처리해야 합니다.
+
+    $> < file1 cmd1 | cmd2 > file2
+
+III.1 Examples
+III.1 예시
+
+     $> ./pipex infile ``ls -l'' ``wc -l'' outfile
+
+should be the same as “< infile ls -l | wc -l > outfile”
+`< infile ls -l | wc -l > outfile`의 결과와 동일해야 합니다.
+
+     $> ./pipex infile ``grep a1'' ``wc -w'' outfile
+
+should be the same as “< infile grep a1 | wc -w > outfile”
+`< infile grep a1 | wc -w > outfile`의 결과와 동일해야 합니다.
+
+# page 6
+
+Bonuses will be evaluated only if your mandatory part is PERFECT.
+By PERFECT we naturally mean that it needs to be complete, that it
+cannot fail, even in cases of nasty mistakes like wrong uses, etc.
+It means that if your mandatory part does not obtain ALL the points
+during the grading, your bonuses will be entirely IGNORED.
+
+```
+⚠️
+보너스는 필수로 구현해야 하는 파트가 완벽할 때만 평가될 것입니다. 저희가 말하는 '완벽함' 이란, 어떠한 경우에도 - 잘못된 사용과 같은 끔찍한 실수 등 - 실패하지 않고 동작해야 한다는 의미입니다. 쉽게 말하자면, 필수로 구현해야 하는 파트에서 만점을 받지 못한다면, 보너스는 완전히 '무시될' 것입니다.
 ```
 
-## fork <unistd.h>
+• Handle multiple pipes :
+• 다중 파이프 구현하기 :
 
-- `pid_t fork(void);`
-- 현재 프로세스에 대한 복사본 프로세스를 생성한다.
-- 대체로 자식 프로세스라고 부른다.
-- 반환 값은 자식프로세스의 pid (자료형 pid_t, 0 ~ 32767 || -1 ~ 32768, int도 됨...)
-- 실패할 경우 반환값은 -1
-- 자식 프로세스는 fork 함수 호출 이후부터 진행하기 때문에 pid를 저장한 변수 값은 자식 프로세스에서 확인했을 때에는 0
+    $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 
-## wait, waitpid <sys/wait.h>
+    Must be equivalent to :
+    위의 명령어는 다음에 상응해야 합니다. :
 
-- `pid_t wait(int *status);`
-- `pid_t waitpid(pid_t pid, int *status, int options);`
-- wait은 자식 프로세스가 작업이 끝날 때 까지 대기하고, 자식 프로세스를 수거하여 종료한 상태를 구한다.
-- 정상 종료 되었다면, status의 변수 값의 상위 2번째 index인 1바이트에 종료 값을 저장하고, 3번째 index인 1바이트에 종료 코드를 저장한다. (8비트)
-  - 다만 위의 경우는 쉬프트 연산을 제공하는 메크로로 해석해서 볼 수 있다. (e.g. WEXITSTATUS)
-- waitpid 는 자식 프로세스 중 어느 하나라도 종료되면 복귀되는 wait과는 다르게 특정 자식이 종료될 때까지 대기한다.
-- 또한 wait은 자식 프로세스가 종료될 때까지 block 되지만, waitpid는 WNOHANG 옵션을 통해 block되지 않고 다른 작업을 진행할 수 있다.
-- wait 함수는 자식프로세스가 좀비 프로세스 상태로 되는 것을 방지한다. 자식프로세스가 종료됐을지라도 부모프로세스가 진행중이라면 자식프로세스는 반환값을 지닌채 좀비프로세스 상태로 대시하고 있다. 그 때, wait 함수의 인자를 통해 자식프로세스의 반환값과 데이터등을 받아오면 자식프로세스는 데이터를 넘겨주고 좀비 프로세스 상태에서 벗어날 수 있다.
+    < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 
-```C
-// 정상 종료를 확인하는 코드는 다음과 같이 수정할 수 있습니다.
-if ( 0 == ( status & 0xff))  ->  if ( WIFEXITED( status))
+• Support « and ».
+• « 와 » 구현하기.
 
-// 자식이 반환한 코드를 아래와 같이 바꿀 수 있습니다.
-status >> 8    ->    WEXITSTATUS( status)
+# page 7
 
-// 출처 : https://badayak.com/entry/C%EC%96%B8%EC%96%B4-%EC%9E%90%EC%8B%9D-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EA%B0%80-%EC%A2%85%EB%A3%8C%EB%90%A0-%EB%95%8C%EA%B9%8C%EC%A7%80-%EB%8C%80%EA%B8%B0-%ED%95%A8%EC%88%98-wait
-```
+Chapter V
+챕터 4
+Submission and peer correction
+제출과 동료평가
 
-## dup, dup2 <unistd.h>
-
-- `int dup(int fildes)`
-- `int dup2(int fd, int fd2)`
-- fildes == fd
-- 파일 디스크립터의 복사본을 만든다.
-- 원본 디스크립터와 복사된 디스크립터의 읽기/쓰기 포인터는 공유된다. (원본에 똑같이 쓸 수 있다, 정확히는 fd가 가리키는 inode가 같다.)
-- 사용하지 않는 가장 작은 파일 디스크립터 번호가 임의로 지정된다.
-- close는 각각 해줘야 한다.
-- cf) dup2는 기능은 동일하지만, fd 값을 지정한 곳에 복사할 수 있다.
-- dup2의 반환값은 fd2가 된다.
-- 만약 2번째 인자의 fd 값이 열려있다면 기존 fd를 닫고 새로 할당받는다.
-- stdout의 경우 가리키던 terminal 에서 복제된 fd의 inode, stdin의 경우 가리키던 I/O device에서 복제된 fd의 inode
-  - 표준 스트림 (stdin, stdout, stderr) 은 shell에서 상속 받는다.
-  - DMA...?
-
-## access <unistd.h>
-
-- `int access(const char *pathname, int mode);`
-- 프로세스가 지정한 파일이 존재하는지, 읽거나 쓰거나 실행이 가능한 지 확인하는 함수.
-- 만일 지정한 파일이 심볼릭 링크라면 링크의 원본을 체크한다.
-- 인수 pathname : 파일이나 디렉토리 전체 이름, mode : 검사할 내용
-- 반환 0 : 가능, 파일이 존재함
-- 반환 -1 : mode 에 대해 하나 이상 거절되었거나 에러가 있음, 자세한 내용은 errno 에 셋팅
-
-## unlink <unistd.h>
-
-- `int unlink(const char *path);`
-- 하드링크를 삭제하는 함수.
-- 만약 하드링크가 남아있지 않다면 당연하게 파일이 삭제된다.
-- cf) 심볼릭 링크는 별도의 아이노드를 갖고 있고, 그 아이노드는 하드 링크의 inode를 참조한다.
-- 인수 : char \*path, 삭제하려는 링크 이름
-- 반환 0 : 성공
-- 반환 -1 : 실패
-
-## execve <unistd.h>
-
-- `int execve(const char *path, char *const argv[], char *const envp[]);`
-- path를 실행하고 자신은 종료한다.
-- 만들어진 path 프로세스는 새로운 메모리 공간을 갖는다. (스택, 힙, 데이터)
-- 이 떄 별도의 프로세스가 구동되는 것이 아닌 새로운 프로세스를 교체하는 행위로 이뤄지기 때문에 동기적인 특성을 갖는다.
-- 인자는 각각 파일이름, 파일인자의 포인터, 환경변수의 포인터이다.
-- path의 파일(바이너리 실행파일이거나, 스크립트 파일이어야 한다.)을 실행하고, argv envp를 인자로 전달한다.
-- exec 계열은 l, v, e, p 가 붙을 수 있는데 각각 list, vector, environment, path 이다.
-- 끝은 항상 NULL 이어야 한다.
-
-```C
-int main()
-{
-	int fd1[2];
-	int fd2[2];
-	char buffer[BUFSIZ];
-	pid_t pid;
-
-	if (pipe(fd1) == -1 || pipe(fd2) == -1)
-	{
-		printf("pipe error");
-		exit(1);
-	}
-	pid = fork();
-
-	if (pid == -1)
-	{
-		printf("fork() error");
-		exit(1);
-	}
-	if (pid == 0)
-	{
-		write(fd1[1], "자식에서 입력 \n", 25);
-		read(fd2[0], buffer, 25);
-		// 만약 부모에서 쓰지 않으면 여기에서 대기 중으로 실행 안됨
-		// 읽을 fd가 있을 때 까지 대기
-		printf("\n자식 출력 : %s\n", buffer);
-	}
-	else
-	{
-		// write(fd2[1], "부모에서 입력 \n", 25);
-		read(fd1[0], buffer, BUFSIZ);
-		printf("\n부모 출력 : %s\n", buffer);
-	}
-	return 0;
-}
-```
-
-```C
-int main()
-{
-	int fd1[2];
-	int fd2[2];
-	char buffer[BUFSIZ];
-	pid_t pid;
-
-	if (pipe(fd1) == -1 || pipe(fd2) == -1)
-	{
-		printf("pipe error");
-		exit(1);
-	}
-	pid = fork();
-
-	if (pid == -1)
-	{
-		printf("fork() error");
-		exit(1);
-	}
-	if (pid == 0)
-	{
-		write(fd1[1], "자식에서 입력 \n", 25);
-		read(fd2[0], buffer, 25);
-		// 만약 부모에서 쓰지 않으면 여기에서 대기 중으로 실행 안됨
-		// 읽을 fd가 있을 때 까지 대기
-		printf("\n자식 출력 : %s\n", buffer);
-	}
-	else
-	{
-		wait(NULL); // 자식 프로세스가 끝날 때 까지 대기로 무한대기
-		write(fd2[1], "부모에서 입력 \n", 25);
-		// wait(NULL); 이 상태에서는 실행 가능
-		read(fd1[0], buffer, BUFSIZ);
-		printf("\n부모 출력 : %s\n", buffer);
-	}
-	return 0;
-}
-```
-
-### 참고
-
-- `int main(int argc, char *argv[], char *envp[]);` envp는 환경변수
-  - 인자 3개는 POSIX 표준이 아니다.
-  - https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html
-  - https://www.gnu.org/software/libc/manual/html_node/Program-Arguments.html
-- `extern char **environ;` 전역으로 environ, 환경변수 가져올 수 있음
-- `<` : stdin, `<` 기호의 다음을 source로 사용 (cat, grep...etc)
-  - ls 는 표준 입력을 받지 않고, argv를 통해서 사용자 입력을 받는다.
-- `>` : stdout
+Submit your work on your GiT repository as usual. Only the work on your repository will be graded.
+평소처럼 여러분의 GIT 레포지토리에 작업물을 제출하시면 됩니다. 제출하신 작업물만 평가에 반영될 것입니다.
