@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:54:00 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 17:57:11 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/19 09:34:48 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ void	child_process(char *argv[], char *envp[], int *fd)
 		exit_msg("file error\n", 1);
 	else
 	{
+		close(fd[READ_END]);
 		if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
 			exit_msg("duplicate error\n", 1);
 		else 
 			close(fd[WRITE_END]);
 		if (dup2(infile, STDIN_FILENO) == -1)
 			exit_msg("duplicate error\n", 1);
-		else
-			close(fd[READ_END]);
 		close(infile);
 		find_path(argv[2], envp);
 	}
@@ -43,14 +42,13 @@ void	parent_process(char *argv[], char *envp[], int *fd)
 		exit_msg("file error\n", 1);
 	else
 	{
+		close(fd[WRITE_END]);
 		if (dup2(fd[READ_END], STDIN_FILENO) == -1)
 			exit_msg("duplicate error\n", 1);
 		else
 			close(fd[READ_END]);
 		if (dup2(outfile, STDOUT_FILENO) == -1)
 			exit_msg("duplicate error\n", 1);
-		else
-			close(fd[WRITE_END]);
 		close(outfile);
 		find_path(argv[3], envp);
 	}
