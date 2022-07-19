@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:51 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 17:56:31 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 22:37:02 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*set_path(char *cmd, char *envp[])
 	while (paths[i])
 	{
 		path = ft_strjoin(paths[i], cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);
 		i++;
