@@ -6,12 +6,11 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 10:43:26 by yebeen            #+#    #+#              #
-#    Updated: 2022/07/18 22:45:22 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/19 13:28:19 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= pipex
-NAMEB		= pipex_bonus
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
@@ -25,32 +24,34 @@ SRCS		= pipex.c				\
 
 SRCB		= pipex_bonus.c			\
 			  pipex_utils_bonus.c	\
-			#   pipex_gnl.c	
 
 OBJS 		= $(SRCS:.c=.o)
 OBJB 		= $(SRCB:.c=.o)
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(OBJB)
+else
+	OBJ_FILES = $(OBJS)
+endif
 
 %.o: %.c
 			$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT)
 
 all: 		$(NAME)
 
-bonus:		$(NAMEB)
+bonus:
+			@make WITH_BONUS=42 all
 
-$(NAME): 	$(OBJS)
+$(NAME): 	$(OBJ_FILES)
 			@make -C $(LIBFT)
 			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
 
-$(NAMEB): 	$(OBJB)
-			@make -C $(LIBFT)
-			@$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
-			cp pipex_bonus pipex
 clean:
 			@$(RM) $(OBJS) $(OBJB)
 			@make clean -C $(LIBFT)
 
 fclean: 	clean
-			@$(RM) $(NAME) $(NAMEB)
+			@$(RM) $(NAME)
 			@make fclean -C $(LIBFT)
 
 re:	

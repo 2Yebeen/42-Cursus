@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:51 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 22:37:02 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/19 11:19:27 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_msg(char *str, int sig)
 {
-	char *ret;
+	char	*ret;
 
 	ret = ft_strjoin("Error : ", str);
 	write(2, ret, ft_strlen(ret));

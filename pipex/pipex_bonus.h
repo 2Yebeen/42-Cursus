@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/18 17:39:33 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/19 11:19:00 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	here_doc(char *limiter);
 void	exit_msg(char *str, int sig);
 char	*set_path(char *cmd, char *envp[]);
 void	find_path(char *argv, char *envp[]);
-int	    ft_openfile(char *argv, int type);
+int		ft_openfile(char *argv, int type);
 
 #endif
