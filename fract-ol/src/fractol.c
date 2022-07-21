@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 14:03:06 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/21 16:11:57 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:16:29 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,46 @@ int mandelbrot(double a, double b)
     int i;
     double zx;
     double zy;
+    double tmp;
+    double cr;
+    double ci;
 
     i = 0;
     zx = 0;
     zy = 0;
+    cr = ((a - 1000 / 2) * 2.0 / 1000) - 0.5;
+    ci = ((1000 / 2) - b) * 2.0 / 1000;
     while (i < MAX_ITERATION)
     {
-        zx = (zx * zx) - (zy * zy) + a;
-        zy = (2 * zx * zy) + b;
+        tmp = (zx * zx) - (zy * zy) + cr;
+        zy = (2 * zx * zy) + ci;
+        zx = tmp;
+        i++;
+        if ((zx * zx) + (zy * zy) > 4)
+            return (WHITE);
+    }
+    return (BLACK);
+}
+
+int julia(double a, double b)
+{
+    int i;
+    double zx;
+    double zy;
+    double tmp;
+    double cr;
+    double ci;
+
+    i = 0;
+    cr = -0.629578;
+    ci = -0.41524;
+    zx = ((a - 1000 / 2) * 2.0 / 1000);
+    zy = ((1000 / 2) - b) * 2.0 / 1000;
+    while (i < MAX_ITERATION)
+    {
+        tmp = (zx * zx) - (zy * zy) + cr;
+        zy = (2 * zx * zy) + ci;
+        zx = tmp;
         i++;
         if ((zx * zx) + (zy * zy) > 4)
             return (WHITE);
@@ -75,12 +107,12 @@ int main(void)
     i = 0;
     while (i < 1000)
     {
-        c.r = i * (4/1000);
+        c.i = i;
         j = 0;
         while (j < 1000)
         {
-            c.i = j * (4/1000);
-            img.data[i * 1000 + j] = mandelbrot(c.r, c.i);
+            c.r = j;
+            img.data[i * 1000 + j] = julia(c.r, c.i);
             j++;
         }
         i++;
