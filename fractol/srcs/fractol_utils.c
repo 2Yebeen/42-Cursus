@@ -1,0 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/25 21:51:11 by yeblee            #+#    #+#             */
+/*   Updated: 2022/07/26 03:35:52 by yeblee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/fractol.h"
+
+int ft_error(char *msg, int fd)
+{
+	if (msg)
+		ft_putstr_fd(msg, fd);
+	ft_putstr_fd("\n\e[91m", 1);
+    ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
+    ft_putstr_fd("//                     FRACT'OL                     //\n", 1);
+	ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
+	ft_putstr_fd(" USAGE : ", 1);
+	ft_putstr_fd("./fractol <type>\n", 1);
+	ft_putstr_fd(" TYPE\n", 1);
+	ft_putstr_fd("\t1) Mandelbrot\n", 1);
+    ft_putstr_fd("\t2) Julia -0.7 -0.27015\n", 1);
+    ft_putstr_fd("\t3) BurningShip\n", 1);
+	ft_putstr_fd(" KEY\n", 1);
+	ft_putstr_fd("\t[W|A|S|D] or [↑|←|↓|→] -> Move\n", 1);
+	ft_putstr_fd("\t[ESC]                  -> Exit\n", 1);
+	ft_putstr_fd(" MOUSE\n", 1);
+	ft_putstr_fd("\t[SCROLL]               -> Zoom\n", 1);
+    ft_putstr_fd("\t[LEFT_BUTTON]          -> Change Color\n", 1);
+	ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
+	return(fd);
+}
+
+int ft_check_type(t_fractol *f, int ac, char *av[])
+{
+    f->set = 0;
+    if (ac >= 2)
+    {
+        f->title = av[1];
+        if (ft_strcmp(av[1], "Mandelbrot") == 0)
+            f->set = 1;
+        else if (ft_strcmp(av[1], "Julia") == 0 && ac == 4)
+        {
+            f->set = 2;
+            f->julia.x = ft_atof(av[2]);
+            f->julia.y = ft_atof(av[3]);
+        }
+        else if (ft_strcmp(av[1], "BurningShip") == 0)
+            f->set = 3;
+    }
+    if (f->set == 0)
+        ft_error(NULL, 2);
+    return (f->set);
+}
+
+void    ft_fractal_init(t_fractol *f)
+{
+    f->color = 0x008DE3EC;
+    f->zoom = 0.03;
+    if (f->set == 1 || f->set == 3)
+    {
+        f->x_max = 1.0;
+        f->x_min = -2.5 ;
+        f->y_max = 2.0 ;
+        f->y_min = -2.0 ;
+    }
+    else if (f->set == 2)
+    {
+        f->x_max = 1.0;
+        f->x_min = -2.0 ;
+        f->y_max = 1.0 ;
+        f->y_min = -2.0 ;
+        f->c.x = f->julia.x;
+        f->c.y = f->julia.y;
+    }
+}
+
+int    ft_mlx_init(t_fractol *f, t_image *img)
+{
+    f->mlx = mlx_init();
+    if (!f->mlx)
+        return (0);
+    f->win = mlx_new_window(f->mlx, WIN_WIDTH, WIN_HEIGHT, TITLE(f->title));
+    if (!f->win)
+        return (0);
+    img->ptr = mlx_new_image(f->mlx, WIN_WIDTH, WIN_HEIGHT);
+    if (!img->ptr)
+        return (0);
+    img->buff = (int *)mlx_get_data_addr(img->ptr, &img->bits_per_pixel,\
+                &img->line_length, &img->endian);
+    if (!img->buff)
+        return (0);
+    return (1);
+}
