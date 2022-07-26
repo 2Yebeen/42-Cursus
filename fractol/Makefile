@@ -6,14 +6,14 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/21 14:03:13 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/26 04:10:03 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/26 09:32:10 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = fractol
 
 CC              = cc
-FLAGS			= -O3 -Wall -Werror -Wextra
+FLAGS			= -O3
 RM              = rm -rf
 
 HEADERS         = includes
