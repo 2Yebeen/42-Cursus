@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 23:27:30 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/26 12:40:56 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/26 23:37:55 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ void	ft_key_move(int keycode, t_fractol *f)
 
 int	ft_key_hook(int keycode, t_fractol *f)
 {
-	if (keycode == ESC)
+	if (keycode == KEY_ESC)
+	{
+		ft_putstr_fd("Exit\n", 1);
+		free(f->img);
 		exit(0);
+	}
+	else if (keycode == KEY_ENTER)
+	{
+		f->color += 10;
+		ft_draw(f);
+	}
 	else
 		ft_key_move(keycode, f);
 	return (1);
@@ -74,6 +83,11 @@ int	ft_mouse_hook(int button, int x, int y, t_fractol *f)
 	{
 		zoom(f, (double)x, (double)y, 0.7);
 		f->zoom *= 0.7;
+		ft_draw(f);
+	}
+	else if (button == M_LEFT_BUTTON)
+	{
+		f->color -= 10;
 		ft_draw(f);
 	}
 	return (1);
