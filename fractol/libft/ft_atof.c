@@ -6,13 +6,13 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 22:05:17 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/25 22:11:44 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:24:36 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	size_t	i;
 	long	ret;

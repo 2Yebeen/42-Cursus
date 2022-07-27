@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:51:11 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/26 23:20:11 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:13:44 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,22 @@ int	ft_check_type(t_fractol *f, int ac, char *av[])
 
 void	ft_fractal_init(t_fractol *f)
 {
-	f->color = 0x008DE3EC;
+	f->color = 0x0087CEEB;
 	f->zoom = 0.03;
-	f->x_max = 2.0;
-	f->x_min = -2.0 ;
-	f->y_max = 2.0 ;
-	f->y_min = -2.0 ;
+	if (f->set == 1)
+	{
+		f->x_max = 1.5;
+		f->x_min = -2.5 ;
+		f->y_max = 2.0 ;
+		f->y_min = -2.0 ;
+	}
+	else
+	{
+		f->x_max = 2.0;
+		f->x_min = -2.0 ;
+		f->y_max = 2.0 ;
+		f->y_min = -2.0 ;
+	}
 }
 
 int	ft_mlx_init(t_fractol *f)

@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 00:08:14 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/26 23:16:20 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:17:36 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	ft_color_pixel(t_fractol *f, int x, int y)
 	if (f->i != ITERATION)
 		color = 1;
 	pixel = (y * 1000 + x);
-	f->img->buff[pixel] = ((f->i * f->color) + 0x008DE3EC) * color;
+	f->img->buff[pixel] = ((f->i * f->color) + 0x0087CEEB) * color;
 }
