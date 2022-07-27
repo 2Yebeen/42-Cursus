@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 23:27:30 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/26 23:37:55 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:34:02 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_key_hook(int keycode, t_fractol *f)
 	}
 	else if (keycode == KEY_ENTER)
 	{
-		f->color += 10;
+		f->color += 123456;
 		ft_draw(f);
 	}
 	else
@@ -87,7 +87,7 @@ int	ft_mouse_hook(int button, int x, int y, t_fractol *f)
 	}
 	else if (button == M_LEFT_BUTTON)
 	{
-		f->color -= 10;
+		f->color -= 125356;
 		ft_draw(f);
 	}
 	return (1);

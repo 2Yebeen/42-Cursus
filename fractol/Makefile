@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/21 14:03:13 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/26 09:32:10 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/27 13:10:50 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ DIR_O			= obj
 
 SOURCES         = main.c			\
 				  fractol.c			\
+				  fractol_init.c	\
 				  fractol_draw.c	\
 				  fractol_hook.c	\
 				  fractol_utils.c	

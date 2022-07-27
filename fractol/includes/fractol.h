@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:23:45 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/27 11:26:33 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 13:22:33 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "types.h"
 
 # define TITLE(title)	title
-# define WIN_WIDTH 		1000
-# define WIN_HEIGHT 	1000
+# define WIN_WIDTH 		1080
+# define WIN_HEIGHT 	1080
 # define ITERATION		250
 
 int		ft_check_type(t_fractol *f, int ac, char *av[]);

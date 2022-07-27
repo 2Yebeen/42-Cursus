@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:51:11 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/27 11:13:44 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:20:18 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_error(char *msg, int fd)
 {
 	if (msg)
 		ft_putstr_fd(msg, fd);
-	ft_putstr_fd("\n\e[91m", 1);
+	ft_putstr_fd("\n\e[33m", 1);
 	ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
 	ft_putstr_fd("//                     FRACT'OL                     //\n", 1);
 	ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
@@ -32,7 +32,7 @@ int	ft_error(char *msg, int fd)
 	ft_putstr_fd(" MOUSE\n", 1);
 	ft_putstr_fd("\t[SCROLL]               -> Zoom\n", 1);
 	ft_putstr_fd("\t[LEFT_BUTTON]          -> Change Color\n", 1);
-	ft_putstr_fd("//////////////////////////////////////////////////////\n", 1);
+	ft_putstr_fd("//////////////////////////////////////////////////////\n\n", 1);
 	return (fd);
 }
 
@@ -56,52 +56,4 @@ int	ft_check_type(t_fractol *f, int ac, char *av[])
 	if (f->set == 0)
 		ft_error(NULL, 2);
 	return (f->set);
-}
-
-void	ft_fractal_init(t_fractol *f)
-{
-	f->color = 0x0087CEEB;
-	f->zoom = 0.03;
-	if (f->set == 1)
-	{
-		f->x_max = 1.5;
-		f->x_min = -2.5 ;
-		f->y_max = 2.0 ;
-		f->y_min = -2.0 ;
-	}
-	else
-	{
-		f->x_max = 2.0;
-		f->x_min = -2.0 ;
-		f->y_max = 2.0 ;
-		f->y_min = -2.0 ;
-	}
-}
-
-int	ft_mlx_init(t_fractol *f)
-{
-	f->mlx = mlx_init();
-	if (!f->mlx)
-		return (0);
-	f->win = mlx_new_window(f->mlx, WIN_WIDTH, WIN_HEIGHT, TITLE(f->title));
-	if (!f->win)
-		return (0);
-	f->img = (t_image *)malloc(sizeof(t_image));
-	if (!f->img)
-		return (0);
-	ft_fractal_init(f);
-	mlx_key_hook(f->win, ft_key_hook, f);
-	mlx_mouse_hook(f->win, ft_mouse_hook, f);
-	return (1);
-}
-
-void	ft_image_init(t_fractol *f)
-{
-	f->img->ptr = mlx_new_image(f->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!f->img->ptr)
-		exit(1);
-	f->img->buff = (int *)mlx_get_data_addr(f->img->ptr, \
-		&f->img->bits_per_pixel, &f->img->line_length, &f->img->endian);
-	if (!f->img->buff)
-		exit(1);
 }
