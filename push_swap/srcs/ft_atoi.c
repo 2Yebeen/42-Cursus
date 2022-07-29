@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:51:49 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/29 17:18:14 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 00:20:07 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 
-int	ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	int	ret;
 

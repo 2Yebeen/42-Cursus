@@ -6,12 +6,12 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 16:18:49 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/24 14:11:57 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:47:14 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 static int	ft_ischar(char c, char s)
 {
 	if (c == s)
@@ -19,7 +19,7 @@ static int	ft_ischar(char c, char s)
 	return (0);
 }
 
-static char	**ft_malloc_error(char **arr)
+static char	**ft_malloc_free(char **arr)
 {
 	size_t	i;
 
@@ -77,7 +77,7 @@ char	**ft_split(char const *s, char c)
 	size_t	len;
 	size_t	next_len;
 	size_t	idx;
-
+	
 	if (!s)
 		return (NULL);
 	len = ft_countchar(s, c);
@@ -92,9 +92,9 @@ char	**ft_split(char const *s, char c)
 		ft_get_next_str(&temp, &next_len, c);
 		arr[idx] = (char *)malloc(sizeof(char) * (next_len + 1));
 		if (!(arr[idx]))
-			return (ft_malloc_error(arr));
+			return (ft_malloc_free(arr));
 		ft_strlcpy(arr[idx++], temp, next_len + 1);
 	}
-	arr[idx] = NULL;
+	arr[idx] = 0x00;
 	return (arr);
 }

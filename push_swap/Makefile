@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
+#    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 17:16:35 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/29 14:02:02 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/29 23:19:18 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,17 @@ LIBFT		= -L./libft -lft
 DIR_O		= obj
 DIR_S 		= srcs
 SOURCES		= main.c				\
-			  ft_atoi.c	
+			  ft_utils.c			\
+			  ft_atoi.c				\
+			  ft_push_swap.c		\
+			  ft_push_swap_utils.c	\
 
 
 SRCB		= main.c				\
-			  ft_atoi.c	
+			  ft_utils.c			\
+			  ft_atoi.c				\
+			  ft_push_swap.c		\
+			  ft_push_swap_utils.c	\
 
 
 SRCS		= $(addprefix $(DIR_S)/,$(SOURCES))
