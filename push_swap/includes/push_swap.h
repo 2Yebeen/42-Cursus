@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:56:26 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/29 15:06:36 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/29 17:19:14 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+# define TRUE		1
+# define FALSE		0
 # define LONG_MAX 	9223372036854775807
 
 typedef struct s_node
 {
 	int				data;
-	struct s_node	*pLLink;
-	struct s_node	*pRLink;
+	struct s_node	*l_link;
+	struct s_node	*r_link;
 }			t_node;
 
 typedef struct s_stack
@@ -33,6 +35,7 @@ typedef struct s_stack
 }	t_stack;
 
 
-int	ft_atoi(const char *str, int *err);
+int	ft_atoi(const char *str);
+void	ft_error(char *msg, int fd);
 
 #endif
