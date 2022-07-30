@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_utils.c                               :+:      :+:    :+:   */
+/*   ps_push_swap_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:02:01 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 02:00:52 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:12:54 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*ft_create_stack(t_stack *stack)
+t_stack	*ps_create_stack(t_stack *stack)
 {
 	t_stack	*new;
 
 	new = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (!new)
-		ft_error("ft_create_stack중 할당에 실패했습니다.\n", 2);
+		ps_error("ft_create_stack중 할당에 실패했습니다.\n", 2);
 	return (new);
 }
 
-int	ft_add_data(t_stack *stack, int data)
+int	ps_add_data(t_stack *stack, int data)
 {
 	t_node	*buf;
 	t_node	*new;
@@ -39,7 +39,7 @@ int	ft_add_data(t_stack *stack, int data)
 	}
 	else
 	{
-		buf = ft_get_node(stack, stack->count - 1);
+		buf = ps_get_node(stack, stack->count - 1);
 		new->l_link = buf;
 		new->r_link = buf->r_link;
 		buf->r_link->l_link = new;
@@ -49,7 +49,7 @@ int	ft_add_data(t_stack *stack, int data)
 	return (TRUE);
 }
 
-t_node	*ft_get_node(t_stack *stack, int position)
+t_node	*ps_get_node(t_stack *stack, int position)
 {
 	t_node	*buf;
 
@@ -62,7 +62,7 @@ t_node	*ft_get_node(t_stack *stack, int position)
 	return (buf);
 }
 
-void	ft_clear(t_stack *stack)
+void	ps_clear(t_stack *stack)
 {
 	t_node	*clear;
 	t_node	*next;
@@ -82,9 +82,9 @@ void	ft_clear(t_stack *stack)
 	next = NULL;
 }
 
-void	ft_delete(t_stack *stack)
+void	ps_delete(t_stack *stack)
 {
-	ft_clear(stack);
+	ps_clear(stack);
 	stack->header.r_link = NULL;
 	stack->header.l_link = NULL;
 	stack->count = 0;

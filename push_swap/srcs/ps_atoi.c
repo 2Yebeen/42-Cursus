@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ps_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:51:49 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 00:20:07 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:12:50 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	ft_isdigit(int c)
+static int	ps_isdigit(int c)
 {
 	int	ret;
 
 	ret = (c >= '0' && c <= '9');
 	if (!ret)
-		ft_error("잘못된 입력입니다.\n", 2);
+		ps_error("잘못된 입력입니다.\n", 2);
 	return (ret);
 }
 
-int	ft_atoi(const char *str)
+int	ps_atoi(const char *str)
 {
 	size_t				i;
 	int					sign;
@@ -37,8 +37,8 @@ int	ft_atoi(const char *str)
 		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	ft_isdigit(str[i]);
-	while (str[i] && ft_isdigit(str[i]))
+	ps_isdigit(str[i]);
+	while (str[i] && ps_isdigit(str[i]))
 	{
 		num = (num * 10) + (str[i] - '0');
 		if (num > LONG_MAX && sign == 1)
