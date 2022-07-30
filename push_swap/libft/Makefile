@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
+#    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 13:08:09 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/29 17:19:55 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/30 10:45:45 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,12 @@ SRCS =  ft_split.c		\
 		ft_strlen.c		\
 		ft_calloc.c		\
 		ft_putstr_fd.c	\
-		ft_memset.c
+		ft_memset.c		\
+		ft_printf.c		\
+		ft_checkbase.c	\
+		ft_formats.c	\
+		ft_printbase.c	\
+		ft_printstr.c	
 
 OBJS = $(SRCS:.c=.o)
 
