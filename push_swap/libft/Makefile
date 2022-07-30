@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/18 13:08:09 by yeblee            #+#    #+#              #
-#    Updated: 2022/07/30 10:45:45 by yeblee           ###   ########.fr        #
+#    Updated: 2022/07/30 11:18:12 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,19 +37,21 @@ SRCS =  ft_split.c		\
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_B)
+	@$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
-re: clean all
+re: 
+	@make fclean 
+	@make all
 
 .PHONY: all clean fclean re
