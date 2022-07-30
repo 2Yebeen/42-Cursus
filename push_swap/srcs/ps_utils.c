@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:59:32 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 11:12:58 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:19:11 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ps_display(t_stack *stack)
 
 	i = 0;
 	buf = stack->header.r_link;
-	ft_printf("--------------------------\n\n--------------------------\n");
+	ft_printf("--------------------------\n");
 	while (i < stack->count)
 	{
 		ft_printf("stack[%d] = ", i++);
@@ -34,7 +34,7 @@ void	ps_display(t_stack *stack)
 		// printf("\nstack[%d] = %d\n", i++, buf->data);
 		buf = buf->r_link;
 	}
-	ft_printf("--------------------------\n\n--------------------------\n");
+	ft_printf("--------------------------\n");
 }
 
 void	ps_parsing(const char *str, t_stack *stack)
