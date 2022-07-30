@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:55:47 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 11:10:19 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:23:00 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ int	main(int ac, char *av[])
 		b = ps_create_stack(b);
 		while (i < ac)
 			ps_parsing(av[i++], a);
+		ps_push(b, a);
 		ps_display(a);
+		ps_display(b);
 		ps_delete(a);
 		ps_delete(b);
 	}
-	system("leaks push_swap");
+	// system("leaks push_swap");
 	return (0);
 }
