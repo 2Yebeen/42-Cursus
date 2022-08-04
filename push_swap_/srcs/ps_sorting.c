@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sorting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 00:26:54 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 11:32:08 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 01:14:02 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ps_init_sort(t_ps *a, t_ps *b, int *sorted)
 		ps_sort2(a);
 	else if (a->count == 3)
 		ps_sort3(a);
-	else if (a->count > 3)
-		ps_sorting(a, b, sorted);
+	else if (a->count >= 4)
+		ps_push_swap(a, b, sorted);
 }
 
 void	ps_sort2(t_ps *a)
@@ -52,5 +52,39 @@ void	ps_sort3(t_ps *a)
 	{
 		ps_swap(a, SA);
 		ps_rotate(a, RA);
+	}
+}
+
+void	ps_push_swap(t_ps *a, t_ps *b, int *arr)
+{
+	ps_pivot(a, b, arr);
+	while (a->count > 3)
+		ps_push(a, b, PB);
+	ps_init_sort(a, b, arr);
+	while (b->count)
+	{
+		return ;	
+	}
+}
+
+void	ps_pivot(t_ps *a, t_ps *b, int *arr)
+{
+	int	i;
+	int	pivot1;
+	int	pivot2;
+	
+	pivot1 = arr[a->count / 3];
+	pivot2 = arr[(a->count * 2) / 3];
+	i = a->count;
+	while (i--)
+	{
+		if (a->head->data >= pivot2)
+			ps_reverse_rotate(a, RA);
+		else
+		{
+			ps_push(a, b, PB);
+			if (b->head->data < pivot1)
+				ps_rotate(b, RB);
+		}
 	}
 }

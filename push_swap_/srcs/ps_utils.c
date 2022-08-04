@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:07:19 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 11:46:29 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/03 14:18:42 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include <stdio.h>
 
 void	ps_error(int fd)
 {
@@ -72,7 +73,7 @@ void	ps_parsing(const char *str, t_ps *a)
 		ps_error(2);
 	while (tmp[i])
 	{
-		if (!ps_add_data(a, ps_atoi(tmp[i])))
+		if (!ps_push_bottom(a, ps_atoi(tmp[i])))
 			ps_error(2);
 		i++;
 	}

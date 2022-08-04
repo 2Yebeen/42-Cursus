@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_arr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:48:34 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 11:32:12 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/03 14:24:01 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	ps_sorting_arr(int *arr, int len)
 				tmp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = tmp;
-				i++;
-				j++;
 			}
 			if (arr[i] == arr[j])
 				return (FALSE);
+			i++;
+			j++;
 		}
 	}
 	return (TRUE);

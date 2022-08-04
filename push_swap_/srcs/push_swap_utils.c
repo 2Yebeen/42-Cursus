@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:17:10 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 12:30:10 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/03 13:31:36 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,28 @@ t_ps	*ps_create(void)
 	return (ps);
 }
 
-int	ps_add_data(t_ps *ps, int data)
+int	ps_push_top(t_ps *ps, int data)
+{
+	t_node	*buf;
+	t_node	*new;
+
+	new = (t_node *)ft_calloc(1, sizeof(t_node));
+	if (!new)
+		return (FALSE);
+	new->data = data;
+	if (ps->count == 0)
+		ps->head = new;
+	else
+	{
+		buf = ps_get_node(ps, ps->count - 1);
+		buf->prev = new;
+		new->next = buf;
+	}
+	ps->count += 1;
+	return (TRUE);
+}
+
+int	ps_push_bottom(t_ps *ps, int data)
 {
 	t_node	*buf;
 	t_node	*new;
@@ -39,16 +60,6 @@ int	ps_add_data(t_ps *ps, int data)
 	}
 	ps->count += 1;
 	return (TRUE);
-}
-
-t_node	*ps_get_node(t_ps *ps, int position)
-{
-	t_node	*buf;
-
-	buf = ps->head;
-	while (position--)
-		buf = buf->next;
-	return (buf);
 }
 
 t_node	*ps_pop_top(t_ps *ps)

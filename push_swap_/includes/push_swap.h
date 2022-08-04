@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:38:30 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 12:30:09 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 01:06:13 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	ps_reverse_rotate(t_ps *ps, int type);
 
 /* push_swap_utils.c */
 t_ps	*ps_create(void);
-int		ps_add_data(t_ps *ps, int data);
+int		ps_push_top(t_ps *ps, int data);
+int		ps_push_bottom(t_ps *ps, int data);
 t_node	*ps_get_node(t_ps *ps, int position);
 t_node	*ps_pop_top(t_ps *ps);
 t_node	*ps_pop_bottom(t_ps *ps);
@@ -60,6 +61,6 @@ int		ps_sorting_arr(int *arr, int len);
 void	ps_init_sort(t_ps *a, t_ps *b, int *sorted);
 void	ps_sort2(t_ps *a);
 void	ps_sort3(t_ps *a);
-void	ps_sorting(t_ps *a, t_ps *b, int *sotred);
-
+void	ps_push_swap(t_ps *a, t_ps *b, int *arr);
+void	ps_pivot(t_ps *a, t_ps *b, int *arr);
 #endif
