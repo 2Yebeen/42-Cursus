@@ -6,13 +6,13 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:17:10 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/04 20:30:04 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 21:02:12 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_min_ratate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
+void	ps_min_rotate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 {
 	int		i;
 	int		i_a;
@@ -30,7 +30,7 @@ void	ps_min_ratate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 			i_b = (b->count - i) * -1;
 		else
 			i_b = i;
-		if (i == 0 || ps_get_bigger(idx_a, idx_b, i_a, i_b))
+		if (i == 0 || ps_get_bigger(*idx_a, *idx_b, i_a, i_b))
 		{
 			*idx_a = i_a;
 			*idx_b = i_b;
@@ -43,9 +43,9 @@ int	ps_location(int num, t_ps *ps)
 {
 	int	ret;
 
-	if (num < ps_data_min(ps->head->data))
+	if (num < ps_data_min(ps->head))
 		ret = ps_min(ps);
-	else if (num > ps_data_max(ps->head->data))
+	else if (num > ps_data_max(ps->head))
 		ret = ps_max(ps);
 	else
 		ret = ps_mid(num, ps);

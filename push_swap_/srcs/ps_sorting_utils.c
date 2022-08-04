@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:54:32 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/04 20:40:47 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 21:01:47 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ void	ps_rr(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 		ps_rotate(a, NONE);
 		ps_rotate(b, NONE);
 		ps_display(RR);
-		*idx_a--;
-		*idx_b--;
+		*idx_a = *idx_a - 1;
+		*idx_b = *idx_b - 1;
 	}
 	while (*idx_a && *idx_b && (*idx_a < 0 && *idx_b < 0))
 	{
 		ps_reverse_rotate(a, NONE);
 		ps_reverse_rotate(b, NONE);
 		ps_display(RRR);
-		*idx_a++;
-		*idx_b++;
+		*idx_a = *idx_a + 1;
+		*idx_b = *idx_b + 1;
 	}
 }
 

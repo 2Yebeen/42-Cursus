@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 00:26:54 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/04 20:27:13 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 21:01:05 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,15 @@ void	ps_sort_last(t_ps *a)
 	int	i;
 	int	min;
 
-	min = ps_data_min(a->head->data);
+	min = ps_data_min(a->head);
 	i = ps_min(a);
 	ps_rr_ab(a, i, RA, RRA);
 }
 
-int	ps_data_min(t_ps *ps)
+int	ps_data_min(t_node *node)
 {
 	int		num;
-	t_node	*node;
 
-	node = ps->head;
 	num = node->data;
 	while (node)
 	{
@@ -85,7 +83,7 @@ int	ps_min(t_ps *ps)
 	ret = 0;
 	tmp = 0;
 	node = ps->head;
-	i = ps_data_min(ps);
+	i = ps_data_min(node);
 	while (node)
 	{
 		tmp = node->data;
@@ -109,7 +107,7 @@ int	ps_max(t_ps *ps)
 	ret = 0;
 	tmp = 0;
 	node = ps->head;
-	i = ps_data_max(ps);
+	i = ps_data_max(node);
 	while (node)
 	{
 		tmp = node->data;
@@ -129,8 +127,8 @@ int	ps_mid(int num, t_ps *ps)
 	int		ret;
 	t_node	*node;
 
+	ret = 0;
 	node = ps->head;
-	i = 1;
 	while (node->next)
 	{
 		if (num > ps->head->data && num < ps->head->next->data)
@@ -143,12 +141,10 @@ int	ps_mid(int num, t_ps *ps)
 	return (ret);
 }
 
-int	ps_data_max(t_ps *ps)
+int	ps_data_max(t_node *node)
 {
 	int		num;
-	t_node	*node;
 
-	node = ps->head;
 	num = node->data;
 	while (node)
 	{

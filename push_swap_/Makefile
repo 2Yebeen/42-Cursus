@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 11:44:01 by yeblee            #+#    #+#              #
-#    Updated: 2022/08/04 16:57:51 by yeblee           ###   ########.fr        #
+#    Updated: 2022/08/04 20:45:34 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,15 @@ DIR_O		= obj
 DIR_S 		= srcs
 SOURCES		= 					\
 			main.c				\
-			ps_arr.c			\
 			ps_utils.c			\
+			ps_stack.c			\
+			ps_array.c			\
 			ps_sorting.c		\
+			ps_sorting_utils.c	\
 			push_swap.c			\
 			push_swap_utils.c
 
+SRCS		= $(addprefix $(DIR_S)/,$(SOURCES))
 OBJS		= $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 # SRCB		= $(addprefix $(DIR_S)/,$(BONUS_S))
 # OBJB		= $(addprefix $(DIR_O)/,$(BONUS_S:.c=.o))
