@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sorting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 00:26:54 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/04 01:14:02 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 20:27:13 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,71 +20,141 @@ void	ps_init_sort(t_ps *a, t_ps *b, int *sorted)
 		ps_sort3(a);
 	else if (a->count >= 4)
 		ps_push_swap(a, b, sorted);
-}
-
-void	ps_sort2(t_ps *a)
-{
-	if (a->head->data > a->head->next->data)
-		ps_swap(a, SA);
-}
-
-void	ps_sort3(t_ps *a)
-{
-	int	top;
-	int	middle;
-	int	bottom;
-
-	top = a->head->data;
-	middle = a->head->next->data;
-	bottom = a->head->next->next->data;
-	if (top > middle && bottom > top && bottom > middle)
-		ps_swap(a, SA);
-	if (top > middle && top > bottom && bottom > middle)
-		ps_rotate(a, RA);
-	if (middle > top && top > bottom && middle > bottom)
-		ps_reverse_rotate(a, RRA);
-	if (top > middle && middle > bottom)
-	{
-		ps_swap(a, SA);
-		ps_reverse_rotate(a, RRA);
-	}
-	if (top < middle && top < bottom)
-	{
-		ps_swap(a, SA);
-		ps_rotate(a, RA);
-	}
+	else
+		ps_error(2);
 }
 
 void	ps_push_swap(t_ps *a, t_ps *b, int *arr)
 {
+	int	idx_a;
+	int	idx_b;
+
 	ps_pivot(a, b, arr);
 	while (a->count > 3)
 		ps_push(a, b, PB);
-	ps_init_sort(a, b, arr);
+	if (a->count == 2)
+		ps_sort2(a);
+	if (a->count == 3)
+		ps_sort3(a);
 	while (b->count)
 	{
-		return ;	
+		idx_a = 0;
+		idx_b = 0;
+		ps_min_rotate(a, b, &idx_a, &idx_b);
+		ps_rr(a, b, &idx_a, &idx_b);
+		ps_rr_ab(a, idx_a, RA, RRA);
+		ps_rr_ab(b, idx_b, RB, RRB);
+		ps_push(b, a, PA);
 	}
+	ps_sort_last(a);
 }
 
-void	ps_pivot(t_ps *a, t_ps *b, int *arr)
+void	ps_sort_last(t_ps *a)
 {
 	int	i;
-	int	pivot1;
-	int	pivot2;
-	
-	pivot1 = arr[a->count / 3];
-	pivot2 = arr[(a->count * 2) / 3];
-	i = a->count;
-	while (i--)
+	int	min;
+
+	min = ps_data_min(a->head->data);
+	i = ps_min(a);
+	ps_rr_ab(a, i, RA, RRA);
+}
+
+int	ps_data_min(t_ps *ps)
+{
+	int		num;
+	t_node	*node;
+
+	node = ps->head;
+	num = node->data;
+	while (node)
 	{
-		if (a->head->data >= pivot2)
-			ps_reverse_rotate(a, RA);
-		else
-		{
-			ps_push(a, b, PB);
-			if (b->head->data < pivot1)
-				ps_rotate(b, RB);
-		}
+		if (num > node->data)
+			num = node->data;
+		node = node->next;
 	}
+	return (num);
+}
+
+int	ps_min(t_ps *ps)
+{
+	int		i;
+	int		tmp;
+	int		ret;
+	t_node	*node;
+
+	ret = 0;
+	tmp = 0;
+	node = ps->head;
+	i = ps_data_min(ps);
+	while (node)
+	{
+		tmp = node->data;
+		if (tmp == i)
+			break ;
+		ret++;
+		node = node->next;
+	}
+	if (ret >= (ps->count) / 2)
+		ret = (ps->count - ret) * -1;
+	return (ret);
+}
+
+int	ps_max(t_ps *ps)
+{
+	int		i;
+	int		tmp;
+	int		ret;
+	t_node	*node;
+
+	ret = 0;
+	tmp = 0;
+	node = ps->head;
+	i = ps_data_max(ps);
+	while (node)
+	{
+		tmp = node->data;
+		if (tmp == i)
+			break ;
+		ret++;
+		node = node->next;
+	}
+	ret++;
+	if (ret >= (ps->count) / 2)
+		ret = (ps->count - ret) * -1;
+	return (ret);
+}
+
+int	ps_mid(int num, t_ps *ps)
+{
+	int		ret;
+	t_node	*node;
+
+	node = ps->head;
+	i = 1;
+	while (node->next)
+	{
+		if (num > ps->head->data && num < ps->head->next->data)
+			break ;
+		ret++;
+		node = node->next;
+	}
+	if (ret >= (ps->count) / 2)
+		ret = (ps->count - ret) * -1;
+	return (ret);
+}
+
+int	ps_data_max(t_ps *ps)
+{
+	int		num;
+	t_node	*node;
+
+	node = ps->head;
+	num = node->data;
+	while (node)
+	{
+		if (num < node->data)
+			num = node->data;
+		node = node->next;
+	}
+	return (num);
 }

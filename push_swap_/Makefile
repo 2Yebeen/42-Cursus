@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 11:44:01 by yeblee            #+#    #+#              #
-#    Updated: 2022/08/03 11:45:48 by yeblee           ###   ########.fr        #
+#    Updated: 2022/08/04 16:57:51 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,6 @@ SOURCES		= 					\
 			push_swap.c			\
 			push_swap_utils.c
 
-
-SRCS		= $(addprefix $(DIR_S)/,$(SOURCES))
 OBJS		= $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 # SRCB		= $(addprefix $(DIR_S)/,$(BONUS_S))
 # OBJB		= $(addprefix $(DIR_O)/,$(BONUS_S:.c=.o))
@@ -44,7 +42,7 @@ $(NAME): $(OBJS)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c $(HEADERS)/$(NAME).h
 	@mkdir -p $(DIR_O)
-	@$(CC) $(FLAGS) -I $(HEADERS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@ 
 
 clean:
 	@$(RM) $(DIR_O)

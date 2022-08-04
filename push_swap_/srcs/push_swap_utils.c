@@ -3,84 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:17:10 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 13:31:36 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 20:30:04 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_ps	*ps_create(void)
+void	ps_min_ratate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 {
-	t_ps	*ps;
+	int		i;
+	int		i_a;
+	int		i_b;
+	int		num;
+	t_node	*node;
 
-	ps = (t_ps *)ft_calloc(1, sizeof(t_ps));
-	return (ps);
-}
-
-int	ps_push_top(t_ps *ps, int data)
-{
-	t_node	*buf;
-	t_node	*new;
-
-	new = (t_node *)ft_calloc(1, sizeof(t_node));
-	if (!new)
-		return (FALSE);
-	new->data = data;
-	if (ps->count == 0)
-		ps->head = new;
-	else
+	i = 0;
+	node = ps_get_node(b, 0);
+	while (i++ < b->count)
 	{
-		buf = ps_get_node(ps, ps->count - 1);
-		buf->prev = new;
-		new->next = buf;
+		num = b->head->data;
+		i_a = ps_location(num, a);
+		if (i >= (b->count / 2))
+			i_b = (b->count - i) * -1;
+		else
+			i_b = i;
+		if (i == 0 || ps_get_bigger(idx_a, idx_b, i_a, i_b))
+		{
+			*idx_a = i_a;
+			*idx_b = i_b;
+		}
+		node = node->next;
 	}
-	ps->count += 1;
-	return (TRUE);
 }
 
-int	ps_push_bottom(t_ps *ps, int data)
+int	ps_location(int num, t_ps *ps)
 {
-	t_node	*buf;
-	t_node	*new;
+	int	ret;
 
-	new = (t_node *)ft_calloc(1, sizeof(t_node));
-	if (!new)
-		return (FALSE);
-	new->data = data;
-	if (ps->count == 0)
-		ps->head = new;
+	if (num < ps_data_min(ps->head->data))
+		ret = ps_min(ps);
+	else if (num > ps_data_max(ps->head->data))
+		ret = ps_max(ps);
 	else
-	{
-		buf = ps_get_node(ps, ps->count - 1);
-		buf->next = new;
-		new->prev = buf;
-	}
-	ps->count += 1;
-	return (TRUE);
+		ret = ps_mid(num, ps);
+	return (ret);
 }
 
-t_node	*ps_pop_top(t_ps *ps)
+int	ps_get_bigger(int a, int b, int i_a, int i_b)
 {
-	t_node	*top;
-
-	top = ps->head;
-	ps->head = top->next;
-	ps->head->prev = NULL;
-	top->next = NULL;
-	ps->count--;
-	return (top);
-}
-
-t_node	*ps_pop_bottom(t_ps *ps)
-{
-	t_node	*bottom;
-
-	bottom = ps_get_node(ps, ps->count - 1);
-	bottom->prev->next = NULL;
-	bottom->prev = NULL;
-	ps->count--;
-	return (bottom);
+	if (a < 0)
+		a *= -1;
+	if (b < 0)
+		b *= -1;
+	if (i_a < 0)
+		i_a *= -1;
+	if (i_b < 0)
+		i_b *= -1;
+	if (a + b > i_a + i_b)
+		return (1);
+	else
+		return (0);
 }

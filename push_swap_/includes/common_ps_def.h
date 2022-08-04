@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:05:22 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 11:37:50 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:33:25 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define FALSE	0
 # define TRUE	1
 
+# define NONE	99
 # define SA		11
 # define SB		12
 # define SS		13

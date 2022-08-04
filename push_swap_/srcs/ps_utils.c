@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:07:19 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 14:18:42 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:43:37 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 
 void	ps_error(int fd)
 {
@@ -84,27 +83,23 @@ void	ps_display(int type)
 {
 	char	*str;
 
-	if (type == SA)
-		str = "sa\n";
-	else if (type == SB)
-		str = "sb\n";
-	else if (type == SS)
-		str = "ss\n";
-	else if (type == PA)
-		str = "pa\n";
-	else if (type == PB)
-		str = "pb\n";
-	else if (type == RA)
-		str = "ra\n";
-	else if (type == RB)
-		str = "rb\n";
-	else if (type == RR)
-		str = "rr\n";
-	else if (type == RRA)
-		str = "rra\n";
-	else if (type == RRB)
-		str = "rrb\n";
-	else if (type == RRR)
-		str = "rrr\n";
+	str = NULL;
+	if (type == NONE)
+		return ;
+	if (type == SA || type == SB || type == SS)
+		str = ft_strjoin(str, "s");
+	else if (type == PA || type == PB)
+		str = ft_strjoin(str, "p");
+	else if (type == RA || type == RB || type == RR)
+		str = ft_strjoin(str, "r");
+	else if (type == RRA || type == RRB || type == RRR)
+		str = ft_strjoin(str, "rr");
+	if (type == SA || type == PA || type == RA || type == RRA)
+		str = ft_strjoin(str, "a");
+	else if (type == SB || type == PB || type == RB || type == RRB)
+		str = ft_strjoin(str, "b");
+	else if (type == RR || type == RRR)
+		str = ft_strjoin(str, "r");
+	str = ft_strjoin(str, "\n");
 	ft_putstr_fd(str, 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_arr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:48:34 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/03 14:24:01 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/04 15:49:20 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	*ps_add_arr(t_ps *ps, int len)
 	int		*ret;
 	t_node	*buf;
 
+	i = 0;
 	ret = (int *)ft_calloc(len, sizeof(int));
 	if (!ret)
 		return (FALSE);
