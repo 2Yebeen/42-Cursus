@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:46:18 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 13:14:25 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 19:28:28 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ps_push(t_ps *a, t_ps *b, int type)
 	if (a->count)
 	{		
 		node = ps_left_pop(a);
+		if (!node)
+			return ;
 		ps_left_add(b, node->data);
 		ps_display(type);
 		free(node);

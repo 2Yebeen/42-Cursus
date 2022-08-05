@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:29:29 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 18:22:41 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 20:29:21 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ void	ps_pivot(t_ps *a, t_ps *b, int *arr)
 			ps_push(a, b, PB);
 		else
 			ps_rotate(a, RA);
-		// if (a->head->data >= pivot2)
-		// 	ps_reverse_rotate(a, RA);
-		// else
-		// {
-		// 	ps_push(a, b, PB);
-		// 	if (b->head->data < pivot1)
-		// 		ps_rotate(b, RB);
-		// }
 		i--;
 	}
 }
@@ -56,7 +48,7 @@ void	ps_min_rotate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 	while (i < b->count)
 	{
 		i_a = ps_get_index(node->data, a);
-		if (i >= (b->count / 2))
+		if (i >= (b->count + 1) / 2)
 			i_b = (b->count - i) * -1;
 		else
 			i_b = i;
@@ -70,14 +62,14 @@ void	ps_min_rotate(t_ps *a, t_ps *b, int *idx_a, int *idx_b)
 	}
 }
 
-int	ps_get_index(int num, t_ps *ps)
+int	ps_get_index(int top_num, t_ps *ps)
 {
-	if (num < ps_data_min(ps->head))
+	if (top_num < ps_data_min(ps->head))
 		return (ps_min(ps));
-	else if (num > ps_data_max(ps->head))
+	else if (top_num > ps_data_max(ps->head))
 		return (ps_max(ps));
 	else
-		return (ps_mid(num, ps));
+		return (ps_mid(top_num, ps));
 }
 
 int	ps_bigger(int a, int b, int i_a, int i_b)

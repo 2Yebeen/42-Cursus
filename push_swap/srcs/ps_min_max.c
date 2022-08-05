@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:39:22 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 18:21:46 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 20:46:29 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ps_min(t_ps *ps)
 	t_node	*node;
 
 	idx = 0;
-	data = 0;
 	node = ps->head;
 	min_data = ps_data_min(node);
 	while (node)
@@ -59,7 +58,7 @@ int	ps_min(t_ps *ps)
 		idx++;
 		node = node->next;
 	}
-	if (idx >= (ps->count) / 2)
+	if (idx >= (ps->count + 1) / 2)
 		idx = (ps->count - idx) * -1;
 	return (idx);
 }
@@ -83,26 +82,27 @@ int	ps_max(t_ps *ps)
 		idx++;
 		node = node->next;
 	}
-	if (idx >= ps->count / 2)
+	idx++;
+	if (idx >= (ps->count + 1) / 2)
 		idx = (ps->count - idx) * -1;
 	return (idx);
 }
 
-int	ps_mid(int num, t_ps *ps)
+int	ps_mid(int top, t_ps *ps)
 {
 	int		idx;
 	t_node	*node;
 
-	idx = 0;
+	idx = 1;
 	node = ps->head;
-	while (node)
+	while (node->next)
 	{
-		if (num > ps->head->data && num < ps->head->next->data)
+		if (top > node->data && top < node->next->data)
 			break ;
 		idx++;
 		node = node->next;
 	}
-	if (idx >= ps->count / 2)
+	if (idx >= (ps->count + 1) / 2)
 		idx = (ps->count - idx) * -1;
 	return (idx);
 }

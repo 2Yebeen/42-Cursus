@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:33:37 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 16:44:15 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 20:38:44 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ps_rotate1(t_ps *ps, int idx, int type1, int type2)
 		if (idx > 0)
 		{
 			ps_rotate(ps, type1);
-			idx--;
+			idx -= 1;
 		}
 		else
 		{
 			ps_reverse_rotate(ps, type2);
-			idx++;
+			idx += 1;
 		}
 	}
 }
@@ -56,6 +56,8 @@ void	ps_rotate(t_ps *ps, int type)
 	if (ps->head->next)
 	{		
 		node = ps_left_pop(ps);
+		if (!node)
+			return ;
 		if (!ps_right_add(ps, node->data))
 			ps_error(2);
 		ps_display(type);
@@ -71,6 +73,8 @@ void	ps_reverse_rotate(t_ps *ps, int type)
 	if (ps->head->next)
 	{		
 		node = ps_right_pop(ps);
+		if (!node)
+			return ;
 		if (!ps_left_add(ps, node->data))
 			ps_error(2);
 		ps_display(type);

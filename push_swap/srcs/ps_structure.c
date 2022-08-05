@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_structure.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 00:30:30 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 01:35:05 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 19:29:32 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_node	*ps_left_pop(t_ps *ps)
 {
 	t_node	*buf;
 
-	if (ps->count == 0)
+	if (!ps->count)
 		return (NULL);
 	buf = ps->head;
 	ps->head = buf->next;
