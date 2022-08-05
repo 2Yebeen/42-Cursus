@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 00:46:12 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/26 01:04:28 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/26 16:24:39 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+size_t	ft_strlen(const char *str)
 {
-	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	size_t	i;
 
 	i = 0;
-	if (ac >= 2)
-	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
-	}
-	return (0);
+	while (str[i])
+		i++;
+	return (i);
 }

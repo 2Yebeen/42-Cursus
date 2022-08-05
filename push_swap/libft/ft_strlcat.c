@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 00:46:12 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/26 01:49:11 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/26 16:12:25 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
-	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	size_t	i;
+	size_t	len_des;
+	size_t	len_src;
 
+	len_des = ft_strlen(dest);
+	len_src = ft_strlen(src);
 	i = 0;
-	if (ac >= 2)
+	if (len_des > dstsize)
+		return (dstsize + len_src);
+	while (src[i] && len_des + i + 1 < dstsize)
 	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
+		dest[len_des + i] = src[i];
+		i++;
 	}
-	return (0);
+	dest[len_des + i] = 0;
+	return (len_des + len_src);
 }

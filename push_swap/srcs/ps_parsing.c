@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ps_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 00:46:12 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 01:39:08 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 01:45:42 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char *av[])
+void	ps_parsing(const char *str, t_ps *a)
 {
 	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	char	**tmp;
 
 	i = 0;
-	if (ac >= 2)
+	tmp = ft_split(str, ' ');
+	if (!tmp[i])
+		ps_error(2);
+	while (tmp[i])
 	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
+		if (!ps_right_add(a, ps_atoi(tmp[i])))
+			ps_error(2);
+		free(tmp[i]);
+		tmp[i] = NULL;
+		i++;
 	}
-	return (0);
+	free(tmp);
+	tmp = NULL;
 }

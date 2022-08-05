@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ps_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 00:46:12 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 11:46:12 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 11:47:34 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char *av[])
+void	ps_swap(t_ps *ps, int type)
 {
-	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	int	data;
 
-	i = 0;
-	if (ac >= 2)
-	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
+	if (ps->count >= 2)
+	{		
+		data = ps->head->data;
+		ps->head->data = ps->head->next->data;
+		ps->head->next->data = data;
+		ps_display(type);
 	}
-	return (0);
 }

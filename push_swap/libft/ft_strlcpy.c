@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 00:46:12 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/26 01:35:25 by marvin            #+#    #+#             */
+/*   Updated: 2022/03/26 16:12:08 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	size_t	i;
+	size_t	len_src;
 
+	len_src = ft_strlen(src);
+	if (dstsize == 0)
+		return (len_src);
 	i = 0;
-	if (ac >= 2)
+	while (i + 1 < dstsize && src[i])
 	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
+		dst[i] = src[i];
+		i++;
 	}
-	return (0);
+	dst[i] = 0;
+	return (len_src);
 }
