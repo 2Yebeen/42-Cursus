@@ -3,37 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 17:18:06 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 10:47:09 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/03 11:35:27 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/04 16:42:45 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
-# include <stdarg.h>
+# include <stdlib.h>
 
-char	**ft_split(char const *s, char c);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *str);
-void	*ft_calloc(size_t count, size_t size);
+char	*ft_strdup(const char *s1);
 void	ft_putstr_fd(char *s, int fd);
+char	**ft_split(char const *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memset(void *ptr, int value, size_t len);
-char	*base_type(const char type);
-int	    ft_checkbase(va_list ap, const char format);
-int     ft_parsing(va_list args, const char format);
-int     ft_formats(va_list ap, const char *format);
-void	ft_printbase(unsigned long long num, const char *base);
-int	    ft_printi(int n, const char *base);
-int	    ft_printu(unsigned int n, const char *base);
-int 	ft_printp(unsigned long long n, const char *base);
-int 	ft_printf(const char *format, ...);
-int	    ft_printchar(int chr);
-int 	ft_printstr(char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcat(char *dest, const char *src, size_t dstsize);
 
 #endif

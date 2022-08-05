@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ps_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 14:56:59 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/21 17:38:26 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 11:46:12 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 11:47:34 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-void	*ft_memset(void *ptr, int value, size_t len)
+void	ps_swap(t_ps *ps, int type)
 {
-	size_t			i;
-	unsigned char	v;
-	unsigned char	*p;
+	int	data;
 
-	i = 0;
-	v = (unsigned char)value;
-	p = (unsigned char *)ptr;
-	while (i < len)
-		p[i++] = v;
-	return (p);
+	if (ps->count >= 2)
+	{		
+		data = ps->head->data;
+		ps->head->data = ps->head->next->data;
+		ps->head->next->data = data;
+		ps_display(type);
+	}
 }

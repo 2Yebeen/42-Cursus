@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ps_def.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 14:56:59 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/21 17:38:26 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 00:22:27 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 00:24:38 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PS_DEF_H
+# define PS_DEF_H
 
-void	*ft_memset(void *ptr, int value, size_t len)
-{
-	size_t			i;
-	unsigned char	v;
-	unsigned char	*p;
+# define FALSE	0
+# define TRUE	1
 
-	i = 0;
-	v = (unsigned char)value;
-	p = (unsigned char *)ptr;
-	while (i < len)
-		p[i++] = v;
-	return (p);
-}
+# define NONE	99
+# define SA		11
+# define SB		12
+# define SS		13
+
+# define PA		21
+# define PB		22
+# define RA		31
+
+# define RB		32
+# define RR		33
+
+# define RRA	41
+# define RRB	42
+# define RRR	43
+
+#endif

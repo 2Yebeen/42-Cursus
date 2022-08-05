@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ps_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 14:56:59 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/21 17:38:26 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 01:39:08 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 01:45:42 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-void	*ft_memset(void *ptr, int value, size_t len)
+void	ps_parsing(const char *str, t_ps *a)
 {
-	size_t			i;
-	unsigned char	v;
-	unsigned char	*p;
+	int		i;
+	char	**tmp;
 
 	i = 0;
-	v = (unsigned char)value;
-	p = (unsigned char *)ptr;
-	while (i < len)
-		p[i++] = v;
-	return (p);
+	tmp = ft_split(str, ' ');
+	if (!tmp[i])
+		ps_error(2);
+	while (tmp[i])
+	{
+		if (!ps_right_add(a, ps_atoi(tmp[i])))
+			ps_error(2);
+		free(tmp[i]);
+		tmp[i] = NULL;
+		i++;
+	}
+	free(tmp);
+	tmp = NULL;
 }

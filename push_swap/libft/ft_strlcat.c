@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 16:03:21 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/30 10:44:53 by yeblee           ###   ########.fr       */
+/*   Created: 2022/03/26 01:49:11 by yeblee            #+#    #+#             */
+/*   Updated: 2022/03/26 16:12:25 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_printchar(int chr)
+size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
-	unsigned char	c;
+	size_t	i;
+	size_t	len_des;
+	size_t	len_src;
 
-	c = (unsigned char)chr;
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_printstr(char *str)
-{
-	int	print_length;
-
-	if (!str)
+	len_des = ft_strlen(dest);
+	len_src = ft_strlen(src);
+	i = 0;
+	if (len_des > dstsize)
+		return (dstsize + len_src);
+	while (src[i] && len_des + i + 1 < dstsize)
 	{
-		print_length = write(1, "(null)", 6);
-		return (print_length);
+		dest[len_des + i] = src[i];
+		i++;
 	}
-	print_length = write(1, str, ft_strlen(str));
-	return (print_length);
+	dest[len_des + i] = 0;
+	return (len_des + len_src);
 }

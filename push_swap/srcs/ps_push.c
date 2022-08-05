@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ps_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 14:56:59 by yeblee            #+#    #+#             */
-/*   Updated: 2022/03/21 17:38:26 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 11:46:18 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 19:28:28 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-void	*ft_memset(void *ptr, int value, size_t len)
+void	ps_push(t_ps *a, t_ps *b, int type)
 {
-	size_t			i;
-	unsigned char	v;
-	unsigned char	*p;
+	t_node	*node;
 
-	i = 0;
-	v = (unsigned char)value;
-	p = (unsigned char *)ptr;
-	while (i < len)
-		p[i++] = v;
-	return (p);
+	if (a->count)
+	{		
+		node = ps_left_pop(a);
+		if (!node)
+			return ;
+		ps_left_add(b, node->data);
+		ps_display(type);
+		free(node);
+		node = NULL;
+	}
 }
