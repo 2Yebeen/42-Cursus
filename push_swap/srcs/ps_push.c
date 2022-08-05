@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:46:18 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 11:47:41 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 13:14:25 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ps_push(t_ps *a, t_ps *b, int type)
 
 	if (a->count)
 	{		
-		node = ps_pop_top(a);
-		ps_push_top(b, node->data);
+		node = ps_left_pop(a);
+		ps_left_add(b, node->data);
 		ps_display(type);
 		free(node);
 		node = NULL;

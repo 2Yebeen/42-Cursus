@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:33:37 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 11:45:45 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 16:44:15 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	ps_rotate1(t_ps *ps, int idx, int type1, int type2)
 {
 	while (idx)
 	{
-		if (idx-- > 0)
+		if (idx > 0)
+		{
 			ps_rotate(ps, type1);
+			idx--;
+		}
 		else
 		{
 			ps_reverse_rotate(ps, type2);
@@ -50,10 +53,10 @@ void	ps_rotate(t_ps *ps, int type)
 {
 	t_node	*node;
 
-	if (ps->count)
+	if (ps->head->next)
 	{		
-		node = ps_pop_top(ps);
-		if (!ps_push_bottom(ps, node->data))
+		node = ps_left_pop(ps);
+		if (!ps_right_add(ps, node->data))
 			ps_error(2);
 		ps_display(type);
 		free(node);
@@ -65,10 +68,10 @@ void	ps_reverse_rotate(t_ps *ps, int type)
 {
 	t_node	*node;
 
-	if (ps->count)
+	if (ps->head->next)
 	{		
-		node = ps_pop_bottom(ps);
-		if (!ps_push_top(ps, node->data))
+		node = ps_right_pop(ps);
+		if (!ps_left_add(ps, node->data))
 			ps_error(2);
 		ps_display(type);
 		free(node);

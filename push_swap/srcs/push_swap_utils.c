@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:29:29 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 11:48:42 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 18:22:41 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,26 @@ void	ps_pivot(t_ps *a, t_ps *b, int *arr)
 	pivot1 = arr[a->count / 3];
 	pivot2 = arr[(a->count * 2) / 3];
 	i = a->count;
-	while (i--)
+	while (i)
 	{
-		if (a->head->data >= pivot2)
-			ps_reverse_rotate(a, RA);
-		else
+		if (a->head->data < pivot1)
 		{
 			ps_push(a, b, PB);
-			if (b->head->data < pivot1)
-				ps_rotate(b, RB);
+			ps_rotate(b, RB);
 		}
+		else if (a->head->data < pivot2)
+			ps_push(a, b, PB);
+		else
+			ps_rotate(a, RA);
+		// if (a->head->data >= pivot2)
+		// 	ps_reverse_rotate(a, RA);
+		// else
+		// {
+		// 	ps_push(a, b, PB);
+		// 	if (b->head->data < pivot1)
+		// 		ps_rotate(b, RB);
+		// }
+		i--;
 	}
 }
 

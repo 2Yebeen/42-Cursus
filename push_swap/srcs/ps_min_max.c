@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_min_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:39:22 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 11:37:25 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 18:21:46 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int	ps_data_max(t_node *node)
 
 int	ps_min(t_ps *ps)
 {
-	int		i;
-	int		tmp;
 	int		idx;
+	int		data;
+	int		min_data;
 	t_node	*node;
 
 	idx = 0;
-	tmp = 0;
+	data = 0;
 	node = ps->head;
-	i = ps_data_min(node);
+	min_data = ps_data_min(node);
 	while (node)
 	{
-		tmp = node->data;
-		if (tmp == i)
+		data = node->data;
+		if (data == min_data)
 			break ;
 		idx++;
 		node = node->next;
@@ -66,25 +66,24 @@ int	ps_min(t_ps *ps)
 
 int	ps_max(t_ps *ps)
 {
-	int		i;
-	int		tmp;
+	int		max_data;
+	int		data;
 	int		idx;
 	t_node	*node;
 
 	idx = 0;
-	tmp = 0;
+	data = 0;
 	node = ps->head;
-	i = ps_data_max(node);
+	max_data = ps_data_max(node);
 	while (node)
 	{
-		tmp = node->data;
-		if (tmp == i)
+		data = node->data;
+		if (data == max_data)
 			break ;
 		idx++;
 		node = node->next;
 	}
-	idx++;
-	if (idx >= (ps->count) / 2)
+	if (idx >= ps->count / 2)
 		idx = (ps->count - idx) * -1;
 	return (idx);
 }
@@ -96,14 +95,14 @@ int	ps_mid(int num, t_ps *ps)
 
 	idx = 0;
 	node = ps->head;
-	while (node->next)
+	while (node)
 	{
 		if (num > ps->head->data && num < ps->head->next->data)
 			break ;
 		idx++;
 		node = node->next;
 	}
-	if (idx >= (ps->count) / 2)
+	if (idx >= ps->count / 2)
 		idx = (ps->count - idx) * -1;
 	return (idx);
 }

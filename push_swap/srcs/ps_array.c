@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_array.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:49:57 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 02:19:13 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 13:16:21 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ps_array_sort(int *arr, int len)
 	int	i;
 	int	j;
 	int	tmp;
-	
+
 	n = 0;
 	while (n++ < len)
 	{
@@ -71,4 +71,5 @@ int	ps_array_sort(int *arr, int len)
 			j++;
 		}
 	}
+	return (TRUE);
 }
