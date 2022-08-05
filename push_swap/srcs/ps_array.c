@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:49:57 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 19:14:09 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 21:26:47 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 int	*ps_array_validation(t_ps *ps)
 {
 	int	len;
+	int	sorted;
 	int	*array;
 
 	len = ps->count;
 	array = ps_array_add(ps);
 	if (!array)
 		ps_error(2);
-	if (!ps_array_sort(array, len))
+	sorted = ps_array_sort(array, len);
+	if (!sorted)
+		ps_error(1);
+	else if (sorted == -1)
 		ps_error(0);
 	return (array);
 }
@@ -53,7 +57,7 @@ int	ps_array_sort(int *arr, int len)
 	int	cnt;
 
 	n = 0;
-	cnt = 0;
+	cnt = -1;
 	while (n < len)
 	{
 		i = 0;
@@ -64,7 +68,7 @@ int	ps_array_sort(int *arr, int len)
 				tmp = arr[i - 1];
 				arr[i - 1] = arr[i];
 				arr[i] = tmp;
-				cnt++;
+				cnt += 2;
 			}
 		}
 		if (arr[n] == arr[n + 1])

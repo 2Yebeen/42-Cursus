@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 00:22:49 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 18:22:09 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 21:13:04 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,9 @@ void	ps_pivot(t_ps *a, t_ps *b, int *arr);
 void	ps_min_rotate(t_ps *a, t_ps *b, int *idx_a, int *idx_b);
 int		ps_get_index(int num, t_ps *ps);
 int		ps_bigger(int a, int b, int i_a, int i_b);
+
+/* ps_destroy.c */
+void	ps_destroy(t_ps *ps);
+void	ps_delete_node(t_ps *ps);
 
 #endif

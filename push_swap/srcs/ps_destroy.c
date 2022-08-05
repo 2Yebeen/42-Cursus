@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ps_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 00:25:28 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 21:56:29 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/05 21:10:06 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/05 21:18:17 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char *av[])
+void	ps_delete_node(t_ps *ps)
 {
-	int		i;
-	t_ps	*a;
-	t_ps	*b;
-	int		*sorted_array;
+	t_node	*buf;
+	t_node	*del;
 
-	i = 0;
-	if (ac >= 2)
+	buf = ps->head;
+	while (buf->next)
 	{
-		a = ps_create();
-		b = ps_create();
-		while (++i < ac)
-			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		ps_sort_init(a, b, sorted_array);
-		ps_destroy(a);
-		ps_destroy(b);
+		del = buf;
+		free(del);
+		del = NULL;
+		buf = buf->next;
 	}
-	return (0);
+	free(buf);
+	buf = NULL;
+}
+
+void	ps_destroy(t_ps *ps)
+{
+	if (ps->head)
+		ps_delete_node(ps);
+	free(ps);
+	ps = NULL;
 }

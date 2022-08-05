@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:45:44 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/05 19:08:26 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/05 21:32:02 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,29 @@ int	ps_atoi(const char *str)
 
 void	ps_display(int type)
 {
+	char	*tp;
+	char	*ps;
 	char	*str;
 
-	str = NULL;
 	if (type == NONE)
 		return ;
 	if (type == SA || type == SB || type == SS)
-		str = ft_strjoin(str, "s");
+		tp = "s";
 	else if (type == PA || type == PB)
-		str = ft_strjoin(str, "p");
+		tp = "p";
 	else if (type == RA || type == RB || type == RR)
-		str = ft_strjoin(str, "r");
+		tp = "r";
 	else if (type == RRA || type == RRB || type == RRR)
-		str = ft_strjoin(str, "rr");
+		tp = "rr";
 	if (type == SA || type == PA || type == RA || type == RRA)
-		str = ft_strjoin(str, "a");
+		ps = "a";
 	else if (type == SB || type == PB || type == RB || type == RRB)
-		str = ft_strjoin(str, "b");
+		ps = "b";
 	else if (type == RR || type == RRR)
-		str = ft_strjoin(str, "r");
-	str = ft_strjoin(str, "\n");
+		ps = "r";
+	str = ft_strjoin(tp, ps);
 	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
+	free(str);
+	str = NULL;
 }

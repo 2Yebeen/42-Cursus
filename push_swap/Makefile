@@ -6,7 +6,7 @@
 #    By: yeblee <yeblee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/05 13:06:40 by yeblee            #+#    #+#              #
-#    Updated: 2022/08/05 13:16:51 by yeblee           ###   ########.fr        #
+#    Updated: 2022/08/05 21:22:27 by yeblee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SOURCES		= 					\
 			ps_array.c			\
 			ps_parsing.c		\
 			ps_sorting.c		\
+			ps_destroy.c		\
 			ps_min_max.c		\
 			ps_structure.c		\
 			push_swap.c			\
