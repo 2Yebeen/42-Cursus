@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:30:17 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/08 00:13:43 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/09 03:46:50 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,34 @@ void	checker(char *line, t_ps *a, t_ps *b)
 	if (ft_strncmp(line, "rrb", l) == 0 || ft_strncmp(line, "rrr", l) == 0)
 		ps_reverse_rotate(b, NONE);
 }
+void	ch_duplication(t_ps *a)
+{
+	int		i;
+	int		j;
+	t_node	*buf;
+	t_node	*node;
+	
+	i = a->count;
+	buf = a->head;
+	while (i--)
+	{
+		j = i;
+		node = buf->next;
+		while (j--)
+		{
+			if (buf->data == node->data)
+				ps_error(2);
+			node = node->next;
+		}
+		buf = buf->next;
+	}	
+}
 
 int	main(int ac, char *av[])
 {
 	int		i;
 	t_ps	*a;
 	t_ps	*b;
-	int		*sorted_array;
 	char	*line;
 		
 	i = 0;
@@ -52,21 +73,14 @@ int	main(int ac, char *av[])
 		b = ps_create();
 		while (++i < ac)
 			ps_parsing(av[i], a);
-		sorted_array = ps_array_validation(a);
-		if (!sorted_array)
-			ps_error(2);
-		while (1)
-		{
-			line = get_next_line(0);
-			if (!line)
-				break;
-			checker(line, a, b);
-			free(line);
-		}
+		ch_duplication(a);
+		ch_read(line, a, b);
 		if (ch_is_sorted(a) && !b->count)
 			ft_putstr_fd("OK\n", 1);
 		else
 			ft_putstr_fd("KO\n", 1);
+		ps_destroy(a);
+		ps_destroy(b);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:49:57 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/07 22:13:42 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/08/09 03:36:28 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	*ps_array_validation(t_ps *ps)
 		ps_error(2);
 	sorted = ps_array_sort(array, len);
 	if (!sorted)
-		ps_error(1);
+		ps_error(2);
 	else if (sorted == -1)
 		ps_error(0);
 	return (array);
@@ -49,31 +49,60 @@ int	*ps_array_add(t_ps *ps)
 	return (array);
 }
 
+// int	ps_array_sort(int *arr, int len)
+// {
+// 	int	n;
+// 	int	i;
+// 	int	tmp;
+// 	int	flag;
+
+// 	n = 0;
+// 	flag = -1;
+// 	while (n < len)
+// 	{
+// 		i = 0;
+// 		while (++i < len)
+// 		{
+// 			if (arr[i - 1] > arr[i])
+// 			{
+// 				tmp = arr[i - 1];
+// 				arr[i - 1] = arr[i];
+// 				arr[i] = tmp;
+// 				flag = 2;
+// 			}
+// 		}
+// 		if (arr[n] == arr[n + 1])
+// 			return (FALSE);
+// 		n++;
+// 	}
+// 	return (flag);
+// }
+
 int	ps_array_sort(int *arr, int len)
 {
-	int	n;
 	int	i;
+	int	j;
 	int	tmp;
-	int	flag;
+	int flag;
 
-	n = 0;
+	i = 0;
 	flag = -1;
-	while (n < len)
+	while (i < len)
 	{
-		i = 0;
-		while (++i < len)
+		j = i;
+		while (++j < len)
 		{
-			if (arr[i - 1] > arr[i])
+			if (arr[i] > arr[j])
 			{
-				tmp = arr[i - 1];
-				arr[i - 1] = arr[i];
-				arr[i] = tmp;
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
 				flag = 2;
 			}
+			if (arr[i] == arr[j])
+				return (FALSE);
 		}
-		if (arr[n] == arr[n + 1])
-			return (FALSE);
-		n++;
+		i++;
 	}
 	return (flag);
 }
