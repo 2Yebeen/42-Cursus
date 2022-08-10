@@ -40,11 +40,14 @@ SOURCES		= 					\
 			push_swap_utils.c
 BONUS_C		=					\
 			checker.c			\
+			ch_read.c			\
 			ch_command.c		\
 			ch_is_sorted.c		\
+			ch_duplication.c	\
 			ps_utils.c			\
 			ps_structure.c		\
 			ps_parsing.c		\
+			ps_destroy.c		\
 			ps_array.c			\
 			ps_push.c			\
 			ps_swap.c			\

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ch_duplication.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 21:50:11 by yeblee            #+#    #+#             */
-/*   Updated: 2022/08/08 00:07:38 by yeblee           ###   ########.fr       */
+/*   Created: 2022/08/07 22:30:17 by yeblee            #+#    #+#             */
+/*   Updated: 2022/08/09 03:46:50 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-# include "push_swap.h"
+#include "../includes/checker.h"
 
-int		ch_is_sorted(t_ps *a);
-void	ch_duplication(t_ps *a);
-int		ch_command(char *line, int l);
-void	checker(char *line, t_ps *a, t_ps *b);
-void	ch_read(char *line, t_ps *a, t_ps *b);
+void	ch_duplication(t_ps *a)
+{
+	int		i;
+	int		j;
+	t_node	*buf;
+	t_node	*node;
 
-#endif
+	i = a->count;
+	buf = a->head;
+	while (i--)
+	{
+		j = i;
+		node = buf->next;
+		while (j--)
+		{
+			if (buf->data == node->data)
+				ps_error(2);
+			node = node->next;
+		}
+		buf = buf->next;
+	}	
+}

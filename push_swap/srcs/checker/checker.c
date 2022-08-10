@@ -36,28 +36,6 @@ void	checker(char *line, t_ps *a, t_ps *b)
 	if (ft_strncmp(line, "rrb", l) == 0 || ft_strncmp(line, "rrr", l) == 0)
 		ps_reverse_rotate(b, NONE);
 }
-void	ch_duplication(t_ps *a)
-{
-	int		i;
-	int		j;
-	t_node	*buf;
-	t_node	*node;
-	
-	i = a->count;
-	buf = a->head;
-	while (i--)
-	{
-		j = i;
-		node = buf->next;
-		while (j--)
-		{
-			if (buf->data == node->data)
-				ps_error(2);
-			node = node->next;
-		}
-		buf = buf->next;
-	}	
-}
 
 int	main(int ac, char *av[])
 {
@@ -65,8 +43,9 @@ int	main(int ac, char *av[])
 	t_ps	*a;
 	t_ps	*b;
 	char	*line;
-		
+
 	i = 0;
+	line = NULL;
 	if (ac >= 2)
 	{
 		a = ps_create();

@@ -49,41 +49,12 @@ int	*ps_array_add(t_ps *ps)
 	return (array);
 }
 
-// int	ps_array_sort(int *arr, int len)
-// {
-// 	int	n;
-// 	int	i;
-// 	int	tmp;
-// 	int	flag;
-
-// 	n = 0;
-// 	flag = -1;
-// 	while (n < len)
-// 	{
-// 		i = 0;
-// 		while (++i < len)
-// 		{
-// 			if (arr[i - 1] > arr[i])
-// 			{
-// 				tmp = arr[i - 1];
-// 				arr[i - 1] = arr[i];
-// 				arr[i] = tmp;
-// 				flag = 2;
-// 			}
-// 		}
-// 		if (arr[n] == arr[n + 1])
-// 			return (FALSE);
-// 		n++;
-// 	}
-// 	return (flag);
-// }
-
 int	ps_array_sort(int *arr, int len)
 {
 	int	i;
 	int	j;
 	int	tmp;
-	int flag;
+	int	flag;
 
 	i = 0;
 	flag = -1;

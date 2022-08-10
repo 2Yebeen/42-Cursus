@@ -14,7 +14,7 @@
 
 int	ch_command(char *line, int l)
 {
-	if ( ft_strncmp(line, "pa", l) == 0 || ft_strncmp(line, "pb", l) == 0
+	if (ft_strncmp(line, "pa", l) == 0 || ft_strncmp(line, "pb", l) == 0
 		|| ft_strncmp(line, "sa", l) == 0
 		|| ft_strncmp(line, "sb", l) == 0 || ft_strncmp(line, "ss", l) == 0
 		|| ft_strncmp(line, "ra", l) == 0

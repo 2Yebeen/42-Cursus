@@ -14,9 +14,9 @@
 
 int	ch_is_sorted(t_ps *a)
 {
-	int	i;
+	int		i;
 	t_node	*node;
-	
+
 	i = 1;
 	node = a->head;
 	while (i < a->count)

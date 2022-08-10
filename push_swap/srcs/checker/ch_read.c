@@ -18,7 +18,7 @@ void	ch_read(char *line, t_ps *a, t_ps *b)
 	{
 		line = get_next_line(0);
 		if (!line)
-			break;
+			break ;
 		checker(line, a, b);
 		free(line);
 	}
