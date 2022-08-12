@@ -14,26 +14,25 @@
 
 void	checker(char *line, t_ps *a, t_ps *b)
 {
-	int	l;
-
-	l = ft_strlen(line) - 1;
-	if (!ch_command(line, l))
+	if (!ch_command(line, (ft_strlen(line) - 1)))
 		ps_error(2);
-	if (ft_strncmp(line, "sa", l) == 0 || ft_strncmp(line, "ss", l) == 0)
+	if (ft_strncmp(line, "sa", 2) == 0 || ft_strncmp(line, "ss", 2) == 0)
 		ps_swap(a, NONE);
-	if (ft_strncmp(line, "sb", l) == 0 || ft_strncmp(line, "ss", l) == 0)
+	if (ft_strncmp(line, "sb", 2) == 0 || ft_strncmp(line, "ss", 2) == 0)
 		ps_swap(b, NONE);
-	if (ft_strncmp(line, "pa", l) == 0)
+	if (ft_strncmp(line, "pa", 2) == 0)
 		ps_push(b, a, NONE);
-	if (ft_strncmp(line, "pb", l) == 0)
+	if (ft_strncmp(line, "pb", 2) == 0)
 		ps_push(a, b, NONE);
-	if (ft_strncmp(line, "ra", l) == 0 || ft_strncmp(line, "rr", l) == 0)
+	if ((ft_strncmp(line, "ra", 2) == 0 || ft_strncmp(line, "rr", 2) == 0) && \
+		ft_strncmp("rrr", line, 3) != 0)
 		ps_rotate(a, NONE);
-	if (ft_strncmp(line, "rb", l) == 0 || ft_strncmp(line, "rr", l) == 0)
+	if ((ft_strncmp(line, "rb", 2) == 0 || ft_strncmp(line, "rr", 2) == 0) && \
+		ft_strncmp("rrr", line, 3) != 0)
 		ps_rotate(b, NONE);
-	if (ft_strncmp(line, "rra", l) == 0 || ft_strncmp(line, "rrr", l) == 0)
+	if (ft_strncmp(line, "rra", 3) == 0 || ft_strncmp("rrr", line, 3) == 0)
 		ps_reverse_rotate(a, NONE);
-	if (ft_strncmp(line, "rrb", l) == 0 || ft_strncmp(line, "rrr", l) == 0)
+	if (ft_strncmp(line, "rrb", 3) == 0 || ft_strncmp("rrr", line, 3) == 0)
 		ps_reverse_rotate(b, NONE);
 }
 

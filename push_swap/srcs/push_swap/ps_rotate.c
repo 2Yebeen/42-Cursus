@@ -53,7 +53,7 @@ void	ps_rotate(t_ps *ps, int type)
 {
 	t_node	*node;
 
-	if (ps->head->next)
+	if (ps->count > 1)
 	{		
 		node = ps_left_pop(ps);
 		if (!node)
@@ -70,7 +70,7 @@ void	ps_reverse_rotate(t_ps *ps, int type)
 {
 	t_node	*node;
 
-	if (ps->head->next)
+	if (ps->count > 1)
 	{		
 		node = ps_right_pop(ps);
 		if (!node)
