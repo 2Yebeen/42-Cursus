@@ -10,6 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
+# ================ Color Variables ================ #
+
+BLACK			= 	"\033[0;30m"
+GRAY			= 	"\033[1;30m"
+RED				=	"\033[0;31m"
+GREEN			=	"\033[0;32m"
+YELLOW			=	"\033[1;33m"
+PURPLE			=	"\033[0;35m"
+CYAN			=	"\033[0;36m"
+WHITE			=	"\033[1;37m"
+EOC				=	"\033[0;0m"
+LINE_CLEAR		=	"\x1b[1A\x1b[M"
+
+# ================================================= #
+
 NAME		= push_swap
 BONUS		= checker
 
@@ -63,28 +78,38 @@ all: $(NAME)
 bonus: $(BONUS)
 
 $(NAME): $(OBJS)
+	@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 	@make -C libft
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
+	@echo $(GREEN) "$(NAME) is created!\n" $(EOC)
 
 $(BONUS): $(OBJ_C)
+	@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 	@make -C libft
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
+	@echo $(GREEN) "$(BONUS) is created!\n" $(EOC)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c $(HEADERS)/$(NAME).h
+	@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
 	@mkdir -p $(DIR_O)
 	@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@ 
 
 $(DIR_O)/%.o: $(DIR_C)/%.c $(HEADERS)/$(BONUS).h
+	@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
 	@mkdir -p $(DIR_O)
 	@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@ 
 	
 clean:
+	@echo $(YELLOW) "Cleaning object files..." $(EOC)
 	@$(RM) $(DIR_O)
 	@make clean -C libft
+	@echo $(RED) "Object files are cleaned!\n" $(EOC)
 
 fclean:	clean
+	@echo $(YELLOW) "Removing $(NAME)..." $(EOC)
 	@$(RM) $(NAME) $(BONUS)
 	@make fclean -C libft
+	@echo $(RED) "$(NAME) is removed!\n\n" $(EOC)
 
 re:	
 	@make fclean 
