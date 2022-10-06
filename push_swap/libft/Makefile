@@ -16,9 +16,9 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 
 AR		= ar 
-ARFLAGS	= rcs
+ARFLAGS	= rcsu
 
-RM		= rm -rf
+RM		= rm -f
 
 HEADER	= libft.h
 
@@ -38,20 +38,20 @@ SRCS	= 				\
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^
 
-%obj/.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+all: $(NAME)
 
 clean:
-	@$(RM) $(OBJS) $(OBJS_B)
+	@$(RM) $(OBJS)
 
 fclean: clean
 	@$(RM) $(NAME)
-
+	
 re: 
 	@make fclean 
 	@make all

@@ -31,58 +31,39 @@ typedef struct s_ps
 	t_node	*head;
 }			t_ps;
 
-/* ps_utils.c */
 void	ps_error(int fd);
 t_node	*ps_get_node(t_ps *ps, int position);
 int		ps_atoi(const char *str);
 void	ps_display(int type);
-
-/* ps_structure.c */
 t_ps	*ps_create(void);
 int		ps_left_add(t_ps *ps, int data);
 int		ps_right_add(t_ps *ps, int data);
 t_node	*ps_left_pop(t_ps *ps);
 t_node	*ps_right_pop(t_ps *ps);
-
-/* ps_array.c */
 int		*ps_array_validation(t_ps *ps);
 int		*ps_array_add(t_ps *ps);
 int		ps_array_sort(int *arr, int len);
-
-/* ps_min_max.c */
 int		ps_data_min(t_node *node);
 int		ps_data_max(t_node *node);
 int		ps_min(t_ps *ps);
 int		ps_max(t_ps *ps);
 int		ps_mid(int num, t_ps *ps);
-
-/* ps_push.c */
 void	ps_push(t_ps *a, t_ps *b, int type);
-/* ps_swap.c */
 void	ps_swap(t_ps *ps, int type);
-/* ps_rotate.c */
 void	ps_rotate1(t_ps *ps, int idx, int type1, int type2);
 void	ps_rotate2(t_ps *a, t_ps *b, int *idx_a, int *idx_b);
 void	ps_rotate(t_ps *ps, int type);
 void	ps_reverse_rotate(t_ps *ps, int type);
-
-/* ps_parsing.c */
 void	ps_parsing(const char *str, t_ps *a);
-/* ps_sorting.c */
 void	ps_sort_init(t_ps *a, t_ps *b, int *sorted_array);
 void	ps_sort2(t_ps *a);
 void	ps_sort3(t_ps *a);
 void	ps_sort_last(t_ps *a);
-
-/* push_swap.c */
 void	push_swap(t_ps *a, t_ps *b, int *arr);
-/* ps_push_swap_utils.c */
 void	ps_pivot(t_ps *a, t_ps *b, int *arr);
 void	ps_min_rotate(t_ps *a, t_ps *b, int *idx_a, int *idx_b);
 int		ps_get_index(int num, t_ps *ps);
 int		ps_bigger(int a, int b, int i_a, int i_b);
-
-/* ps_destroy.c */
 void	ps_destroy(t_ps *ps);
 void	ps_delete_node(t_ps *ps);
 
