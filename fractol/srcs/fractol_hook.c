@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 23:27:30 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/27 11:34:02 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:25:57 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_key_hook(int keycode, t_fractol *f)
 {
 	if (keycode == KEY_ESC)
 	{
-		ft_putstr_fd("Exit\n", 1);
+		ft_putstr_fd("\e[35m[ EXIT ]\n", 1);
 		free(f->img);
 		exit(0);
 	}
