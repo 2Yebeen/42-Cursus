@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:09:13 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/23 17:10:21 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:20:16 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 char	*gnl_clear_node(t_list *node)
 {
-	free(node->contents);
-	node->prev->next = node->next;
-	if (node->next)
-		node->next->prev = node->prev;
-	free(node);
-	node = NULL;
+	if (node)
+	{
+		if (node->contents)
+		{
+			free(node->contents);
+			node->contents = NULL;
+		}
+		node->prev->next = node->next;
+		if (node->next)
+			node->next->prev = node->prev;
+		free(node);
+		node = NULL;
+	}
 	return (NULL);
 }
 
@@ -62,7 +69,7 @@ char	*gnl_strchr(const char *s, int c)
 			return ((char *)s + i);
 	if (!c)
 		return ((char *)s + i);
-	return (0);
+	return (NULL);
 }
 
 size_t	gnl_strlcpy(char *dst, const char *src, size_t dstsize)

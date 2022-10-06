@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:08:56 by yeblee            #+#    #+#             */
-/*   Updated: 2022/05/24 12:29:41 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:17:03 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ char	*gnl_set_remains(char *contents, size_t offset)
 	if (!ret)
 		return (NULL);
 	gnl_strlcpy(ret, contents + offset, gnl_strlen(contents + offset) + 1);
-	free(contents);
-	contents = NULL;
+	if (contents)
+	{
+		free(contents);
+		contents = NULL;
+	}
 	return (ret);
 }
 

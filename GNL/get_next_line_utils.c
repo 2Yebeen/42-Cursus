@@ -14,12 +14,19 @@
 
 char	*gnl_clear_node(t_list *node)
 {
-	free(node->contents);
-	node->prev->next = node->next;
-	if (node->next)
-		node->next->prev = node->prev;
-	free(node);
-	node = NULL;
+	if (node)
+	{
+		if (node->contents)
+		{
+			free(node->contents);
+			node->contents = NULL;
+		}
+		node->prev->next = node->next;
+		if (node->next)
+			node->next->prev = node->prev;
+		free(node);
+		node = NULL;
+	}
 	return (NULL);
 }
 
