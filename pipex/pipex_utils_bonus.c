@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:53:36 by yeblee            #+#    #+#             */
-/*   Updated: 2022/07/20 10:42:45 by yeblee           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:43:14 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_openfile(char *argv, int type)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0777);
 	else if (type == 2)
 		file = open(argv, O_RDONLY | O_CLOEXEC, 0777);
-	if (file == -1)
+	else if (file == -1)
 		exit(1);
 	return (file);
 }
