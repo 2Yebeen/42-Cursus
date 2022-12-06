@@ -1,4 +1,4 @@
-|Circle|Project                                                                     |Languate|Topic            |Data of completion|score|
+|Circle|Project                                                                     |Language|Topic            |Data of completion|score|
 |:----:|:---------------------------------------------------------------------------|:------:|:----------------|:-----------------:|:---:|
 |   0  |[Libft](https://github.com/33bini/42-Seoul/tree/master/Libft)               |    C   | Makefile,<br>struct,<br>restrict,<br>static|22.04.11|[![yeblee's 42 Libft Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2523060)](https://github.com/JaeSeoKim/badge42)|
 |   1  |[ft_printf](https://github.com/33bini/42-Seoul/tree/master/ft_printf)       |    C   | va_arg           |22.04.18|[![yeblee's 42 ft_printf Score](https://badge42.vercel.app/api/v2/cl5l3oju8004509mkzaqr1idv/project/2557803)](https://github.com/JaeSeoKim/badge42)|
