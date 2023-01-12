@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:16:34 by yeblee            #+#    #+#             */
-/*   Updated: 2023/01/13 00:39:05 by yeblee           ###   ########.fr       */
+/*   Updated: 2023/01/13 00:49:30 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ft_check_argv(int ac, char *av[])
 	if (ft_atoi(av[4]) < 0)
 		return (1);
 	if (ac == 6)
-		if (ft_atoi(av[5]) < 0)
+		if (ft_atoi(av[5]) < 1)
 			return (1);
 	return (0);
 }
