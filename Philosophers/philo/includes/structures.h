@@ -6,7 +6,7 @@
 /*   By: yeblee <yeblee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:59:37 by yeblee            #+#    #+#             */
-/*   Updated: 2023/01/12 23:00:18 by yeblee           ###   ########.fr       */
+/*   Updated: 2023/01/13 01:29:34 by yeblee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "philo.h"
 
-typedef struct s_input	t_ipnut;
+typedef struct s_input	t_input;
 typedef struct s_info	t_info;
 typedef struct s_philo	t_philo;
 
@@ -30,8 +30,8 @@ struct s_input
 
 struct s_info
 {
-	t_ipnut			*input;
-	t_philo			*philos;
+	t_input			*input;
+	t_philo			*philo;
 	time_t			start;
 	int				end;
 	pthread_mutex_t	*forks;
